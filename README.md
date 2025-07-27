@@ -64,17 +64,17 @@ This repo was built using Cursor.
    ```
 
 3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+pip install -r requirements.txt
+```
 
 4. **Generate the data files:**
-   ```bash
+```bash
    python tools/combine_papers.py
-   ```
+```
 
 5. **Run the application:**
-   ```bash
+```bash
    python run.py
    ```
 
