@@ -177,14 +177,18 @@ def index():
     year_min = int(df['Year'].min())
     year_max = int(df['Year'].max())
     
-    return render_template('index.html', 
+    response = make_response(render_template('index.html', 
                          countries=countries, 
                          venues=venues,
                          venues_by_subfield=venues_by_subfield,
                          continents=CONTINENTS,
                          year_min=year_min, 
                          year_max=year_max,
-                         total_papers=len(df))
+                         total_papers=len(df)))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 @app.route('/search')
 def search():
@@ -218,16 +222,17 @@ def search():
     try:
         for _, row in filtered_df.iterrows():
             results.append({
-                'title': row['Title'],
-                'authors': row['Authors'],
-                'conference': row['Conference'],
-                'year': int(row['Year']),
-                'subfield': row['Subfield'],
-                'countries': row['Author_Countries'],
-                'status': row['Status'],
-                'track': row['Track'],
+                'title': row['Title'] if pd.notna(row['Title']) else '',
+                'authors': row['Authors'] if pd.notna(row['Authors']) else '',
+                'conference': row['Conference'] if pd.notna(row['Conference']) else '',
+                'year': int(row['Year']) if pd.notna(row['Year']) else 0,
+                'subfield': row['Subfield'] if pd.notna(row['Subfield']) else '',
+                'countries': row['Author_Countries'] if pd.notna(row['Author_Countries']) else '',
+                'status': row['Status'] if pd.notna(row['Status']) else '',
+                'track': row['Track'] if pd.notna(row['Track']) else '',
                 'citations': int(row['Citations']) if pd.notna(row['Citations']) else 0
             })
+        print(f"Successfully processed {len(results)} results for search")
     except Exception as e:
         print(f"Error processing results: {e}")
         import traceback
