@@ -4,6 +4,8 @@ A comprehensive web interface for searching through 200,000+ academic papers fro
 
 This data originally comes from https://github.com/papercopilot/paperlists
 
+This repo was built using Cursor.
+
 ## Features
 
 - **206,459 papers** from major AI/ML conferences (1987-2025)
