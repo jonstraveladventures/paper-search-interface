@@ -205,24 +205,40 @@ def search():
     filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
                                selected_venues, year_min, year_max)
     
+    # Limit results to prevent performance issues
+    max_results = 1000
+    total_count = len(filtered_df)
+    
+    if total_count > max_results:
+        filtered_df = filtered_df.head(max_results)
+        print(f"Limited results from {total_count} to {max_results}")
+    
     # Convert to list of dictionaries for JSON response
     results = []
-    for _, row in filtered_df.iterrows():
-        results.append({
-            'title': row['Title'],
-            'authors': row['Authors'],
-            'conference': row['Conference'],
-            'year': int(row['Year']),
-            'subfield': row['Subfield'],
-            'countries': row['Author_Countries'],
-            'status': row['Status'],
-            'track': row['Track'],
-            'citations': int(row['Citations']) if pd.notna(row['Citations']) else 0
-        })
+    try:
+        for _, row in filtered_df.iterrows():
+            results.append({
+                'title': row['Title'],
+                'authors': row['Authors'],
+                'conference': row['Conference'],
+                'year': int(row['Year']),
+                'subfield': row['Subfield'],
+                'countries': row['Author_Countries'],
+                'status': row['Status'],
+                'track': row['Track'],
+                'citations': int(row['Citations']) if pd.notna(row['Citations']) else 0
+            })
+    except Exception as e:
+        print(f"Error processing results: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': f'Error processing results: {str(e)}'})
     
     return jsonify({
         'results': results,
-        'total': len(results)
+        'total': total_count,
+        'displayed': len(results),
+        'limited': total_count > max_results
     })
 
 @app.route('/export_csv')

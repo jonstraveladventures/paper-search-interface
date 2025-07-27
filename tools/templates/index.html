@@ -561,6 +561,11 @@
             fetch(`/search?${params.toString()}`)
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Search response:', data);
+                    if (data.error) {
+                        document.getElementById('results-container').innerHTML = `<div class="no-results">Error: ${data.error}</div>`;
+                        return;
+                    }
                     displayResults(data);
                 })
                 .catch(error => {
@@ -573,14 +578,20 @@
             const container = document.getElementById('results-container');
             const countElement = document.getElementById('results-count');
             
-            countElement.textContent = data.total;
+            let countText = data.total;
+            if (data.limited) {
+                countText += ` (showing first ${data.displayed})`;
+            }
+            countElement.textContent = countText;
             
             if (data.total === 0) {
                 container.innerHTML = '<div class="no-results">No papers found matching your criteria</div>';
                 return;
             }
             
-            let html = '';
+            if (data.limited) {
+                html += '<div class="limited-results" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin-bottom: 15px; border-radius: 4px; color: #856404;">⚠️ Showing first 1,000 results. Use more specific filters to narrow down your search.</div>';
+            }
             data.results.forEach((paper, index) => {
                 const statusClass = getStatusClass(paper.status);
                 html += `
