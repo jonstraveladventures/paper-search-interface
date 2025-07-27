@@ -2,6 +2,8 @@
 
 A comprehensive web interface for searching through 200,000+ academic papers from major AI/ML conferences. This tool allows researchers to easily filter and search papers by title, authors, countries, venues, and publication years.
 
+This data originally comes from https://github.com/papercopilot/paperlists
+
 ## Features
 
 - **206,459 papers** from major AI/ML conferences (1987-2025)
