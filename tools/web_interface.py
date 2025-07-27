@@ -3,7 +3,7 @@
 Flask web application for querying paper data with interactive filters.
 """
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 import pandas as pd
 import json
 from pathlib import Path
@@ -224,6 +224,57 @@ def search():
         'results': results,
         'total': len(results)
     })
+
+@app.route('/export_csv')
+def export_csv():
+    """API endpoint for exporting search results to CSV"""
+    df = load_data()
+    if df.empty:
+        return jsonify({'error': 'Could not load data'})
+    
+    # Get search parameters (same as search endpoint)
+    title_search = request.args.get('title', '')
+    author_search = request.args.get('author', '')
+    selected_countries = request.args.getlist('countries[]')
+    selected_venues = request.args.getlist('venues[]')
+    year_min = request.args.get('year_min', type=int)
+    year_max = request.args.get('year_max', type=int)
+    
+    # Filter papers
+    filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
+                               selected_venues, year_min, year_max)
+    
+    if filtered_df.empty:
+        return jsonify({'error': 'No results to export'})
+    
+    # Generate filename based on search criteria
+    filename_parts = []
+    if title_search:
+        filename_parts.append(f"title_{title_search[:20]}")
+    if author_search:
+        filename_parts.append(f"author_{author_search}")
+    if selected_countries:
+        filename_parts.append(f"countries_{len(selected_countries)}")
+    if selected_venues:
+        filename_parts.append(f"venues_{len(selected_venues)}")
+    if year_min or year_max:
+        year_range = f"{year_min or 'all'}-{year_max or 'all'}"
+        filename_parts.append(f"years_{year_range}")
+    
+    if not filename_parts:
+        filename_parts.append("all_papers")
+    
+    filename = f"search_results_{'_'.join(filename_parts)}.csv"
+    
+    # Create CSV content
+    csv_content = filtered_df.to_csv(index=False)
+    
+    # Create response with CSV file
+    response = make_response(csv_content)
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers['Content-Disposition'] = f'attachment; filename="{filename}"'
+    
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001) 

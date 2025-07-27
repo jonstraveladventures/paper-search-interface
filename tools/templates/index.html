@@ -216,6 +216,27 @@
             align-items: center;
             margin-bottom: 20px;
         }
+        .results-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .export-button {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        .export-button:hover {
+            background: #229954;
+        }
+        .export-button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
         .results-count {
             font-size: 18px;
             font-weight: bold;
@@ -389,6 +410,11 @@
         <div class="results-panel">
             <div class="results-header">
                 <div class="results-count">Results: <span id="results-count">0</span> papers</div>
+                <div class="results-actions">
+                    <button id="export-btn" class="export-button" onclick="exportToCSV()" style="display: none;">
+                        📥 Export to CSV
+                    </button>
+                </div>
             </div>
             <div id="results-container">
                 <div class="no-results">Enter search criteria and click "Search Papers" to begin</div>
@@ -509,6 +535,7 @@
             
             document.getElementById('results-container').innerHTML = '<div class="no-results">Enter search criteria and click "Search Papers" to begin</div>';
             document.getElementById('results-count').textContent = '0';
+            document.getElementById('export-btn').style.display = 'none';
         }
         
         function searchPapers() {
@@ -575,6 +602,40 @@
             });
             
             container.innerHTML = html;
+            
+            // Show export button if there are results
+            const exportBtn = document.getElementById('export-btn');
+            if (data.total > 0) {
+                exportBtn.style.display = 'inline-block';
+            } else {
+                exportBtn.style.display = 'none';
+            }
+        }
+        
+        function exportToCSV() {
+            const titleSearch = document.getElementById('title-search').value;
+            const authorSearch = document.getElementById('author-search').value;
+            const yearMin = document.getElementById('year-min').value;
+            const yearMax = document.getElementById('year-max').value;
+            
+            // Build query parameters (same as search)
+            const params = new URLSearchParams();
+            if (titleSearch) params.append('title', titleSearch);
+            if (authorSearch) params.append('author', authorSearch);
+            if (yearMin) params.append('year_min', yearMin);
+            if (yearMax) params.append('year_max', yearMax);
+            
+            selectedCountries.forEach(country => params.append('countries[]', country));
+            selectedVenues.forEach(venue => params.append('venues[]', venue));
+            
+            // Create download link
+            const downloadUrl = `/export_csv?${params.toString()}`;
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = 'search_results.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
         
         // Allow Enter key to trigger search
