@@ -589,6 +589,7 @@
                 return;
             }
             
+            let html = '';
             if (data.limited) {
                 html += '<div class="limited-results" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin-bottom: 15px; border-radius: 4px; color: #856404;">⚠️ Showing first 1,000 results. Use more specific filters to narrow down your search.</div>';
             }
@@ -596,17 +597,15 @@
                 const statusClass = getStatusClass(paper.status);
                 html += `
                     <div class="paper-item">
-                        <div class="paper-item">
-                            <div class="paper-title">${paper.title}</div>
-                            <div class="paper-authors">${paper.authors}</div>
-                            <div class="paper-meta">
-                                <span>${paper.conference} ${paper.year}</span>
-                                <span>${paper.subfield}</span>
-                                <span class="paper-status ${statusClass}">${paper.status || 'Unknown'}</span>
-                                <span>${paper.track || 'N/A'}</span>
-                                <span>${paper.citations} citations</span>
-                                <span>${paper.countries || 'N/A'}</span>
-                            </div>
+                        <div class="paper-title">${paper.title}</div>
+                        <div class="paper-authors">${paper.authors}</div>
+                        <div class="paper-meta">
+                            <span>${paper.conference} ${paper.year}</span>
+                            <span>${paper.subfield}</span>
+                            <span class="paper-status ${statusClass}">${paper.status || 'Unknown'}</span>
+                            <span>${paper.track || 'N/A'}</span>
+                            <span>${paper.citations} citations</span>
+                            <span>${paper.countries || 'N/A'}</span>
                         </div>
                     </div>
                 `;
