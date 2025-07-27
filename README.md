@@ -133,7 +133,7 @@ paper-search-interface/
 │   └── requirements.txt         # Python dependencies
 ├── all_papers.csv               # Combined dataset (generated locally)
 ├── african_papers.csv           # African papers subset (generated locally)
-├── shock_papers.csv             # Papers by "Shock" author (generated locally)
+├── [name]_papers.csv            # Papers by specific author (generated locally)
 ├── unique_countries.txt         # List of all countries (generated locally)
 ├── african_countries.txt        # African countries list (generated locally)
 ├── mathematica_data.txt         # Data for Mathematica visualization (generated locally)
@@ -163,7 +163,7 @@ The repository includes scripts to generate various data files:
 - `python tools/combine_papers.py` - Creates the main CSV file
 - `python tools/extract_countries.py` - Extracts unique countries
 - `python tools/filter_african_papers.py` - Creates African papers subset
-- `python tools/find_shock_papers.py` - Finds papers by "Shock" author
+- `python tools/find_name_papers.py [name]` - Finds papers by specific author name
 - `python tools/generate_mathematica_data.py` - Creates Mathematica data
 
 ### Customizing the Interface

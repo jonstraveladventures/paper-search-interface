@@ -25,11 +25,13 @@ def demo_search():
     print(f"✅ Loaded {len(df):,} papers")
     
     # Demo 1: Search by author
-    print("\n1️⃣  Searching for papers by 'Shock'...")
-    shock_papers = filter_papers(df, author_search='Shock')
-    print(f"   Found {len(shock_papers)} papers by Shock")
-    for _, paper in shock_papers.head(3).iterrows():
+    print("\n1️⃣  Searching for papers by 'Marivate'...")
+    marivate_papers = filter_papers(df, author_search='Marivate')
+    print(f"   Found {len(marivate_papers)} papers by Marivate")
+    for _, paper in marivate_papers.head(3).iterrows():
         print(f"   - {paper['Title']} ({paper['Conference']} {paper['Year']})")
+    
+    print("\n💡 To find papers by any author, use: python tools/find_name_papers.py [name]")
     
     # Demo 2: Search by title keywords
     print("\n2️⃣  Searching for papers with 'reinforcement learning' in title...")

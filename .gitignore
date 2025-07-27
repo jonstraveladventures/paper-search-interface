@@ -102,7 +102,7 @@ Thumbs.db
 # Large data files (excluded due to size)
 all_papers.csv
 african_papers.csv
-shock_papers.csv
+*_papers.csv
 unique_countries.txt
 african_countries.txt
 mathematica_data.txt

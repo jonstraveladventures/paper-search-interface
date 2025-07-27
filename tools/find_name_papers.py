@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Script to find all papers with authors whose surname is "Shock" across all JSON files.
+Script to find all papers with authors whose surname matches a given name across all JSON files.
+Usage: python find_name_papers.py [name]
+Example: python find_name_papers.py Marivate
 """
 
 import json
@@ -26,8 +28,8 @@ def extract_conference_name(folder_path):
     folder_name = os.path.basename(folder_path)
     return folder_name.upper()
 
-def has_shock_author(authors_str):
-    """Check if any author has surname 'Shock'"""
+def has_author_with_name(authors_str, search_name):
+    """Check if any author has surname matching the search name"""
     if not authors_str or not authors_str.strip():
         return False
     
@@ -39,24 +41,34 @@ def has_shock_author(authors_str):
         if not author:
             continue
         
-        # Split by spaces and check if any part is "Shock"
+        # Split by spaces and check if any part matches the search name
         name_parts = author.split()
         for part in name_parts:
-            if part.lower() == 'shock':
+            if part.lower() == search_name.lower():
                 return True
     
     return False
 
 def main():
-    """Main function to search for Shock papers"""
+    """Main function to search for papers by author name"""
+    
+    import sys
+    
+    # Check if name argument is provided
+    if len(sys.argv) < 2:
+        print("Usage: python find_name_papers.py [name]")
+        print("Example: python find_name_papers.py Marivate")
+        sys.exit(1)
+    
+    search_name = sys.argv[1]
     
     # Get the root directory (parent of tools folder)
     root_dir = Path(__file__).parent.parent
     
-    shock_papers = []
+    found_papers = []
     total_files_processed = 0
     
-    print("Searching for papers with authors named 'Shock'...")
+    print(f"Searching for papers with authors named '{search_name}'...")
     
     # Process each conference folder
     for folder_path in root_dir.iterdir():
@@ -81,8 +93,8 @@ def main():
                     for paper in papers:
                         if isinstance(paper, dict):
                             authors = paper.get('author', '')
-                            if has_shock_author(authors):
-                                shock_papers.append({
+                            if has_author_with_name(authors, search_name):
+                                found_papers.append({
                                     'title': paper.get('title', ''),
                                     'authors': authors,
                                     'conference': conference_name,
@@ -103,11 +115,11 @@ def main():
     # Print results
     print(f"\n=== SEARCH RESULTS ===")
     print(f"Total files processed: {total_files_processed}")
-    print(f"Papers with 'Shock' authors found: {len(shock_papers)}")
+    print(f"Papers with '{search_name}' authors found: {len(found_papers)}")
     
-    if shock_papers:
-        print(f"\n=== PAPERS WITH 'SHOCK' AUTHORS ===")
-        for i, paper in enumerate(shock_papers, 1):
+    if found_papers:
+        print(f"\n=== PAPERS WITH '{search_name.upper()}' AUTHORS ===")
+        for i, paper in enumerate(found_papers, 1):
             print(f"\n{i}. Title: {paper['title']}")
             print(f"   Authors: {paper['authors']}")
             print(f"   Conference: {paper['conference']} ({paper['year']})")
@@ -118,14 +130,14 @@ def main():
         
         # Save to CSV
         import csv
-        output_file = root_dir / 'shock_papers.csv'
+        output_file = root_dir / f'{search_name.lower()}_papers.csv'
         
         with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
             fieldnames = ['Title', 'Authors', 'Conference', 'Year', 'Status', 'Track', 'Citations', 'File']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             
-            for paper in shock_papers:
+            for paper in found_papers:
                 writer.writerow({
                     'Title': paper['title'],
                     'Authors': paper['authors'],
@@ -142,7 +154,7 @@ def main():
         # Show summary by conference
         print(f"\n=== SUMMARY BY CONFERENCE ===")
         conference_counts = {}
-        for paper in shock_papers:
+        for paper in found_papers:
             conf = paper['conference']
             conference_counts[conf] = conference_counts.get(conf, 0) + 1
         
@@ -152,7 +164,7 @@ def main():
         # Show summary by year
         print(f"\n=== SUMMARY BY YEAR ===")
         year_counts = {}
-        for paper in shock_papers:
+        for paper in found_papers:
             year = paper['year']
             year_counts[year] = year_counts.get(year, 0) + 1
         
@@ -160,7 +172,7 @@ def main():
             print(f"  {year}: {year_counts[year]} papers")
     
     else:
-        print("No papers with authors named 'Shock' were found.")
+        print(f"No papers with authors named '{search_name}' were found.")
 
 if __name__ == "__main__":
     main() 
