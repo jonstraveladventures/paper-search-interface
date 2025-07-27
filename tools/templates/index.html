@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Search Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .search-panel {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            background: #f8f9fa;
+        }
+        .search-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .search-group {
+            flex: 1;
+        }
+        .search-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .search-group input, .search-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .year-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .year-range input {
+            width: 80px;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .filter-section h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        .countries-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            background: white;
+        }
+        .continent-group {
+            margin-bottom: 15px;
+        }
+        .continent-header {
+            background: #e9ecef;
+            padding: 8px;
+            margin: -10px -10px 10px -10px;
+            font-weight: bold;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .continent-header:hover {
+            background: #dee2e6;
+        }
+        .continent-countries {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 5px;
+            margin-left: 10px;
+        }
+        .country-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .country-item input[type="checkbox"] {
+            margin: 0;
+        }
+        .country-item label {
+            font-size: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .venues-container {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            background: white;
+        }
+        .venue-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .venue-item input[type="checkbox"] {
+            margin: 0;
+        }
+        .venue-item label {
+            font-size: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .subfield-group {
+            margin-bottom: 15px;
+        }
+        .subfield-header {
+            background: #e9ecef;
+            padding: 8px;
+            margin: -10px -10px 10px -10px;
+            font-weight: bold;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .subfield-header:hover {
+            background: #dee2e6;
+        }
+        .subfield-venues {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 5px;
+            margin-left: 10px;
+        }
+        .subfield-venues.collapsed {
+            display: none;
+        }
+        .selection-buttons {
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .selection-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .selection-button:hover {
+            background: #5a6268;
+        }
+        .selection-button.primary {
+            background: #007bff;
+        }
+        .selection-button.primary:hover {
+            background: #0056b3;
+        }
+        .search-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .search-button:hover {
+            background: #2980b9;
+        }
+        .clear-button {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .clear-button:hover {
+            background: #7f8c8d;
+        }
+        .results-panel {
+            padding: 20px;
+        }
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .results-count {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .paper-item {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: white;
+        }
+        .paper-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        .paper-authors {
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .paper-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: #888;
+            flex-wrap: wrap;
+        }
+        .paper-meta span {
+            background: #f8f9fa;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .paper-status {
+            font-weight: bold;
+        }
+        .paper-status.accepted {
+            color: #28a745;
+        }
+        .paper-status.rejected {
+            color: #dc3545;
+        }
+        .paper-status.withdrawn {
+            color: #ffc107;
+        }
+        .paper-status.unknown {
+            color: #6c757d;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+        .continent-countries.collapsed {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Paper Search Interface</h1>
+            <p>Search through {{ "{:,}".format(total_papers) }} papers from major AI/ML conferences</p>
+            <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">
+                Data sourced from <a href="https://papercopilot.com" target="_blank" style="color: white; text-decoration: underline;">Paper Copilot</a> - OpenReview, official conference sites, and community sources
+            </p>
+        </div>
+        
+        <div class="search-panel">
+            <div class="search-row">
+                <div class="search-group">
+                    <label for="title-search">Title Search:</label>
+                    <input type="text" id="title-search" placeholder="Enter title keywords...">
+                </div>
+                <div class="search-group">
+                    <label for="author-search">Author Search:</label>
+                    <input type="text" id="author-search" placeholder="Enter author name...">
+                </div>
+            </div>
+            
+            <div class="search-row">
+                <div class="search-group">
+                    <label>Year Range:</label>
+                    <div class="year-range">
+                        <input type="number" id="year-min" placeholder="Min" min="{{ year_min }}" max="{{ year_max }}" value="{{ year_min }}">
+                        <span>to</span>
+                        <input type="number" id="year-max" placeholder="Max" min="{{ year_min }}" max="{{ year_max }}" value="{{ year_max }}">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-row">
+                <div class="search-group">
+                    <button class="search-button" onclick="searchPapers()">Search Papers</button>
+                    <button class="clear-button" onclick="clearFilters()">Clear Filters</button>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Countries ({{ countries|length }} total)</h3>
+                <div class="selection-buttons">
+                    <button class="selection-button primary" onclick="selectAllCountries()">Select All Countries</button>
+                    <button class="selection-button" onclick="selectAfricanCountries()">Select All African Countries</button>
+                    <button class="selection-button" onclick="clearAllCountries()">Clear All Countries</button>
+                </div>
+                <div class="countries-container">
+                    {% for continent, continent_countries in continents.items() %}
+                    <div class="continent-group">
+                        <div class="continent-header">
+                            <span onclick="toggleContinent('{{ continent }}')" style="flex-grow: 1; cursor: pointer;">
+                                {{ continent }} ({{ continent_countries|length }} countries)
+                            </span>
+                            <button class="selection-button" onclick="selectContinentCountries('{{ continent }}')" style="margin-left: 10px;">
+                                Select All {{ continent }}
+                            </button>
+                        </div>
+                        <div class="continent-countries" id="continent-{{ continent }}">
+                            {% for country in continent_countries %}
+                            {% if country in countries %}
+                            <div class="country-item">
+                                <input type="checkbox" id="country-{{ country }}" value="{{ country }}" onchange="updateSelectedCountries()">
+                                <label for="country-{{ country }}">{{ country }}</label>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Venues ({{ venues|length }} total)</h3>
+                <div class="selection-buttons">
+                    <button class="selection-button primary" onclick="selectAllVenues()">Select All Venues</button>
+                    <button class="selection-button" onclick="clearAllVenues()">Clear All Venues</button>
+                </div>
+                <div class="venues-container">
+                    {% for subfield, subfield_venues in venues_by_subfield.items() %}
+                    <div class="subfield-group">
+                        <div class="subfield-header">
+                            <span onclick="toggleSubfield('{{ subfield }}')" style="flex-grow: 1; cursor: pointer;">
+                                {{ subfield }} ({{ subfield_venues|length }} venues)
+                            </span>
+                            <button class="selection-button" onclick="selectSubfieldVenues('{{ subfield }}')" style="margin-left: 10px;">
+                                Select All {{ subfield }}
+                            </button>
+                        </div>
+                        <div class="subfield-venues" id="subfield-{{ subfield }}">
+                            {% for venue in subfield_venues %}
+                            <div class="venue-item">
+                                <input type="checkbox" id="venue-{{ venue }}" value="{{ venue }}" onchange="updateSelectedVenues()">
+                                <label for="venue-{{ venue }}">{{ venue }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-panel">
+            <div class="results-header">
+                <div class="results-count">Results: <span id="results-count">0</span> papers</div>
+            </div>
+            <div id="results-container">
+                <div class="no-results">Enter search criteria and click "Search Papers" to begin</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedCountries = [];
+        let selectedVenues = [];
+        
+        function toggleContinent(continent) {
+            const container = document.getElementById(`continent-${continent}`);
+            container.classList.toggle('collapsed');
+        }
+        
+        function toggleSubfield(subfield) {
+            const container = document.getElementById(`subfield-${subfield}`);
+            container.classList.toggle('collapsed');
+        }
+        
+        function selectAllCountries() {
+            document.querySelectorAll('input[type="checkbox"][id^="country-"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            updateSelectedCountries();
+        }
+        
+        function selectAfricanCountries() {
+            // Clear all first
+            clearAllCountries();
+            // Select only African countries
+            const africanCountries = [
+                'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon',
+                'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Congo',
+                'Democratic Republic of the Congo', 'Djibouti', 'Egypt', 'Equatorial Guinea',
+                'Eritrea', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau',
+                'Ivory Coast', 'Kenya', 'Lesotho', 'Liberia', 'Libya', 'Madagascar', 'Malawi',
+                'Mali', 'Mauritania', 'Mauritius', 'Morocco', 'Mozambique', 'Namibia', 'Niger',
+                'Nigeria', 'Rwanda', 'São Tomé and Príncipe', 'Senegal', 'Seychelles',
+                'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Tanzania',
+                'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'
+            ];
+            africanCountries.forEach(country => {
+                const checkbox = document.getElementById(`country-${country}`);
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
+            updateSelectedCountries();
+        }
+        
+        function clearAllCountries() {
+            document.querySelectorAll('input[type="checkbox"][id^="country-"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            updateSelectedCountries();
+        }
+        
+        function selectAllVenues() {
+            document.querySelectorAll('input[type="checkbox"][id^="venue-"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            updateSelectedVenues();
+        }
+        
+        function clearAllVenues() {
+            document.querySelectorAll('input[type="checkbox"][id^="venue-"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            updateSelectedVenues();
+        }
+        
+        function selectContinentCountries(continent) {
+            const container = document.getElementById(`continent-${continent}`);
+            const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            updateSelectedCountries();
+        }
+        
+        function selectSubfieldVenues(subfield) {
+            const container = document.getElementById(`subfield-${subfield}`);
+            const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            updateSelectedVenues();
+        }
+        
+        function updateSelectedCountries() {
+            selectedCountries = [];
+            document.querySelectorAll('input[type="checkbox"][id^="country-"]:checked').forEach(checkbox => {
+                selectedCountries.push(checkbox.value);
+            });
+        }
+        
+        function updateSelectedVenues() {
+            selectedVenues = [];
+            document.querySelectorAll('input[type="checkbox"][id^="venue-"]:checked').forEach(checkbox => {
+                selectedVenues.push(checkbox.value);
+            });
+        }
+        
+        function clearFilters() {
+            document.getElementById('title-search').value = '';
+            document.getElementById('author-search').value = '';
+            document.getElementById('year-min').value = '{{ year_min }}';
+            document.getElementById('year-max').value = '{{ year_max }}';
+            
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            selectedCountries = [];
+            selectedVenues = [];
+            
+            document.getElementById('results-container').innerHTML = '<div class="no-results">Enter search criteria and click "Search Papers" to begin</div>';
+            document.getElementById('results-count').textContent = '0';
+        }
+        
+        function searchPapers() {
+            const titleSearch = document.getElementById('title-search').value;
+            const authorSearch = document.getElementById('author-search').value;
+            const yearMin = document.getElementById('year-min').value;
+            const yearMax = document.getElementById('year-max').value;
+            
+            // Show loading
+            document.getElementById('results-container').innerHTML = '<div class="loading">Searching...</div>';
+            
+            // Build query parameters
+            const params = new URLSearchParams();
+            if (titleSearch) params.append('title', titleSearch);
+            if (authorSearch) params.append('author', authorSearch);
+            if (yearMin) params.append('year_min', yearMin);
+            if (yearMax) params.append('year_max', yearMax);
+            
+            selectedCountries.forEach(country => params.append('countries[]', country));
+            selectedVenues.forEach(venue => params.append('venues[]', venue));
+            
+            // Make request
+            fetch(`/search?${params.toString()}`)
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('results-container').innerHTML = '<div class="no-results">Error occurred while searching</div>';
+                });
+        }
+        
+        function displayResults(data) {
+            const container = document.getElementById('results-container');
+            const countElement = document.getElementById('results-count');
+            
+            countElement.textContent = data.total;
+            
+            if (data.total === 0) {
+                container.innerHTML = '<div class="no-results">No papers found matching your criteria</div>';
+                return;
+            }
+            
+            let html = '';
+            data.results.forEach((paper, index) => {
+                const statusClass = getStatusClass(paper.status);
+                html += `
+                    <div class="paper-item">
+                        <div class="paper-item">
+                            <div class="paper-title">${paper.title}</div>
+                            <div class="paper-authors">${paper.authors}</div>
+                            <div class="paper-meta">
+                                <span>${paper.conference} ${paper.year}</span>
+                                <span>${paper.subfield}</span>
+                                <span class="paper-status ${statusClass}">${paper.status || 'Unknown'}</span>
+                                <span>${paper.track || 'N/A'}</span>
+                                <span>${paper.citations} citations</span>
+                                <span>${paper.countries || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Allow Enter key to trigger search
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchPapers();
+            }
+        });
+        
+        function getStatusClass(status) {
+            if (!status) return 'unknown';
+            status = status.toLowerCase();
+            if (status.includes('accept') || status.includes('oral') || status.includes('poster')) {
+                return 'accepted';
+            } else if (status.includes('reject') || status.includes('desk reject')) {
+                return 'rejected';
+            } else if (status.includes('withdraw')) {
+                return 'withdrawn';
+            } else {
+                return 'unknown';
+            }
+        }
+    </script>
+</body>
+</html> 
