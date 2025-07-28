@@ -1,0 +1,5 @@
+Title,Authors,Conference,Year,Status,Track,Citations,File
+A game-theoretic analysis of networked system control for common-pool resource management using multi-agent reinforcement learning,Arnu Pretorius; Scott Cameron; Elan van Biljon; Thomas Makkink; Shahil Mawjee; Jeremy du Plessis; Jonathan Shock; Alexandre Laterre; Karim Beguir,NIPS,2020,Poster,main,15,nips2020.json
+Dispelling the Mirage of Progress in Offline MARL through Standardised Baselines and Evaluation,Juan Claude Formanek;Callum Rhys Tilbury;Louise Beyers;Jonathan Phillip Shock;Arnu Pretorius,NIPS,2024,Poster,Datasets & Benchmarks,1,nips2024.json
+Off-the-Grid MARL: Datasets with Baselines for Offline Multi-Agent Reinforcement Learning,Juan Claude Formanek;Asad Jeewa;Jonathan Phillip Shock;Arnu Pretorius,NIPS,2023,Reject,Datasets & Benchmarks,15,nips2023.json
+Off-the-Grid MARL: Datasets with Baselines for Offline Multi-Agent Reinforcement Learning,Juan Claude Formanek;Asad Jeewa;Jonathan Phillip Shock;Arnu Pretorius,ICLR,2024,Reject,main,15,iclr2024.json

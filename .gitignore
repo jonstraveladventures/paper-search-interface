@@ -50,11 +50,11 @@ Thumbs.db
 instance/
 .webassets-cache
 
-# Data files - NOT INCLUDED IN REPOSITORY
-# Users must obtain data from https://papercopilot.com
-*.csv
-*.json
-*.txt
+# Data files - NOW INCLUDED IN REPOSITORY
+# All JSON, CSV, and TXT files are included
+# *.csv
+# *.json
+# *.txt
 !requirements.txt
 !README.md
 !LICENSE
@@ -65,43 +65,43 @@ instance/
 !install.bat
 !demo.py
 
-# Conference data directories
-aaai/
-acl/
-acml/
-acmmm/
-aistats/
-automl/
-coling/
-colm/
-colt/
-corl/
-cvpr/
-eccv/
-emnlp/
-iccv/
-iclr/
-icml/
-icra/
-ijcai/
-iros/
-kdd/
-naacl/
-nips/
-rss/
-siggraph/
-siggraphasia/
-uai/
-wacv/
-www/
+# Conference data directories - NOW INCLUDED
+# aaai/
+# acl/
+# acml/
+# acmmm/
+# aistats/
+# automl/
+# coling/
+# colm/
+# colt/
+# corl/
+# cvpr/
+# eccv/
+# emnlp/
+# iccv/
+# iclr/
+# icml/
+# icra/
+# ijcai/
+# iros/
+# kdd/
+# naacl/
+# nips/
+# rss/
+# siggraph/
+# siggraphasia/
+# uai/
+# wacv/
+# www/
 
-# Generated data files
-all_papers.csv
-african_papers.csv
-*_papers.csv
-unique_countries.txt
-african_countries.txt
-mathematica_data.txt
+# Generated data files - NOW INCLUDED
+# all_papers.csv
+# african_papers.csv
+# *_papers.csv
+# unique_countries.txt
+# african_countries.txt
+# mathematica_data.txt
 
 # Logs
 *.log

@@ -1,0 +1,261 @@
+=== UNIQUE COUNTRIES FROM AUTHOR_COUNTRIES COLUMN ===
+Total unique countries: 127
+
+All countries (alphabetically sorted):
+  1. Albania
+  2. Algeria
+  3. Argentina
+  4. Armenia
+  5. Australia
+  6. Austria
+  7. Azerbaijan
+  8. Bahrain
+  9. Bangladesh
+ 10. Belarus
+ 11. Belgium
+ 12. Benin
+ 13. Bolivia
+ 14. Bosnia and Herzegovina
+ 15. Brazil
+ 16. Brunei Darussalam
+ 17. Bulgaria
+ 18. Burkina Faso
+ 19. Cameroon
+ 20. Canada
+ 21. Chile
+ 22. China
+ 23. Colombia
+ 24. Costa Rica
+ 25. Croatia
+ 26. Cuba
+ 27. Cyprus
+ 28. Czech Republic
+ 29. Czechia
+ 30. Denmark
+ 31. Djibouti
+ 32. Ecuador
+ 33. Egypt
+ 34. Estonia
+ 35. Ethiopia
+ 36. Finland
+ 37. France
+ 38. French Polynesia
+ 39. Georgia
+ 40. Germany
+ 41. Ghana
+ 42. Gibraltar
+ 43. Greece
+ 44. Guyana
+ 45. Hungary
+ 46. Iceland
+ 47. India
+ 48. Indonesia
+ 49. Iran
+ 50. Iraq
+ 51. Ireland
+ 52. Israel
+ 53. Italy
+ 54. Japan
+ 55. Jordan
+ 56. Kazakhstan
+ 57. Kenya
+ 58. Kingdom of Saudi Arabia
+ 59. Kosovo
+ 60. Kuwait
+ 61. Latvia
+ 62. Lebanon
+ 63. Libya
+ 64. Liechtenstein
+ 65. Lithuania
+ 66. Luxembourg
+ 67. Madagascar
+ 68. Malawi
+ 69. Malaysia
+ 70. Mali
+ 71. Malta
+ 72. Mauritius
+ 73. Mexico
+ 74. Morocco
+ 75. Mozambique
+ 76. Myanmar
+ 77. Namibia
+ 78. Nepal
+ 79. Netherlands
+ 80. New Caledonia
+ 81. New Zealand
+ 82. Nigeria
+ 83. North Macedonia
+ 84. Norway
+ 85. Oman
+ 86. Pakistan
+ 87. Panama
+ 88. Peru
+ 89. Philippines
+ 90. Poland
+ 91. Portugal
+ 92. Puerto Rico
+ 93. Qatar
+ 94. Romania
+ 95. Russia
+ 96. Russian Federation
+ 97. Rwanda
+ 98. Saudi Arabia
+ 99. Senegal
+100. Serbia
+101. Singapore
+102. Slovakia
+103. Slovenia
+104. South Africa
+105. South Korea
+106. Spain
+107. Sri Lanka
+108. State of Palestine
+109. Sudan
+110. Sweden
+111. Switzerland
+112. Tanzania
+113. Thailand
+114. Togo
+115. Tunisia
+116. Türkiye
+117. Uganda
+118. Ukraine
+119. United Arab Emirates
+120. United Kingdom
+121. United States
+122. Unknown
+123. Uruguay
+124. Uzbekistan
+125. Venezuela
+126. Vietnam
+127. Zambia
+
+=== COUNTRY COUNTS ===
+Countries by paper count:
+  United States: 78,329 papers
+  China: 51,139 papers
+  United Kingdom: 14,119 papers
+  Germany: 12,057 papers
+  Japan: 9,148 papers
+  Canada: 8,446 papers
+  South Korea: 7,650 papers
+  France: 6,766 papers
+  Singapore: 6,549 papers
+  Australia: 6,167 papers
+  Switzerland: 5,832 papers
+  Italy: 3,844 papers
+  Israel: 3,028 papers
+  India: 2,884 papers
+  Netherlands: 2,511 papers
+  Spain: 1,841 papers
+  Sweden: 1,691 papers
+  United Arab Emirates: 1,243 papers
+  Austria: 1,203 papers
+  Denmark: 1,102 papers
+  Belgium: 1,007 papers
+  Russian Federation: 829 papers
+  Finland: 783 papers
+  Saudi Arabia: 697 papers
+  Portugal: 592 papers
+  Greece: 557 papers
+  Czech Republic: 534 papers
+  Poland: 491 papers
+  Brazil: 472 papers
+  Norway: 421 papers
+  Vietnam: 419 papers
+  Unknown: 392 papers
+  Türkiye: 341 papers
+  Iran: 319 papers
+  New Zealand: 282 papers
+  Ireland: 263 papers
+  Mexico: 179 papers
+  South Africa: 149 papers
+  Romania: 145 papers
+  Slovenia: 123 papers
+  Chile: 122 papers
+  Hungary: 119 papers
+  Luxembourg: 117 papers
+  Qatar: 115 papers
+  Thailand: 101 papers
+  Argentina: 76 papers
+  Malaysia: 74 papers
+  Bangladesh: 73 papers
+  Colombia: 72 papers
+  Croatia: 70 papers
+  Bulgaria: 64 papers
+  Pakistan: 60 papers
+  Egypt: 58 papers
+  Estonia: 55 papers
+  Cyprus: 54 papers
+  Czechia: 48 papers
+  Lebanon: 47 papers
+  Indonesia: 45 papers
+  Serbia: 36 papers
+  Sri Lanka: 31 papers
+  Algeria: 29 papers
+  Tunisia: 28 papers
+  Slovakia: 23 papers
+  Kazakhstan: 22 papers
+  Armenia: 22 papers
+  Nigeria: 20 papers
+  Uruguay: 20 papers
+  Ukraine: 18 papers
+  Morocco: 18 papers
+  Philippines: 17 papers
+  Peru: 16 papers
+  Latvia: 16 papers
+  Kenya: 16 papers
+  Ecuador: 12 papers
+  Jordan: 12 papers
+  Iceland: 12 papers
+  Iraq: 11 papers
+  Ethiopia: 11 papers
+  Cameroon: 11 papers
+  Bosnia and Herzegovina: 11 papers
+  Libya: 10 papers
+  Malta: 9 papers
+  Lithuania: 9 papers
+  Russia: 8 papers
+  Ghana: 8 papers
+  Venezuela: 7 papers
+  Puerto Rico: 7 papers
+  Uganda: 6 papers
+  Rwanda: 6 papers
+  Nepal: 5 papers
+  State of Palestine: 5 papers
+  Cuba: 4 papers
+  Liechtenstein: 4 papers
+  Georgia: 3 papers
+  Azerbaijan: 3 papers
+  Kingdom of Saudi Arabia: 3 papers
+  Kuwait: 3 papers
+  Uzbekistan: 3 papers
+  Costa Rica: 3 papers
+  Panama: 2 papers
+  Oman: 2 papers
+  Kosovo: 2 papers
+  Bahrain: 2 papers
+  North Macedonia: 2 papers
+  Zambia: 2 papers
+  Belarus: 2 papers
+  Senegal: 2 papers
+  Namibia: 1 papers
+  Madagascar: 1 papers
+  Sudan: 1 papers
+  Benin: 1 papers
+  Bolivia: 1 papers
+  Mozambique: 1 papers
+  Tanzania: 1 papers
+  Djibouti: 1 papers
+  Gibraltar: 1 papers
+  Malawi: 1 papers
+  Guyana: 1 papers
+  New Caledonia: 1 papers
+  Mauritius: 1 papers
+  French Polynesia: 1 papers
+  Togo: 1 papers
+  Burkina Faso: 1 papers
+  Albania: 1 papers
+  Myanmar: 1 papers
+  Brunei Darussalam: 1 papers
+  Mali: 1 papers

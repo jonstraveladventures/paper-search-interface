@@ -1,0 +1,61 @@
+=== AFRICAN COUNTRIES FOUND IN THE DATASET ===
+Total African countries found: 27
+Total countries in dataset: 127
+Percentage of African countries: 21.3%
+
+African countries (alphabetically sorted):
+ 1. Algeria
+ 2. Benin
+ 3. Burkina Faso
+ 4. Cameroon
+ 5. Djibouti
+ 6. Egypt
+ 7. Ethiopia
+ 8. Ghana
+ 9. Kenya
+10. Libya
+11. Madagascar
+12. Malawi
+13. Mali
+14. Mauritius
+15. Morocco
+16. Mozambique
+17. Namibia
+18. Nigeria
+19. Rwanda
+20. Senegal
+21. South Africa
+22. Sudan
+23. Tanzania
+24. Togo
+25. Tunisia
+26. Uganda
+27. Zambia
+
+African countries NOT found in the dataset:
+ 1. Angola
+ 2. Botswana
+ 3. Burundi
+ 4. Cape Verde
+ 5. Central African Republic
+ 6. Chad
+ 7. Comoros
+ 8. Congo
+ 9. Democratic Republic of the Congo
+10. Equatorial Guinea
+11. Eritrea
+12. Gabon
+13. Gambia
+14. Guinea
+15. Guinea-Bissau
+16. Ivory Coast
+17. Lesotho
+18. Liberia
+19. Mauritania
+20. Niger
+21. Seychelles
+22. Sierra Leone
+23. Somalia
+24. South Sudan
+25. São Tomé and Príncipe
+26. Zimbabwe

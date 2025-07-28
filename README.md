@@ -4,11 +4,11 @@ A web-based tool for searching and analyzing academic papers from various confer
 
 ## ⚠️ Important Notice
 
-**This repository contains only the search interface and processing tools. The actual paper data is not included and must be obtained separately from [Paper Copilot](https://papercopilot.com).**
+**This repository includes both the search interface and the paper data for immediate use.**
 
 - **Data Source**: All paper metadata originates from [Paper Copilot](https://papercopilot.com)
 - **Usage Rights**: Users must comply with Paper Copilot's [Terms and Conditions](https://papercopilot.com/policy/terms-and-conditions/)
-- **Data Processing**: This tool processes locally obtained data for personal, non-commercial use only
+- **Data Processing**: This tool processes data for personal, non-commercial use only
 
 ## Features
 
@@ -33,7 +33,6 @@ The tool supports papers from major conferences including:
 
 ### Prerequisites
 - Python 3.8 or higher
-- Access to paper data from [Paper Copilot](https://papercopilot.com)
 
 ### Installation
 
@@ -53,30 +52,12 @@ The tool supports papers from major conferences including:
    install.bat
    ```
 
-3. **Download your data** (Choose one option):
-
-   **Option A: Automatic Download (Recommended)**
-   ```bash
-   python download_data.py
-   ```
-   This script will automatically download all available data from Paper Copilot and organize it into the correct folder structure.
-
-   **Option B: Manual Download**
-   - Visit [Paper Copilot](https://papercopilot.com)
-   - Download the paper data you wish to analyze
-   - Place the JSON files in the appropriate conference folders (e.g., `nips/`, `icml/`, etc.)
-
-4. **Process the data**:
-   ```bash
-   python tools/combine_papers.py
-   ```
-
-5. **Start the web interface**:
+3. **Start the web interface**:
    ```bash
    python run.py
    ```
 
-6. **Open your browser** and go to `http://localhost:5001`
+4. **Open your browser** and go to `http://localhost:5001`
 
 ## Usage
 
@@ -96,7 +77,7 @@ The tool supports papers from major conferences including:
 
 ## Data Attribution
 
-This tool processes data from [Paper Copilot](https://papercopilot.com). Please ensure you comply with their [Terms and Conditions](https://papercopilot.com/policy/terms-and-conditions/) when using this tool.
+This tool includes data from [Paper Copilot](https://papercopilot.com). Please ensure you comply with their [Terms and Conditions](https://papercopilot.com/policy/terms-and-conditions/) when using this tool.
 
 ## Project Structure
 
@@ -108,12 +89,12 @@ paper-search-interface/
 │   ├── find_name_papers.py       # Author search utility
 │   └── templates/
 │       └── index.html            # Web interface template
-├── download_data.py              # Automatic data downloader
-├── setup_data.py                 # Data setup checker
 ├── run.py                        # Application launcher
 ├── requirements.txt              # Python dependencies
 ├── install.sh                    # Unix/Linux/macOS setup script
 ├── install.bat                   # Windows setup script
+├── all_papers.csv                # Combined paper data
+├── [conference folders]/         # Individual conference data
 └── README.md                     # This file
 ```
 
