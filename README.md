@@ -53,7 +53,15 @@ The tool supports papers from major conferences including:
    install.bat
    ```
 
-3. **Obtain your data**:
+3. **Download your data** (Choose one option):
+
+   **Option A: Automatic Download (Recommended)**
+   ```bash
+   python download_data.py
+   ```
+   This script will automatically download all available data from Paper Copilot and organize it into the correct folder structure.
+
+   **Option B: Manual Download**
    - Visit [Paper Copilot](https://papercopilot.com)
    - Download the paper data you wish to analyze
    - Place the JSON files in the appropriate conference folders (e.g., `nips/`, `icml/`, etc.)
@@ -100,6 +108,8 @@ paper-search-interface/
 │   ├── find_name_papers.py       # Author search utility
 │   └── templates/
 │       └── index.html            # Web interface template
+├── download_data.py              # Automatic data downloader
+├── setup_data.py                 # Data setup checker
 ├── run.py                        # Application launcher
 ├── requirements.txt              # Python dependencies
 ├── install.sh                    # Unix/Linux/macOS setup script
