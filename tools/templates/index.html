@@ -539,10 +539,13 @@
         }
         
         function searchPapers() {
+            console.log('searchPapers function called');
             const titleSearch = document.getElementById('title-search').value;
             const authorSearch = document.getElementById('author-search').value;
             const yearMin = document.getElementById('year-min').value;
             const yearMax = document.getElementById('year-max').value;
+            
+            console.log('Search parameters:', { titleSearch, authorSearch, yearMin, yearMax, selectedCountries, selectedVenues });
             
             // Show loading
             document.getElementById('results-container').innerHTML = '<div class="loading">Searching...</div>';
@@ -557,9 +560,29 @@
             selectedCountries.forEach(country => params.append('countries[]', country));
             selectedVenues.forEach(venue => params.append('venues[]', venue));
             
+            const url = `/search?${params.toString()}`;
+            console.log('Making request to:', url);
+            console.log('Full URL would be:', window.location.origin + url);
+            
             // Make request
-            fetch(`/search?${params.toString()}`)
-                .then(response => response.json())
+            fetch(url)
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text().then(text => {
+                        console.log('Raw response text:', text.substring(0, 200) + '...');
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error('JSON parse error:', e);
+                            console.error('Response text:', text);
+                            throw new Error('Invalid JSON response');
+                        }
+                    });
+                })
                 .then(data => {
                     console.log('Search response:', data);
                     if (data.error) {
@@ -569,14 +592,18 @@
                     displayResults(data);
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.error('Fetch error:', error);
                     document.getElementById('results-container').innerHTML = '<div class="no-results">Error occurred while searching</div>';
                 });
         }
         
         function displayResults(data) {
+            console.log('displayResults called with:', data);
             const container = document.getElementById('results-container');
             const countElement = document.getElementById('results-count');
+            
+            console.log('Container:', container);
+            console.log('Count element:', countElement);
             
             let countText = data.total;
             if (data.limited) {
@@ -584,7 +611,9 @@
             }
             countElement.textContent = countText;
             
+            console.log('Data total:', data.total);
             if (data.total === 0) {
+                console.log('No results found');
                 container.innerHTML = '<div class="no-results">No papers found matching your criteria</div>';
                 return;
             }

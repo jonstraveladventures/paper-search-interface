@@ -1,16 +1,8 @@
-# Virtual environments
-venv/
-.venv/
-env/
-.env/
-
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -27,68 +19,23 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
+# Virtual environments
 venv/
+.venv/
+env/
+.env/
 ENV/
 env.bak/
 venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
 # OS
 .DS_Store
@@ -99,10 +46,67 @@ dmypy.json
 ehthumbs.db
 Thumbs.db
 
-# Large data files (excluded due to size)
+# Flask
+instance/
+.webassets-cache
+
+# Data files - NOT INCLUDED IN REPOSITORY
+# Users must obtain data from https://papercopilot.com
+*.csv
+*.json
+*.txt
+!requirements.txt
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+!setup.py
+!run.py
+!install.sh
+!install.bat
+!demo.py
+
+# Conference data directories
+aaai/
+acl/
+acml/
+acmmm/
+aistats/
+automl/
+coling/
+colm/
+colt/
+corl/
+cvpr/
+eccv/
+emnlp/
+iccv/
+iclr/
+icml/
+icra/
+ijcai/
+iros/
+kdd/
+naacl/
+nips/
+rss/
+siggraph/
+siggraphasia/
+uai/
+wacv/
+www/
+
+# Generated data files
 all_papers.csv
 african_papers.csv
 *_papers.csv
 unique_countries.txt
 african_countries.txt
 mathematica_data.txt
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
