@@ -1,6 +1,6 @@
 # Paper Search Interface
 
-A web-based tool for searching and analyzing academic papers from various conferences. This tool processes paper metadata from [Paper Copilot](https://papercopilot.com) to provide advanced search and filtering capabilities.
+A web-based tool for searching and analyzing academic papers from major conferences and journals across multiple research subfields. This tool processes paper metadata from [Paper Copilot](https://papercopilot.com) to provide advanced search and filtering capabilities.
 
 ![Paper Search Interface](tools/img/interface_screenshot.png)
 
@@ -21,15 +21,20 @@ A web-based tool for searching and analyzing academic papers from various confer
 - **CSV Export**: Export search results to CSV format
 - **Bulk Selection**: Select all countries, African countries, or venues with one click
 
-## Supported Conferences
+## Supported Research Areas
 
-The tool supports papers from major conferences including:
-- **AI/ML**: AAAI, ICML, ICLR, NeurIPS, IJCAI, AISTATS
-- **Computer Vision**: CVPR, ICCV, ECCV, WACV
-- **NLP**: ACL, EMNLP, NAACL, COLING
-- **Robotics**: ICRA, IROS, RSS, CORL
-- **Graphics**: SIGGRAPH, SIGGRAPH Asia
-- **And many more...**
+The tool supports papers from major conferences and journals across these research subfields:
+
+- **Artificial Intelligence**: AAAI, ICML, ICLR, NeurIPS, IJCAI, AISTATS, CORL, ACML
+- **Computational Linguistics**: ACL, EMNLP, NAACL, COLING, COLM
+- **Computer Vision & Pattern Recognition**: CVPR, ICCV, ECCV, WACV
+- **Computer Graphics**: SIGGRAPH, SIGGRAPH Asia
+- **Robotics**: ICRA, IROS, RSS
+- **Data Mining & Analysis**: KDD
+- **Databases & Information Systems**: WWW
+- **Multimedia**: ACMMM
+- **Computer Networks**: SITCOM
+- **And more...**
 
 ## Quick Start
 
@@ -96,7 +101,7 @@ paper-search-interface/
 ├── install.sh                    # Unix/Linux/macOS setup script
 ├── install.bat                   # Windows setup script
 ├── all_papers.csv                # Combined paper data
-├── [conference folders]/         # Individual conference data
+├── [conference/journal folders]/ # Individual conference and journal data
 └── README.md                     # This file
 ```
 
