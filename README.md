@@ -1,6 +1,6 @@
 # Paper Search Interface
 
-A web-based tool for searching and analyzing academic papers from major conferences and journals across multiple research subfields. This tool processes paper metadata from [Paper Copilot](https://papercopilot.com) to provide advanced search and filtering capabilities.
+A web-based tool for searching and analyzing academic papers from major conferences and journals across AI/ML/datascience related subfields. This tool processes paper metadata from [Paper Copilot](https://papercopilot.com) to provide advanced search and filtering capabilities.
 
 ![Paper Search Interface](tools/img/interface_screenshot.png)
 
