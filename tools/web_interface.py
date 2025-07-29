@@ -153,7 +153,7 @@ def filter_papers(df, title_search='', author_search='', selected_countries=None
         filtered_df = filtered_df[filtered_df['Author_Countries'].apply(has_selected_country)]
     
     # Filter by venues
-    if selected_venues:
+    if selected_venues and 'Conference' in filtered_df.columns:
         filtered_df = filtered_df[filtered_df['Conference'].isin(selected_venues)]
     
     # Filter by year range
@@ -197,6 +197,10 @@ def search():
     if df.empty:
         return jsonify({'error': 'Could not load data'})
     
+    # Debug: Print DataFrame info
+    print(f"DataFrame shape: {df.shape}")
+    print(f"DataFrame columns: {df.columns.tolist()}")
+    
     # Get search parameters
     title_search = request.args.get('title', '')
     author_search = request.args.get('author', '')
@@ -204,6 +208,9 @@ def search():
     selected_venues = request.args.getlist('venues[]')
     year_min = request.args.get('year_min', type=int)
     year_max = request.args.get('year_max', type=int)
+    
+    # Debug: Print search parameters
+    print(f"Search params - title: '{title_search}', author: '{author_search}', countries: {selected_countries}, venues: {selected_venues}")
     
     # Filter papers
     filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
