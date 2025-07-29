@@ -2,6 +2,8 @@
 
 A web-based tool for searching and analyzing academic papers from various conferences. This tool processes paper metadata from [Paper Copilot](https://papercopilot.com) to provide advanced search and filtering capabilities.
 
+![Paper Search Interface](tools/img/image.png)
+
 ## ⚠️ Important Notice
 
 **This repository includes both the search interface and the paper data for immediate use.**
