@@ -1,6 +1,22 @@
 #!/usr/bin/env python3
 """
-Check for papers from Sudan and other African countries that might not be in the top 15.
+Sudan and African Countries Data Analysis Tool
+
+This script specifically checks for papers from Sudan and other African countries that might not be
+included in the top 15 countries analysis. It helps identify countries that might be missing from
+temporal analysis and provides a comprehensive view of all African countries with papers.
+
+USAGE:
+    python tools/check_sudan_data.py
+
+OUTPUT:
+    - List of all African countries with papers
+    - Specific analysis of Sudan papers
+    - Countries that might be missing from temporal analysis
+    - Complete breakdown of African research presence
+
+AUTHOR: Jonathan Shock
+DATE: 2025
 """
 
 import pandas as pd
@@ -19,7 +35,12 @@ AFRICAN_COUNTRIES = {
 }
 
 def load_african_data():
-    """Load and filter African papers data"""
+    """
+    Load and filter African papers data
+    
+    Returns:
+        pandas.DataFrame: Filtered African papers data or None if file not found
+    """
     try:
         # Load the combined data
         df = pd.read_csv('all_papers.csv')
@@ -46,7 +67,15 @@ def load_african_data():
         return None
 
 def check_all_african_countries(df):
-    """Check all African countries for papers"""
+    """
+    Check all African countries for papers
+    
+    Args:
+        df (pandas.DataFrame): African papers dataset
+        
+    Returns:
+        pandas.Series: Count of papers by African country
+    """
     
     # Extract all countries from Author_Countries column
     all_countries = []
@@ -69,7 +98,15 @@ def check_all_african_countries(df):
     return country_counts
 
 def check_sudan_specifically(df):
-    """Check specifically for Sudan papers"""
+    """
+    Check specifically for Sudan papers
+    
+    Args:
+        df (pandas.DataFrame): African papers dataset
+        
+    Returns:
+        list: List of Sudan papers
+    """
     
     print(f"\n🇸🇩 SUDAN PAPERS ANALYSIS:")
     print("=" * 60)
@@ -92,7 +129,15 @@ def check_sudan_specifically(df):
     return sudan_papers
 
 def check_temporal_analysis_missing(df):
-    """Check what countries might be missing from the temporal analysis"""
+    """
+    Check what countries might be missing from the temporal analysis
+    
+    Args:
+        df (pandas.DataFrame): African papers dataset
+        
+    Returns:
+        pandas.Series: Count of papers by country in temporal period
+    """
     
     # Get the last 10 years
     current_year = 2024
@@ -125,7 +170,9 @@ def check_temporal_analysis_missing(df):
     return all_countries_temporal
 
 def main():
-    """Main function"""
+    """
+    Main function to analyze Sudan and African countries data
+    """
     print("🔍 Checking for Sudan and other African countries...")
     
     # Load data
