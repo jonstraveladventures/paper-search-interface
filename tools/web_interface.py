@@ -157,9 +157,9 @@ def filter_papers(df, title_search='', author_search='', selected_countries=None
         filtered_df = filtered_df[filtered_df['Conference'].isin(selected_venues)]
     
     # Filter by year range
-    if year_min is not None:
+    if year_min is not None and 'Year' in filtered_df.columns and not filtered_df.empty:
         filtered_df = filtered_df[filtered_df['Year'] >= year_min]
-    if year_max is not None:
+    if year_max is not None and 'Year' in filtered_df.columns and not filtered_df.empty:
         filtered_df = filtered_df[filtered_df['Year'] <= year_max]
     
     return filtered_df
