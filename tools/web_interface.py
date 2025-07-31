@@ -125,7 +125,7 @@ def get_venues_by_subfield(df):
     return venues_by_subfield
 
 def filter_papers(df, title_search='', author_search='', selected_countries=None, 
-                 selected_venues=None, year_min=None, year_max=None):
+                 selected_venues=None, year_min=None, year_max=None, include_rejected=False):
     """Filter papers based on search criteria"""
     if selected_countries is None:
         selected_countries = []
@@ -176,6 +176,14 @@ def filter_papers(df, title_search='', author_search='', selected_countries=None
         filtered_df = filtered_df[filtered_df['Year'] >= year_min]
     if year_max is not None and 'Year' in filtered_df.columns and not filtered_df.empty:
         filtered_df = filtered_df[filtered_df['Year'] <= year_max]
+    
+    # Filter by status (exclude rejected/withdrawn papers by default)
+    if not include_rejected and 'Status' in filtered_df.columns:
+        # Define statuses to exclude (rejected, withdrawn, etc.)
+        exclude_statuses = ['Reject', 'Withdraw', 'Desk Reject', 'Desk Rejected']
+        
+        # Filter out papers with excluded statuses
+        filtered_df = filtered_df[~filtered_df['Status'].isin(exclude_statuses)]
     
     return filtered_df
 
@@ -229,13 +237,14 @@ def search():
     year_min = request.args.get('year_min', type=int)
     year_max = request.args.get('year_max', type=int)
     include_unknown = request.args.get('include_unknown', type=bool)
+    include_rejected = request.args.get('include_rejected', type=bool)
     
     # Debug: Print search parameters
     print(f"Search params - title: '{title_search}', author: '{author_search}', countries: {selected_countries}, venues: {selected_venues}")
     
     # Filter papers
     filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
-                               selected_venues, year_min, year_max)
+                               selected_venues, year_min, year_max, include_rejected)
     
     # Handle unknown countries separately
     if include_unknown:
@@ -295,10 +304,11 @@ def export_csv():
     year_min = request.args.get('year_min', type=int)
     year_max = request.args.get('year_max', type=int)
     include_unknown = request.args.get('include_unknown', type=bool)
+    include_rejected = request.args.get('include_rejected', type=bool)
     
     # Filter papers
     filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
-                               selected_venues, year_min, year_max)
+                               selected_venues, year_min, year_max, include_rejected)
     
     # Handle unknown countries separately
     if include_unknown:

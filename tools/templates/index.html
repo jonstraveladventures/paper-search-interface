@@ -389,6 +389,18 @@
             </div>
             
             <div class="filter-section">
+                <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: #495057;">
+                        <input type="checkbox" id="include-rejected" onchange="updateIncludeRejected()">
+                        Include rejected/withdrawn papers (13,638 papers)
+                    </label>
+                    <div style="font-size: 12px; color: #6c757d; margin-top: 5px;">
+                        Check this to include papers that were rejected, desk rejected, or withdrawn. By default, only accepted papers are shown.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-section">
                 <h3>Venues ({{ venues|length }} total)</h3>
                 <div class="selection-buttons">
                     <button class="selection-button primary" onclick="selectAllVenues()">Select All Venues</button>
@@ -438,6 +450,7 @@
         let selectedCountries = [];
         let selectedVenues = [];
         let includeUnknown = false;
+        let includeRejected = false;
         
         function toggleContinent(continent) {
             const container = document.getElementById(`continent-${continent}`);
@@ -537,6 +550,10 @@
             includeUnknown = document.getElementById('include-unknown').checked;
         }
         
+        function updateIncludeRejected() {
+            includeRejected = document.getElementById('include-rejected').checked;
+        }
+        
         function clearFilters() {
             document.getElementById('title-search').value = '';
             document.getElementById('author-search').value = '';
@@ -549,6 +566,8 @@
             
             selectedCountries = [];
             selectedVenues = [];
+            includeUnknown = false;
+            includeRejected = false;
             
             document.getElementById('results-container').innerHTML = '<div class="no-results">Enter search criteria and click "Search Papers" to begin</div>';
             document.getElementById('results-count').textContent = '0';
@@ -578,6 +597,9 @@
             selectedVenues.forEach(venue => params.append('venues[]', venue));
             if (includeUnknown) {
                 params.append('include_unknown', 'true');
+            }
+            if (includeRejected) {
+                params.append('include_rejected', 'true');
             }
             
             const url = `/search?${params.toString()}`;
@@ -688,6 +710,9 @@
             selectedVenues.forEach(venue => params.append('venues[]', venue));
             if (includeUnknown) {
                 params.append('include_unknown', 'true');
+            }
+            if (includeRejected) {
+                params.append('include_rejected', 'true');
             }
             
             // Create download link
