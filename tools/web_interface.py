@@ -79,7 +79,7 @@ def get_unique_countries(df):
     all_countries = []
     for countries_str in df['Author_Countries'].dropna():
         if countries_str and countries_str.strip():
-            countries = [c.strip() for c in countries_str.split(';') if c.strip()]
+            countries = [c.strip() for c in countries_str.split(',') if c.strip()]
             all_countries.extend(countries)
     return sorted(set(all_countries))
 
@@ -147,7 +147,7 @@ def filter_papers(df, title_search='', author_search='', selected_countries=None
         def has_selected_country(countries_str):
             if pd.isna(countries_str) or not countries_str.strip():
                 return False
-            countries = [c.strip() for c in countries_str.split(';') if c.strip()]
+            countries = [c.strip() for c in countries_str.split(',') if c.strip()]
             return any(country in countries for country in selected_countries)
         
         filtered_df = filtered_df[filtered_df['Author_Countries'].apply(has_selected_country)]
