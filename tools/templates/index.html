@@ -377,6 +377,18 @@
             </div>
             
             <div class="filter-section">
+                <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: #495057;">
+                        <input type="checkbox" id="include-unknown" onchange="updateIncludeUnknown()">
+                        Include papers with no country data (32,015 papers)
+                    </label>
+                    <div style="font-size: 12px; color: #6c757d; margin-top: 5px;">
+                        Check this to include papers where author country information is missing or unknown.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-section">
                 <h3>Venues ({{ venues|length }} total)</h3>
                 <div class="selection-buttons">
                     <button class="selection-button primary" onclick="selectAllVenues()">Select All Venues</button>
@@ -425,6 +437,7 @@
     <script>
         let selectedCountries = [];
         let selectedVenues = [];
+        let includeUnknown = false;
         
         function toggleContinent(continent) {
             const container = document.getElementById(`continent-${continent}`);
@@ -520,6 +533,10 @@
             });
         }
         
+        function updateIncludeUnknown() {
+            includeUnknown = document.getElementById('include-unknown').checked;
+        }
+        
         function clearFilters() {
             document.getElementById('title-search').value = '';
             document.getElementById('author-search').value = '';
@@ -559,6 +576,9 @@
             
             selectedCountries.forEach(country => params.append('countries[]', country));
             selectedVenues.forEach(venue => params.append('venues[]', venue));
+            if (includeUnknown) {
+                params.append('include_unknown', 'true');
+            }
             
             const url = `/search?${params.toString()}`;
             console.log('Making request to:', url);
@@ -620,7 +640,7 @@
             
             let html = '';
             if (data.limited) {
-                html += '<div class="limited-results" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin-bottom: 15px; border-radius: 4px; color: #856404;">⚠️ Showing first 1,000 results. Use more specific filters to narrow down your search.</div>';
+                html += `<div class="limited-results" style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin-bottom: 15px; border-radius: 4px; color: #856404;">⚠️ Showing first ${data.displayed} results out of ${data.total} total. Use more specific filters to narrow down your search, or export to CSV to get all results.</div>`;
             }
             data.results.forEach((paper, index) => {
                 const statusClass = getStatusClass(paper.status);
@@ -666,6 +686,9 @@
             
             selectedCountries.forEach(country => params.append('countries[]', country));
             selectedVenues.forEach(venue => params.append('venues[]', venue));
+            if (includeUnknown) {
+                params.append('include_unknown', 'true');
+            }
             
             // Create download link
             const downloadUrl = `/export_csv?${params.toString()}`;

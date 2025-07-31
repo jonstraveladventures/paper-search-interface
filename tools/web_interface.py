@@ -49,8 +49,8 @@ CONTINENTS = {
     'Europe': [
         'Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina',
         'Bulgaria', 'Croatia', 'Czech Republic', 'Czechia', 'Denmark', 'Estonia',
-        'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland',
-        'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta',
+        'Finland', 'France', 'Germany', 'Gibraltar', 'Greece', 'Hungary', 'Iceland', 'Ireland',
+        'Italy', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta',
         'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway',
         'Poland', 'Portugal', 'Romania', 'Russia', 'Russian Federation', 'San Marino',
         'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland',
@@ -68,7 +68,7 @@ CONTINENTS = {
         'Paraguay', 'Peru', 'Suriname', 'Uruguay', 'Venezuela'
     ],
     'Oceania': [
-        'Australia', 'Fiji', 'Kiribati', 'Marshall Islands', 'Micronesia', 'Nauru',
+        'Australia', 'Fiji', 'French Polynesia', 'Kiribati', 'Marshall Islands', 'Micronesia', 'Nauru',
         'New Caledonia', 'New Zealand', 'Palau', 'Papua New Guinea', 'Samoa',
         'Solomon Islands', 'Tonga', 'Tuvalu', 'Vanuatu'
     ]
@@ -147,8 +147,23 @@ def filter_papers(df, title_search='', author_search='', selected_countries=None
         def has_selected_country(countries_str):
             if pd.isna(countries_str) or not countries_str.strip():
                 return False
+            
             countries = [c.strip() for c in countries_str.split(',') if c.strip()]
-            return any(country in countries for country in selected_countries)
+            
+            # Handle name variations
+            for country in countries:
+                # Check exact match first
+                if country in selected_countries:
+                    return True
+                # Handle variations
+                if country == "Kingdom of Saudi Arabia" and "Saudi Arabia" in selected_countries:
+                    return True
+                if country == "State of Palestine" and "Palestine" in selected_countries:
+                    return True
+                if country == "Türkiye" and "Turkey" in selected_countries:
+                    return True
+            
+            return False
         
         filtered_df = filtered_df[filtered_df['Author_Countries'].apply(has_selected_country)]
     
@@ -213,6 +228,7 @@ def search():
     selected_venues = request.args.getlist('venues[]')
     year_min = request.args.get('year_min', type=int)
     year_max = request.args.get('year_max', type=int)
+    include_unknown = request.args.get('include_unknown', type=bool)
     
     # Debug: Print search parameters
     print(f"Search params - title: '{title_search}', author: '{author_search}', countries: {selected_countries}, venues: {selected_venues}")
@@ -220,6 +236,12 @@ def search():
     # Filter papers
     filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
                                selected_venues, year_min, year_max)
+    
+    # Handle unknown countries separately
+    if include_unknown:
+        # Add papers with missing country data
+        unknown_papers = df[df['Author_Countries'].isna() | (df['Author_Countries'].astype(str).str.strip() == '')]
+        filtered_df = pd.concat([filtered_df, unknown_papers]).drop_duplicates()
     
     # Limit results to prevent performance issues
     max_results = 1000
@@ -272,10 +294,17 @@ def export_csv():
     selected_venues = request.args.getlist('venues[]')
     year_min = request.args.get('year_min', type=int)
     year_max = request.args.get('year_max', type=int)
+    include_unknown = request.args.get('include_unknown', type=bool)
     
     # Filter papers
     filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
                                selected_venues, year_min, year_max)
+    
+    # Handle unknown countries separately
+    if include_unknown:
+        # Add papers with missing country data
+        unknown_papers = df[df['Author_Countries'].isna() | (df['Author_Countries'].astype(str).str.strip() == '')]
+        filtered_df = pd.concat([filtered_df, unknown_papers]).drop_duplicates()
     
     if filtered_df.empty:
         return jsonify({'error': 'No results to export'})
