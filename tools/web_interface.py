@@ -29,12 +29,12 @@ CONTINENTS = {
         'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon',
         'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 'Congo',
         'Democratic Republic of the Congo', 'Djibouti', 'Egypt', 'Equatorial Guinea',
-        'Eritrea', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau',
+        'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau',
         'Ivory Coast', 'Kenya', 'Lesotho', 'Liberia', 'Libya', 'Madagascar', 'Malawi',
         'Mali', 'Mauritania', 'Mauritius', 'Morocco', 'Mozambique', 'Namibia', 'Niger',
         'Nigeria', 'Rwanda', 'São Tomé and Príncipe', 'Senegal', 'Seychelles',
         'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Tanzania',
-        'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'
+        'Togo', 'Tunisia', 'Uganda', 'Western Sahara', 'Zambia', 'Zimbabwe'
     ],
     'Asia': [
         'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan',
@@ -171,14 +171,19 @@ def index():
     if df.empty:
         return "Error: Could not load data file"
     
-    countries = get_unique_countries(df)
+    # Use all countries from the hardcoded continent lists instead of just those in the data
+    all_countries = []
+    for continent_countries in CONTINENTS.values():
+        all_countries.extend(continent_countries)
+    all_countries = sorted(all_countries)
+    
     venues = get_unique_venues(df)
     venues_by_subfield = get_venues_by_subfield(df)
     year_min = int(df['Year'].min())
     year_max = int(df['Year'].max())
     
     response = make_response(render_template('index.html', 
-                         countries=countries, 
+                         countries=all_countries, 
                          venues=venues,
                          venues_by_subfield=venues_by_subfield,
                          continents=CONTINENTS,
