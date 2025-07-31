@@ -2,6 +2,8 @@
 
 A web-based tool for searching and analyzing academic papers from major conferences and journals across AI/ML/datascience related subfields. This tool processes paper metadata from [Paper Copilot](https://papercopilot.com) to provide advanced search and filtering capabilities.
 
+**Author:** [Jonathan Shock](https://www.shocklab.net) - University of Cape Town
+
 ![Paper Search Interface](tools/img/interface_screenshot_v2.png)
 
 ## ⚠️ Important Notice
@@ -153,7 +155,9 @@ This tool is provided for educational and research purposes. Users are responsib
 
 ## Contact
 
-For questions about this tool, please open an issue on GitHub.
+For questions about this tool, please open an issue on GitHub or contact the author directly.
+
+**Author Contact:** jonathan.shock@uct.ac.za
 
 For questions about data usage rights, please contact [Paper Copilot](https://papercopilot.com).
 
