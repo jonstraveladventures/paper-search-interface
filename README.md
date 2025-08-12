@@ -68,6 +68,24 @@ The tool supports papers from major conferences and journals across these resear
 
 4. **Open your browser** and go to `http://localhost:5001`
 
+## GitHub Pages (Static Hosting)
+
+You can host a static version (no backend required) directly on GitHub Pages:
+
+1. A static site is in `docs/` and loads `docs/data.json` client-side.
+2. The build script `tools/build_static.py` generates `docs/data.json` from `all_papers.csv`.
+3. A workflow at `.github/workflows/deploy-pages.yml` builds and publishes `docs/` to Pages.
+
+Steps:
+- Push to `main`. The workflow will run and deploy.
+- In GitHub repository settings → Pages, set Source to “GitHub Actions”.
+- Your site will be available at the repository Pages URL.
+
+Note: `docs/data.json` is large (~60 MB). Pages will serve it, but initial load can be slow. If needed, consider:
+- Splitting by year into multiple JSON files
+- Lazy-loading by selected years/conferences
+- Hosting the JSON on an external CDN
+
 ## Usage
 
 ### Basic Search

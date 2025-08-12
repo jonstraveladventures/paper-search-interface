@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paper Search Interface (Static)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden; }
+    .header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+    .search-panel { padding: 20px; border-bottom: 1px solid #eee; background: #f8f9fa; }
+    .search-row { display: flex; gap: 20px; margin-bottom: 15px; align-items: center; flex-wrap: wrap; }
+    .search-group { flex: 1; min-width: 220px; }
+    .search-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+    .search-group input, .search-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+    .year-range { display: flex; gap: 10px; align-items: center; }
+    .year-range input { width: 80px; }
+    .filter-section { margin-bottom: 20px; }
+    .filter-section h3 { margin: 0 0 10px 0; color: #2c3e50; font-size: 16px; }
+    .countries-container, .venues-container { max-height: 260px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; padding: 10px; background: white; }
+    .continent-group { margin-bottom: 15px; }
+    .continent-header, .subfield-header { background: #e9ecef; padding: 8px; margin: -10px -10px 10px -10px; font-weight: bold; user-select: none; display: flex; align-items: center; justify-content: space-between; }
+    .continent-countries, .subfield-venues { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 5px; margin-left: 10px; }
+    .continent-countries.collapsed, .subfield-venues.collapsed { display: none; }
+    .country-item, .venue-item { display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
+    .selection-buttons { margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .selection-button { background: #6c757d; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+    .selection-button.primary { background: #007bff; }
+    .search-button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    .clear-button { background: #95a5a6; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; margin-left: 10px; }
+    .results-panel { padding: 20px; }
+    .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .results-actions { display: flex; gap: 10px; }
+    .export-button { background: #27ae60; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: background-color 0.2s; }
+    .results-count { font-size: 18px; font-weight: bold; color: #2c3e50; }
+    .paper-item { border: 1px solid #ddd; border-radius: 4px; padding: 15px; margin-bottom: 15px; background: white; }
+    .paper-title { font-size: 16px; font-weight: bold; color: #2c3e50; margin-bottom: 8px; }
+    .paper-authors { color: #666; margin-bottom: 8px; }
+    .paper-meta { display: flex; gap: 20px; font-size: 12px; color: #888; flex-wrap: wrap; }
+    .paper-meta span { background: #f8f9fa; padding: 2px 8px; border-radius: 12px; }
+    .loading { text-align: center; padding: 20px; color: #666; }
+    .no-results { text-align: center; padding: 40px; color: #666; font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Paper Search Interface</h1>
+      <p id="paper-count">Loading data...</p>
+      <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">
+        Data sourced from <a href="https://papercopilot.com" target="_blank" style="color: white; text-decoration: underline;">Paper Copilot</a>
+      </p>
+    </div>
+
+    <div class="search-panel">
+      <div class="search-row">
+        <div class="search-group">
+          <label for="title-search">Title Search:</label>
+          <input type="text" id="title-search" placeholder="Enter title keywords..." />
+        </div>
+        <div class="search-group">
+          <label for="author-search">Author Search:</label>
+          <input type="text" id="author-search" placeholder="Enter author name..." />
+        </div>
+      </div>
+
+      <div class="search-row">
+        <div class="search-group">
+          <label>Year Range:</label>
+          <div class="year-range">
+            <input type="number" id="year-min" placeholder="Min" />
+            <span>to</span>
+            <input type="number" id="year-max" placeholder="Max" />
+          </div>
+        </div>
+      </div>
+
+      <div class="search-row">
+        <div class="search-group">
+          <button class="search-button" onclick="searchPapers()">Search Papers</button>
+          <button class="clear-button" onclick="clearFilters()">Clear Filters</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Countries</h3>
+        <div class="selection-buttons">
+          <button class="selection-button primary" onclick="selectAllCountries()">Select All Countries</button>
+          <button class="selection-button" onclick="selectAfricanCountries()">Select All African Countries</button>
+          <button class="selection-button" onclick="clearAllCountries()">Clear All Countries</button>
+        </div>
+        <div class="countries-container" id="countries-container"></div>
+      </div>
+
+      <div class="filter-section">
+        <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: #495057;">
+            <input type="checkbox" id="include-unknown" onchange="updateIncludeUnknown()" />
+            Include papers with no country data
+          </label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; color: #495057;">
+            <input type="checkbox" id="include-rejected" onchange="updateIncludeRejected()" />
+            Include rejected/withdrawn papers
+          </label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Venues</h3>
+        <div class="selection-buttons">
+          <button class="selection-button primary" onclick="selectAllVenues()">Select All Venues</button>
+          <button class="selection-button" onclick="clearAllVenues()">Clear All Venues</button>
+        </div>
+        <div class="venues-container" id="venues-container"></div>
+      </div>
+    </div>
+
+    <div class="results-panel">
+      <div class="results-header">
+        <div class="results-count">Results: <span id="results-count">0</span> papers</div>
+        <div class="results-actions">
+          <button id="export-btn" class="export-button" onclick="exportToCSV()" style="display: none;">📥 Export to CSV</button>
+        </div>
+      </div>
+      <div id="results-container">
+        <div class="no-results">Enter search criteria and click "Search Papers" to begin</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Static data loaded from docs/data.json
+    let allPapers = [];
+    let selectedCountries = [];
+    let selectedVenues = [];
+    let includeUnknown = false;
+    let includeRejected = false;
+
+    const CONTINENTS = {
+      'Africa': ['Algeria','Angola','Benin','Botswana','Burkina Faso','Burundi','Cameroon','Cape Verde','Central African Republic','Chad','Comoros','Congo','Democratic Republic of the Congo','Djibouti','Egypt','Equatorial Guinea','Eritrea','Eswatini','Ethiopia','Gabon','Gambia','Ghana','Guinea','Guinea-Bissau','Ivory Coast','Kenya','Lesotho','Liberia','Libya','Madagascar','Malawi','Mali','Mauritania','Mauritius','Morocco','Mozambique','Namibia','Niger','Nigeria','Rwanda','São Tomé and Príncipe','Senegal','Seychelles','Sierra Leone','Somalia','South Africa','South Sudan','Sudan','Tanzania','Togo','Tunisia','Uganda','Zambia','Zimbabwe'],
+      'Asia': ['Afghanistan','Armenia','Azerbaijan','Bahrain','Bangladesh','Bhutan','Brunei Darussalam','Cambodia','China','Cyprus','Georgia','India','Indonesia','Iran','Iraq','Israel','Japan','Jordan','Kazakhstan','Kuwait','Kyrgyzstan','Laos','Lebanon','Malaysia','Maldives','Mongolia','Myanmar','Nepal','North Korea','Oman','Pakistan','Palestine','Philippines','Qatar','Saudi Arabia','Singapore','South Korea','Sri Lanka','Syria','Taiwan','Tajikistan','Thailand','Timor-Leste','Turkey','Turkmenistan','United Arab Emirates','Uzbekistan','Vietnam','Yemen'],
+      'Europe': ['Albania','Andorra','Austria','Belarus','Belgium','Bosnia and Herzegovina','Bulgaria','Croatia','Czech Republic','Czechia','Denmark','Estonia','Finland','France','Germany','Gibraltar','Greece','Hungary','Iceland','Ireland','Italy','Kosovo','Latvia','Liechtenstein','Lithuania','Luxembourg','Malta','Moldova','Monaco','Montenegro','Netherlands','North Macedonia','Norway','Poland','Portugal','Romania','Russia','Russian Federation','San Marino','Serbia','Slovakia','Slovenia','Spain','Sweden','Switzerland','Ukraine','United Kingdom','Vatican City'],
+      'North America': ['Antigua and Barbuda','Bahamas','Barbados','Belize','Canada','Costa Rica','Cuba','Dominica','Dominican Republic','El Salvador','Grenada','Guatemala','Haiti','Honduras','Jamaica','Mexico','Nicaragua','Panama','Puerto Rico','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Trinidad and Tobago','United States'],
+      'South America': ['Argentina','Bolivia','Brazil','Chile','Colombia','Ecuador','Guyana','Paraguay','Peru','Suriname','Uruguay','Venezuela'],
+      'Oceania': ['Australia','Fiji','French Polynesia','Kiribati','Marshall Islands','Micronesia','Nauru','New Caledonia','New Zealand','Palau','Papua New Guinea','Samoa','Solomon Islands','Tonga','Tuvalu','Vanuatu']
+    };
+
+    function getUnique(arr) { return Array.from(new Set(arr)); }
+
+    function initFilters() {
+      const yearValues = allPapers.map(p => p.Year).filter(v => typeof v === 'number');
+      const yearMin = Math.min(...yearValues);
+      const yearMax = Math.max(...yearValues);
+      document.getElementById('year-min').value = yearMin;
+      document.getElementById('year-max').value = yearMax;
+
+      // Countries list (from continents)
+      const countriesContainer = document.getElementById('countries-container');
+      countriesContainer.innerHTML = '';
+      Object.entries(CONTINENTS).forEach(([continent, countries]) => {
+        const group = document.createElement('div');
+        group.className = 'continent-group';
+        group.innerHTML = `
+          <div class="continent-header">
+            <span style="flex-grow:1;">${continent} (${countries.length} countries)</span>
+            <button class="selection-button" onclick="selectContinentCountries('${continent}')">Select All ${continent}</button>
+          </div>
+          <div class="continent-countries" id="continent-${continent}"></div>
+        `;
+        countriesContainer.appendChild(group);
+        const list = group.querySelector(`#continent-${continent}`);
+        countries.forEach(country => {
+          const item = document.createElement('div');
+          item.className = 'country-item';
+          item.innerHTML = `<input type="checkbox" id="country-${country}" value="${country}" onchange="updateSelectedCountries()"/> <label for="country-${country}">${country}</label>`;
+          list.appendChild(item);
+        });
+      });
+
+      // Venues grouped by subfield using existing Subfield field
+      const venuesBySubfield = {};
+      allPapers.forEach(p => {
+        const sub = p.Subfield || 'Other';
+        const conf = p.Conference || 'Unknown';
+        if (!venuesBySubfield[sub]) venuesBySubfield[sub] = new Set();
+        venuesBySubfield[sub].add(conf);
+      });
+      const venuesContainer = document.getElementById('venues-container');
+      Object.entries(venuesBySubfield).forEach(([subfield, set]) => {
+        const group = document.createElement('div');
+        group.className = 'subfield-group';
+        group.innerHTML = `
+          <div class="subfield-header">
+            <span style="flex-grow:1;">${subfield} (${set.size} venues)</span>
+            <button class="selection-button" onclick="selectSubfieldVenues('${subfield}')">Select All ${subfield}</button>
+          </div>
+          <div class="subfield-venues" id="subfield-${subfield}"></div>
+        `;
+        venuesContainer.appendChild(group);
+        const list = group.querySelector(`#subfield-${subfield}`);
+        Array.from(set).sort().forEach(venue => {
+          const item = document.createElement('div');
+          item.className = 'venue-item';
+          item.innerHTML = `<input type="checkbox" id="venue-${venue}" value="${venue}" onchange="updateSelectedVenues()"/> <label for="venue-${venue}">${venue}</label>`;
+          list.appendChild(item);
+        });
+      });
+
+      document.getElementById('paper-count').textContent = `Loaded ${allPapers.length.toLocaleString()} papers`;
+    }
+
+    function updateSelectedCountries() {
+      selectedCountries = Array.from(document.querySelectorAll('input[id^="country-"]:checked')).map(c => c.value);
+    }
+    function updateSelectedVenues() {
+      selectedVenues = Array.from(document.querySelectorAll('input[id^="venue-"]:checked')).map(c => c.value);
+    }
+    function updateIncludeUnknown() { includeUnknown = document.getElementById('include-unknown').checked; }
+    function updateIncludeRejected() { includeRejected = document.getElementById('include-rejected').checked; }
+
+    function selectAllCountries() { document.querySelectorAll('input[id^="country-"]').forEach(cb => cb.checked = true); updateSelectedCountries(); }
+    function clearAllCountries() { document.querySelectorAll('input[id^="country-"]').forEach(cb => cb.checked = false); updateSelectedCountries(); }
+    function selectAfricanCountries() {
+      clearAllCountries();
+      CONTINENTS['Africa'].forEach(country => { const el = document.getElementById(`country-${country}`); if (el) el.checked = true; });
+      updateSelectedCountries();
+    }
+    function selectContinentCountries(continent) { document.querySelectorAll(`#continent-${continent} input[type="checkbox"]`).forEach(cb => cb.checked = true); updateSelectedCountries(); }
+    function selectAllVenues() { document.querySelectorAll('input[id^="venue-"]').forEach(cb => cb.checked = true); updateSelectedVenues(); }
+    function clearAllVenues() { document.querySelectorAll('input[id^="venue-"]').forEach(cb => cb.checked = false); updateSelectedVenues(); }
+    function selectSubfieldVenues(subfield) { document.querySelectorAll(`#subfield-${subfield} input[type="checkbox"]`).forEach(cb => cb.checked = true); updateSelectedVenues(); }
+
+    function clearFilters() {
+      document.getElementById('title-search').value = '';
+      document.getElementById('author-search').value = '';
+      const years = allPapers.map(p => p.Year).filter(v => typeof v === 'number');
+      document.getElementById('year-min').value = Math.min(...years);
+      document.getElementById('year-max').value = Math.max(...years);
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      selectedCountries = []; selectedVenues = []; includeUnknown = false; includeRejected = false;
+      document.getElementById('results-container').innerHTML = '<div class="no-results">Enter search criteria and click "Search Papers" to begin</div>';
+      document.getElementById('results-count').textContent = '0';
+      document.getElementById('export-btn').style.display = 'none';
+    }
+
+    function filterPapers() {
+      const titleSearch = (document.getElementById('title-search').value || '').toLowerCase();
+      const authorSearch = (document.getElementById('author-search').value || '').toLowerCase();
+      const yearMin = parseInt(document.getElementById('year-min').value, 10);
+      const yearMax = parseInt(document.getElementById('year-max').value, 10);
+
+      return allPapers.filter(row => {
+        // Title/author
+        if (titleSearch && !(row.Title || '').toLowerCase().includes(titleSearch)) return false;
+        if (authorSearch && !(row.Authors || '').toLowerCase().includes(authorSearch)) return false;
+
+        // Year range
+        if (Number.isFinite(yearMin) && typeof row.Year === 'number' && row.Year < yearMin) return false;
+        if (Number.isFinite(yearMax) && typeof row.Year === 'number' && row.Year > yearMax) return false;
+
+        // Countries
+        if (selectedCountries.length > 0) {
+          const countriesStr = row.Author_Countries || '';
+          if (!countriesStr.trim()) return includeUnknown; // only include if explicitly requested
+          const countries = countriesStr.split(',').map(c => c.trim()).filter(Boolean);
+          const hasMatch = countries.some(country => {
+            if (selectedCountries.includes(country)) return true;
+            if (country === 'Kingdom of Saudi Arabia' && selectedCountries.includes('Saudi Arabia')) return true;
+            if (country === 'State of Palestine' && selectedCountries.includes('Palestine')) return true;
+            if (country === 'Türkiye' && selectedCountries.includes('Turkey')) return true;
+            return false;
+          });
+          if (!hasMatch) return false;
+        } else {
+          if (!includeUnknown && !(row.Author_Countries || '').trim()) return false;
+        }
+
+        // Venues
+        if (selectedVenues.length > 0 && row.Conference) {
+          if (!selectedVenues.includes(row.Conference)) return false;
+        }
+
+        // Status (exclude rejected unless included)
+        if (!includeRejected) {
+          const s = (row.Status || '').toLowerCase();
+          if (s.includes('reject') || s.includes('withdraw')) return false;
+        }
+
+        return true;
+      });
+    }
+
+    function searchPapers() {
+      const container = document.getElementById('results-container');
+      container.innerHTML = '<div class="loading">Searching...</div>';
+
+      const filtered = filterPapers();
+      const totalCount = filtered.length;
+      const maxResults = 1000;
+      const displayedList = totalCount > maxResults ? filtered.slice(0, maxResults) : filtered;
+
+      let html = '';
+      if (totalCount === 0) {
+        html = '<div class="no-results">No papers found matching your criteria</div>';
+      } else {
+        if (totalCount > maxResults) {
+          html += `<div style="background:#fff3cd;border:1px solid #ffeaa7;padding:10px;margin-bottom:15px;border-radius:4px;color:#856404;">⚠️ Showing first ${displayedList.length} results out of ${totalCount} total. Use more specific filters to narrow down your search, or export to CSV to get all results.</div>`;
+        }
+        displayedList.forEach(row => {
+          const status = row.Status || 'Unknown';
+          html += `
+            <div class="paper-item">
+              <div class="paper-title">${row.Title}</div>
+              <div class="paper-authors">${row.Authors}</div>
+              <div class="paper-meta">
+                <span>${row.Conference || ''} ${row.Year || ''}</span>
+                <span>${row.Subfield || ''}</span>
+                <span>${status}</span>
+                <span>${row.Track || 'N/A'}</span>
+                <span>${Number.isFinite(row.Citations) ? row.Citations : 0} citations</span>
+                <span>${row.Author_Countries || 'N/A'}</span>
+              </div>
+            </div>`;
+        });
+      }
+
+      container.innerHTML = html;
+      document.getElementById('results-count').textContent = `${totalCount}` + (totalCount > maxResults ? ` (showing first ${maxResults})` : '');
+      document.getElementById('export-btn').style.display = totalCount > 0 ? 'inline-block' : 'none';
+    }
+
+    function exportToCSV() {
+      const filtered = filterPapers();
+      if (filtered.length === 0) return;
+      const header = Object.keys(filtered[0]);
+      const rows = [header.join(',')].concat(
+        filtered.map(obj => header.map(k => JSON.stringify(obj[k] != null ? obj[k] : "")).join(','))
+      );
+      const csv = rows.join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'search_results.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Load data.json and initialize
+    fetch('data.json', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => { allPapers = data; initFilters(); })
+      .catch(err => {
+        document.getElementById('paper-count').textContent = 'Failed to load data.json';
+        console.error(err);
+      });
+
+    // Enter key triggers search
+    document.addEventListener('keypress', e => { if (e.key === 'Enter') searchPapers(); });
+  </script>
+</body>
+</html>
+
+
