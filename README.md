@@ -22,6 +22,9 @@ A web-based tool for searching and analyzing academic papers from major conferen
 - **Status Tracking**: View paper acceptance status with color coding
 - **CSV Export**: Export search results to CSV format
 - **Bulk Selection**: Select all countries, African countries, or venues with one click
+- **Map View**: Toggle a world map above results to visualize per‑country paper counts, scoped to current filters. Download the rendered map as PNG.
+
+<img src="tools/img/african_countries.png" alt="Example map view" width="800" />
 
 ## Supported Research Areas
 
@@ -105,6 +108,10 @@ Note: `docs/data.json` is large (~60 MB). Pages will serve it, but initial load 
 ## Data Attribution
 
 This tool includes data from [Paper Copilot](https://papercopilot.com). Please ensure you comply with their [Terms and Conditions](https://papercopilot.com/policy/terms-and-conditions/) when using this tool.
+
+### Mapping and cartogram sources
+- The inline map is a choropleth built with [D3](https://d3js.org/) and [world-atlas TopoJSON](https://github.com/topojson/world-atlas).
+- A separate cartogram prototype was explored using Max Roser’s world population cartogram data via [mattdzugan/World-Population-Cartogram](https://github.com/mattdzugan/World-Population-Cartogram) (not required for the main interface).
 
 ## Project Structure
 

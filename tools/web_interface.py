@@ -187,6 +187,22 @@ def filter_papers(df, title_search='', author_search='', selected_countries=None
     
     return filtered_df
 
+def aggregate_counts_by_country(df):
+    """Aggregate paper counts by country.
+
+    Each paper contributes 1 count to every country listed in Author_Countries.
+    Empty or missing countries are ignored unless explicitly included elsewhere.
+    """
+    counts = {}
+    if df.empty or 'Author_Countries' not in df.columns:
+        return counts
+    for countries_str in df['Author_Countries'].dropna():
+        if not isinstance(countries_str, str) or not countries_str.strip():
+            continue
+        for country in [c.strip() for c in countries_str.split(',') if c.strip()]:
+            counts[country] = counts.get(country, 0) + 1
+    return counts
+
 @app.route('/')
 def index():
     """Main page"""
@@ -288,6 +304,52 @@ def search():
         'displayed': len(results),
         'limited': total_count > max_results
     })
+
+@app.route('/map_data')
+def map_data():
+    """API endpoint to return aggregated counts by country for the current filters.
+
+    Returns JSON: { counts: { countryName: count, ... }, max: maxCount, filtered_countries: [..] }
+    """
+    df = load_data()
+    if df.empty:
+        return jsonify({'error': 'Could not load data'})
+
+    title_search = request.args.get('title', '')
+    author_search = request.args.get('author', '')
+    selected_countries = request.args.getlist('countries[]')
+    selected_venues = request.args.getlist('venues[]')
+    year_min = request.args.get('year_min', type=int)
+    year_max = request.args.get('year_max', type=int)
+    include_unknown = request.args.get('include_unknown', type=bool)
+    include_rejected = request.args.get('include_rejected', type=bool)
+
+    filtered_df = filter_papers(df, title_search, author_search, selected_countries,
+                                selected_venues, year_min, year_max, include_rejected)
+
+    counts = aggregate_counts_by_country(filtered_df)
+
+    # If specific countries are selected, zero out others for visualization intent
+    if selected_countries:
+        counts = {k: (counts.get(k, 0) if k in selected_countries else 0) for k in set(list(counts.keys()) + selected_countries)}
+
+    # Optionally include an 'Unknown' bucket
+    if include_unknown:
+        unknown_papers = filtered_df[filtered_df['Author_Countries'].isna() | (filtered_df['Author_Countries'].astype(str).str.strip() == '')]
+        if not unknown_papers.empty:
+            counts['Unknown'] = int(len(unknown_papers))
+
+    max_count = max(counts.values()) if counts else 0
+    return jsonify({'counts': counts, 'max': max_count, 'selected_only': bool(selected_countries)})
+
+@app.route('/map')
+def map_view():
+    """Render the map view template. All filtering is passed via query params and fetched client-side."""
+    response = make_response(render_template('map.html'))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 @app.route('/export_csv')
 def export_csv():

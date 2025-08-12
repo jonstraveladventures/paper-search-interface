@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paper Map</title>
+  <style>
+    html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    #app { height: 100%; display: flex; flex-direction: column; }
+    header { padding: 10px 14px; background: #2c3e50; color: #fff; display: flex; gap: 10px; align-items: center; }
+    header input { flex: 1; max-width: 420px; }
+    main { flex: 1; display: grid; place-items: center; background: #f5f5f5; }
+    svg { width: 95vw; height: 80vh; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .legend { font-size: 12px; fill: #333; }
+    .tip { position: fixed; pointer-events: none; background: rgba(0,0,0,0.85); color: #fff; padding: 6px 8px; font-size: 12px; border-radius: 4px; opacity: 0; transform: translate(-50%, -120%); }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <strong>Paper Map</strong>
+      <button onclick="window.history.back()">Back</button>
+    </header>
+    <main><svg id="viz" viewBox="0 0 1000 520"></svg></main>
+  </div>
+  <div class="tip" id="tip"></div>
+  <script>
+    const svg = d3.select('#viz');
+    const tooltip = d3.select('#tip');
+    const width = 1000, height = 520;
+    const projection = d3.geoNaturalEarth1().fitSize([width, height], {type: 'Sphere'});
+    const path = d3.geoPath(projection);
+
+    // Map some common aliases to world-atlas names
+    const alias = new Map([
+      ['United States', 'United States of America'],
+      ['Russian Federation', 'Russia'],
+      ['Russia', 'Russian Federation'],
+      ['Czechia', 'Czech Republic'],
+      ['Türkiye', 'Turkey'],
+      ['Kingdom of Saudi Arabia', 'Saudi Arabia'],
+      ['State of Palestine', 'Palestine'],
+      ["Ivory Coast", "Côte d'Ivoire"],
+      ['Democratic Republic of the Congo', 'Democratic Republic of the Congo'],
+    ]);
+
+    function mergeCountsToAtlasNames(counts) {
+      const merged = new Map();
+      for (const [k, v] of Object.entries(counts)) {
+        const tgt = alias.get(k) || k;
+        merged.set(tgt, (merged.get(tgt) || 0) + (v || 0));
+      }
+      return merged;
+    }
+
+    async function init() {
+      const topo = await (await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')).json();
+      const countries = topojson.feature(topo, topo.objects.countries).features;
+
+      const params = new URLSearchParams(window.location.search);
+      const data = await (await fetch(`/map_data?${params.toString()}`, { cache: 'no-store' })).json();
+      if (data.error) {
+        d3.select('main').append('div').text('Failed to load data');
+        return;
+      }
+      const nameToValue = mergeCountsToAtlasNames(data.counts);
+      const maxVal = data.max || 1;
+      const nonZeroMax = Math.max(1, d3.max(Array.from(nameToValue.values()).filter(v => v > 0)) || 1);
+      const color = d3.scaleSequentialSqrt([1, nonZeroMax], d3.interpolateYlGnBu);
+
+      svg.append('path').attr('fill', '#eef6fb').attr('d', path({type: 'Sphere'}));
+      svg.append('g')
+        .selectAll('path')
+        .data(countries)
+        .join('path')
+        .attr('d', path)
+        .attr('fill', d => {
+          const v = nameToValue.get(d.properties.name) || 0;
+          return v > 0 ? color(v) : '#f0f0f0';
+        })
+        .attr('stroke', '#555')
+        .attr('stroke-width', 0.4)
+        .on('mousemove', (event, d) => {
+          const name = d.properties?.name || '';
+          const v = nameToValue.get(name) || 0;
+          tooltip.style('opacity', 1)
+            .html(`${name}: ${v.toLocaleString()} papers`)
+            .style('left', `${event.pageX}px`)
+            .style('top', `${event.pageY}px`);
+        })
+        .on('mouseleave', () => tooltip.style('opacity', 0));
+
+      // Legend
+      const legend = svg.append('g').attr('class', 'legend').attr('transform', 'translate(20,470)');
+      const stops = d3.range(0, 1.01, 0.1);
+      legend.selectAll('rect').data(stops).join('rect')
+        .attr('x', (d,i) => i*20).attr('y', 0).attr('width', 20).attr('height', 10)
+        .attr('fill', d => d === 0 ? '#f0f0f0' : color(d*nonZeroMax));
+      legend.append('text').attr('x', 0).attr('y', 24).text('0');
+      legend.append('text').attr('x', 200).attr('y', 24).attr('text-anchor', 'end').text(d3.format(',')(nonZeroMax));
+      legend.append('text').attr('x', 0).attr('y', -6).text('Papers');
+    }
+    init().catch(err => console.error(err));
+  </script>
+</body>
+</html>
+
+
