@@ -219,6 +219,8 @@
         venuesBySubfield[sub].add(conf);
       });
       const venuesContainer = document.getElementById('venues-container');
+      // Clear any placeholder like "Loading venues..." before populating
+      venuesContainer.innerHTML = '';
       Object.entries(venuesBySubfield).forEach(([subfield, set]) => {
         const subSlug = makeIdSafe(subfield);
         const group = document.createElement('div');
