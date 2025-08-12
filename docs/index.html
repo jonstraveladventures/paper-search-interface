@@ -31,6 +31,9 @@
     .search-button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; }
     .clear-button { background: #95a5a6; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; margin-left: 10px; }
     .results-panel { padding: 20px; }
+    .map-panel { padding: 20px; padding-top: 0; }
+    #map-wrapper { width: 100%; height: 520px; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: none; overflow: hidden; }
+    .map-controls { display: none; margin: 8px 0 16px 0; }
     .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
     .results-actions { display: flex; gap: 10px; }
     .export-button { background: #27ae60; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: background-color 0.2s; }
@@ -81,6 +84,7 @@
         <div class="search-group">
           <button class="search-button" onclick="searchPapers()">Search Papers</button>
           <button class="clear-button" onclick="clearFilters()">Clear Filters</button>
+          <button class="clear-button" id="show-map-btn" onclick="toggleMapButton()">Show map</button>
         </div>
       </div>
 
@@ -123,6 +127,12 @@
     </div>
 
     <div class="results-panel">
+      <div class="map-panel">
+        <div id="map-wrapper"></div>
+        <div class="map-controls">
+          <button class="export-button" onclick="downloadInlineMapPNG()">Download map (PNG)</button>
+        </div>
+      </div>
       <div class="results-header">
         <div class="results-count">Results: <span id="results-count">0</span> papers</div>
         <div class="results-actions">
@@ -135,6 +145,8 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
   <script>
     // Static data loaded from docs/data.json
     let allPapers = [];
@@ -142,6 +154,8 @@
     let selectedVenues = [];
     let includeUnknown = false;
     let includeRejected = false;
+    let showMap = false;
+    let cachedTopo = null;
 
     const CONTINENTS = {
       'Africa': ['Algeria','Angola','Benin','Botswana','Burkina Faso','Burundi','Cameroon','Cape Verde','Central African Republic','Chad','Comoros','Congo','Democratic Republic of the Congo','Djibouti','Egypt','Equatorial Guinea','Eritrea','Eswatini','Ethiopia','Gabon','Gambia','Ghana','Guinea','Guinea-Bissau','Ivory Coast','Kenya','Lesotho','Liberia','Libya','Madagascar','Malawi','Mali','Mauritania','Mauritius','Morocco','Mozambique','Namibia','Niger','Nigeria','Rwanda','São Tomé and Príncipe','Senegal','Seychelles','Sierra Leone','Somalia','South Africa','South Sudan','Sudan','Tanzania','Togo','Tunisia','Uganda','Zambia','Zimbabwe'],
@@ -269,6 +283,13 @@
       document.getElementById('results-container').innerHTML = '<div class="no-results">Enter search criteria and click "Search Papers" to begin</div>';
       document.getElementById('results-count').textContent = '0';
       document.getElementById('export-btn').style.display = 'none';
+      // hide map
+      showMap = false;
+      const wrapper = document.getElementById('map-wrapper');
+      const controls = document.querySelector('.map-controls');
+      wrapper.style.display = 'none';
+      controls.style.display = 'none';
+      wrapper.innerHTML = '';
     }
 
     function filterPapers() {
@@ -355,6 +376,7 @@
       container.innerHTML = html;
       document.getElementById('results-count').textContent = `${totalCount}` + (totalCount > maxResults ? ` (showing first ${maxResults})` : '');
       document.getElementById('export-btn').style.display = totalCount > 0 ? 'inline-block' : 'none';
+      if (showMap) { renderInlineMap(); }
     }
 
     function exportToCSV() {
@@ -391,6 +413,114 @@
 
     // Enter key triggers search
     document.addEventListener('keypress', e => { if (e.key === 'Enter') searchPapers(); });
+
+    function toggleMapButton() {
+      showMap = !showMap;
+      const wrapper = document.getElementById('map-wrapper');
+      const controls = document.querySelector('.map-controls');
+      const btn = document.getElementById('show-map-btn');
+      if (showMap) {
+        wrapper.style.display = 'block';
+        controls.style.display = 'block';
+        btn.textContent = 'Hide map';
+        renderInlineMap();
+      } else {
+        wrapper.style.display = 'none';
+        controls.style.display = 'none';
+        wrapper.innerHTML = '';
+        btn.textContent = 'Show map';
+      }
+    }
+
+    function aggregateCounts(filtered) {
+      const counts = new Map();
+      filtered.forEach(row => {
+        const s = (row.Author_Countries || '').trim();
+        if (!s) return;
+        s.split(',').map(c => c.trim()).filter(Boolean).forEach(country => {
+          counts.set(country, (counts.get(country) || 0) + 1);
+        });
+      });
+      return counts;
+    }
+
+    async function renderInlineMap() {
+      const wrapper = document.getElementById('map-wrapper');
+      if (!showMap) return;
+      // Use current filtered data
+      const filtered = filterPapers();
+      const rawCounts = aggregateCounts(filtered);
+      // alias to atlas names
+      const alias = new Map([
+        ['United States', 'United States of America'],
+        ['Russian Federation', 'Russia'],
+        ['Russia', 'Russian Federation'],
+        ['Czechia', 'Czech Republic'],
+        ['Türkiye', 'Turkey'],
+        ['Kingdom of Saudi Arabia', 'Saudi Arabia'],
+        ['State of Palestine', 'Palestine'],
+        ["Ivory Coast", "Côte d'Ivoire"],
+        ['Democratic Republic of the Congo', 'Democratic Republic of the Congo'],
+      ]);
+      const nameToValue = new Map();
+      rawCounts.forEach((v, k) => {
+        const tgt = alias.get(k) || k; nameToValue.set(tgt, (nameToValue.get(tgt) || 0) + v);
+      });
+
+      if (!cachedTopo) { cachedTopo = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json()); }
+      const countries = topojson.feature(cachedTopo, cachedTopo.objects.countries).features;
+
+      const width = wrapper.clientWidth || 1000;
+      const height = wrapper.clientHeight || 520;
+      wrapper.innerHTML = '';
+      const svg = d3.select(wrapper).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+      const projection = d3.geoNaturalEarth1().fitSize([width, height], {type: 'Sphere'});
+      const path = d3.geoPath(projection);
+      const nonZeroMax = Math.max(1, d3.max(Array.from(nameToValue.values()).filter(v => v > 0)) || 1);
+      const color = d3.scaleSequentialSqrt([1, nonZeroMax], d3.interpolateYlGnBu);
+
+      svg.append('path').attr('fill', '#eef6fb').attr('d', path({type: 'Sphere'}));
+      svg.append('g')
+        .selectAll('path')
+        .data(countries)
+        .join('path')
+        .attr('d', path)
+        .attr('fill', d => { const v = nameToValue.get(d.properties.name) || 0; return v>0 ? color(v) : '#f0f0f0'; })
+        .attr('stroke', '#555')
+        .attr('stroke-width', 0.4)
+        .append('title')
+        .text(d => `${d.properties.name}: ${(nameToValue.get(d.properties.name) || 0).toLocaleString()} papers`);
+
+      // Legend
+      const legend = svg.append('g').attr('class','legend').attr('transform', `translate(20,${height-30})`);
+      const stops = d3.range(0,1.01,0.1);
+      legend.selectAll('rect').data(stops).join('rect')
+        .attr('x',(d,i)=>i*20).attr('y',0).attr('width',20).attr('height',10)
+        .attr('fill', d => d===0 ? '#f0f0f0' : color(d*nonZeroMax));
+      legend.append('text').attr('x',0).attr('y',24).text('0');
+      legend.append('text').attr('x',200).attr('y',24).attr('text-anchor','end').text(d3.format(',')(nonZeroMax));
+      legend.append('text').attr('x',0).attr('y',-6).text('Papers');
+    }
+
+    function downloadInlineMapPNG() {
+      const wrapper = document.getElementById('map-wrapper');
+      const svg = wrapper.querySelector('svg');
+      if (!svg) return;
+      const serializer = new XMLSerializer();
+      let source = serializer.serializeToString(svg);
+      if (!source.match(/^<svg[^>]+xmlns=/)) source = source.replace('<svg','<svg xmlns="http://www.w3.org/2000/svg"');
+      const blob = new Blob([source], {type:'image/svg+xml;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      const scale = 2;
+      img.onload = function(){
+        const canvas = document.createElement('canvas');
+        const vb = svg.viewBox.baseVal; canvas.width=(vb.width||svg.clientWidth)*scale; canvas.height=(vb.height||svg.clientHeight)*scale;
+        const ctx = canvas.getContext('2d'); ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.drawImage(img,0,0,canvas.width,canvas.height); URL.revokeObjectURL(url);
+        const png = canvas.toDataURL('image/png'); const a=document.createElement('a'); a.href=png; a.download='papers_map.png'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      };
+      img.src = url;
+    }
   </script>
 </body>
 </html>
