@@ -159,14 +159,7 @@
         .replace(/^-+|-+$/g, '');
     }
 
-    function initFilters() {
-      const yearValues = allPapers.map(p => p.Year).filter(v => typeof v === 'number');
-      const yearMin = Math.min(...yearValues);
-      const yearMax = Math.max(...yearValues);
-      document.getElementById('year-min').value = yearMin;
-      document.getElementById('year-max').value = yearMax;
-
-      // Countries list (from continents)
+    function renderCountries() {
       const countriesContainer = document.getElementById('countries-container');
       countriesContainer.innerHTML = '';
       Object.entries(CONTINENTS).forEach(([continent, countries]) => {
@@ -190,6 +183,14 @@
           list.appendChild(item);
         });
       });
+    }
+
+    function initFilters() {
+      const yearValues = allPapers.map(p => p.Year).filter(v => typeof v === 'number');
+      const yearMin = Math.min(...yearValues);
+      const yearMax = Math.max(...yearValues);
+      document.getElementById('year-min').value = yearMin;
+      document.getElementById('year-max').value = yearMax;
 
       // Venues grouped by subfield using existing Subfield field
       const venuesBySubfield = {};
@@ -371,7 +372,13 @@
       URL.revokeObjectURL(url);
     }
 
-    // Load data.json and initialize
+    // Render countries immediately (no data required)
+    renderCountries();
+
+    // Show loading placeholder for venues
+    document.getElementById('venues-container').innerHTML = '<div class="loading">Loading venues...</div>';
+
+    // Load data.json and then initialize data-dependent UI
     fetch('data.json', { cache: 'no-store' })
       .then(r => r.json())
       .then(data => { allPapers = data; initFilters(); })
