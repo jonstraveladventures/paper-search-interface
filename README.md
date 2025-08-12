@@ -1,5 +1,7 @@
 # Paper Search Interface
 
+**Live demo**: https://jonstraveladventures.github.io/paper-search-interface/
+
 A web-based tool for searching and analyzing academic papers from major conferences and journals across AI/ML/datascience related subfields. This tool processes paper metadata from [Paper Copilot](https://papercopilot.com) to provide advanced search and filtering capabilities.
 
 **Author:** [Jonathan Shock](https://www.shocklab.net) - University of Cape Town
