@@ -436,11 +436,14 @@
 
     function aggregateCounts(filtered) {
       const counts = new Map();
+      const selectedSet = new Set(selectedCountries || []);
       filtered.forEach(row => {
         const s = (row.Author_Countries || '').trim();
         if (!s) return;
         s.split(',').map(c => c.trim()).filter(Boolean).forEach(country => {
-          counts.set(country, (counts.get(country) || 0) + 1);
+          if (selectedSet.size === 0 || selectedSet.has(country)) {
+            counts.set(country, (counts.get(country) || 0) + 1);
+          }
         });
       });
       return counts;

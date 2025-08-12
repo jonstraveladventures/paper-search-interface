@@ -187,12 +187,15 @@ def filter_papers(df, title_search='', author_search='', selected_countries=None
     
     return filtered_df
 
-def aggregate_counts_by_country(df):
+def aggregate_counts_by_country(df, selected_countries=None):
     """Aggregate paper counts by country.
 
     Each paper contributes 1 count to every country listed in Author_Countries.
     Empty or missing countries are ignored unless explicitly included elsewhere.
     """
+    if selected_countries is None:
+        selected_countries = []
+    selected_set = set(selected_countries)
     counts = {}
     if df.empty or 'Author_Countries' not in df.columns:
         return counts
@@ -200,6 +203,9 @@ def aggregate_counts_by_country(df):
         if not isinstance(countries_str, str) or not countries_str.strip():
             continue
         for country in [c.strip() for c in countries_str.split(',') if c.strip()]:
+            # Only count countries that are selected (if any are provided)
+            if selected_set and country not in selected_set:
+                continue
             counts[country] = counts.get(country, 0) + 1
     return counts
 
@@ -327,11 +333,12 @@ def map_data():
     filtered_df = filter_papers(df, title_search, author_search, selected_countries,
                                 selected_venues, year_min, year_max, include_rejected)
 
-    counts = aggregate_counts_by_country(filtered_df)
+    counts = aggregate_counts_by_country(filtered_df, selected_countries)
 
-    # If specific countries are selected, zero out others for visualization intent
+    # Ensure selected countries appear even if zero
     if selected_countries:
-        counts = {k: (counts.get(k, 0) if k in selected_countries else 0) for k in set(list(counts.keys()) + selected_countries)}
+        for c in selected_countries:
+            counts.setdefault(c, 0)
 
     # Optionally include an 'Unknown' bucket
     if include_unknown:
