@@ -152,6 +152,13 @@
 
     function getUnique(arr) { return Array.from(new Set(arr)); }
 
+    function makeIdSafe(text) {
+      return String(text || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
     function initFilters() {
       const yearValues = allPapers.map(p => p.Year).filter(v => typeof v === 'number');
       const yearMin = Math.min(...yearValues);
@@ -163,6 +170,7 @@
       const countriesContainer = document.getElementById('countries-container');
       countriesContainer.innerHTML = '';
       Object.entries(CONTINENTS).forEach(([continent, countries]) => {
+        const continentSlug = makeIdSafe(continent);
         const group = document.createElement('div');
         group.className = 'continent-group';
         group.innerHTML = `
@@ -170,14 +178,15 @@
             <span style="flex-grow:1;">${continent} (${countries.length} countries)</span>
             <button class="selection-button" onclick="selectContinentCountries('${continent}')">Select All ${continent}</button>
           </div>
-          <div class="continent-countries" id="continent-${continent}"></div>
+          <div class="continent-countries" id="continent-${continentSlug}"></div>
         `;
         countriesContainer.appendChild(group);
-        const list = group.querySelector(`#continent-${continent}`);
+        const list = group.querySelector(`#continent-${continentSlug}`);
         countries.forEach(country => {
+          const countryId = makeIdSafe(country);
           const item = document.createElement('div');
           item.className = 'country-item';
-          item.innerHTML = `<input type="checkbox" id="country-${country}" value="${country}" onchange="updateSelectedCountries()"/> <label for="country-${country}">${country}</label>`;
+          item.innerHTML = `<input type="checkbox" id="country-${countryId}" value="${country}" onchange="updateSelectedCountries()"/> <label for="country-${countryId}">${country}</label>`;
           list.appendChild(item);
         });
       });
@@ -192,6 +201,7 @@
       });
       const venuesContainer = document.getElementById('venues-container');
       Object.entries(venuesBySubfield).forEach(([subfield, set]) => {
+        const subSlug = makeIdSafe(subfield);
         const group = document.createElement('div');
         group.className = 'subfield-group';
         group.innerHTML = `
@@ -199,14 +209,15 @@
             <span style="flex-grow:1;">${subfield} (${set.size} venues)</span>
             <button class="selection-button" onclick="selectSubfieldVenues('${subfield}')">Select All ${subfield}</button>
           </div>
-          <div class="subfield-venues" id="subfield-${subfield}"></div>
+          <div class="subfield-venues" id="subfield-${subSlug}"></div>
         `;
         venuesContainer.appendChild(group);
-        const list = group.querySelector(`#subfield-${subfield}`);
+        const list = group.querySelector(`#subfield-${subSlug}`);
         Array.from(set).sort().forEach(venue => {
+          const venueId = makeIdSafe(venue);
           const item = document.createElement('div');
           item.className = 'venue-item';
-          item.innerHTML = `<input type="checkbox" id="venue-${venue}" value="${venue}" onchange="updateSelectedVenues()"/> <label for="venue-${venue}">${venue}</label>`;
+          item.innerHTML = `<input type="checkbox" id="venue-${venueId}" value="${venue}" onchange="updateSelectedVenues()"/> <label for="venue-${venueId}">${venue}</label>`;
           list.appendChild(item);
         });
       });
@@ -227,13 +238,22 @@
     function clearAllCountries() { document.querySelectorAll('input[id^="country-"]').forEach(cb => cb.checked = false); updateSelectedCountries(); }
     function selectAfricanCountries() {
       clearAllCountries();
-      CONTINENTS['Africa'].forEach(country => { const el = document.getElementById(`country-${country}`); if (el) el.checked = true; });
+      const allowed = new Set(CONTINENTS['Africa']);
+      document.querySelectorAll('input[id^="country-"]').forEach(cb => { cb.checked = allowed.has(cb.value); });
       updateSelectedCountries();
     }
-    function selectContinentCountries(continent) { document.querySelectorAll(`#continent-${continent} input[type="checkbox"]`).forEach(cb => cb.checked = true); updateSelectedCountries(); }
+    function selectContinentCountries(continent) {
+      const slug = makeIdSafe(continent);
+      document.querySelectorAll(`#continent-${slug} input[type="checkbox"]`).forEach(cb => cb.checked = true);
+      updateSelectedCountries();
+    }
     function selectAllVenues() { document.querySelectorAll('input[id^="venue-"]').forEach(cb => cb.checked = true); updateSelectedVenues(); }
     function clearAllVenues() { document.querySelectorAll('input[id^="venue-"]').forEach(cb => cb.checked = false); updateSelectedVenues(); }
-    function selectSubfieldVenues(subfield) { document.querySelectorAll(`#subfield-${subfield} input[type="checkbox"]`).forEach(cb => cb.checked = true); updateSelectedVenues(); }
+    function selectSubfieldVenues(subfield) {
+      const slug = makeIdSafe(subfield);
+      document.querySelectorAll(`#subfield-${slug} input[type="checkbox"]`).forEach(cb => cb.checked = true);
+      updateSelectedVenues();
+    }
 
     function clearFilters() {
       document.getElementById('title-search').value = '';
