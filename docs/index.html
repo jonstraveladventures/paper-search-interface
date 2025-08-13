@@ -47,6 +47,7 @@
     .map-panel { padding: 20px; padding-top: 0; }
     #map-wrapper { width: 100%; height: 520px; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: none; overflow: hidden; }
     .map-controls { display: none; margin: 8px 0 16px 0; }
+    .bubble-toggle { display: inline-flex; align-items: center; gap: 6px; margin-left: 10px; font-size: 12px; }
     .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
     .results-actions { display: flex; gap: 10px; }
     .export-button { background: #27ae60; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: background-color 0.2s; }
@@ -159,6 +160,7 @@
         <div id="map-wrapper"></div>
         <div class="map-controls">
           <button class="export-button" onclick="downloadInlineMapPNG()">Download map (PNG)</button>
+          <label class="bubble-toggle"><input type="checkbox" id="toggle-bubbles" onchange="renderInlineMap()"/> Show bubbles</label>
         </div>
       </div>
       <div class="results-header">
@@ -509,12 +511,62 @@
       return counts;
     }
 
+    function aggregateAuthorCounts(filtered) {
+      const authorsByCountry = new Map();
+      const selectedSet = new Set(selectedCountries || []);
+      filtered.forEach(row => {
+        const countriesStr = (row.Author_Countries || '').trim();
+        if (!countriesStr) return;
+        const countries = countriesStr.split(',').map(c => c.trim()).filter(Boolean);
+        const authors = (row.Authors || '').split(',').map(a => a.trim()).filter(Boolean);
+        countries.forEach(country => {
+          if (selectedSet.size > 0 && !selectedSet.has(country)) return;
+          if (!authorsByCountry.has(country)) authorsByCountry.set(country, new Set());
+          const set = authorsByCountry.get(country);
+          authors.forEach(a => set.add(a));
+        });
+      });
+      const counts = new Map();
+      authorsByCountry.forEach((set, country) => counts.set(country, set.size));
+      return counts;
+    }
+
+    function buildBubblePoints(filtered, alias) {
+      const papersBy = new Map();
+      const authorsBy = new Map();
+      const venuesBy = new Map();
+      const selectedSet = new Set(selectedCountries || []);
+      filtered.forEach(row => {
+        const countriesStr = (row.Author_Countries || '').trim();
+        if (!countriesStr) return;
+        const venue = row.Conference || '';
+        const authors = (row.Authors || '').split(',').map(a => a.trim()).filter(Boolean);
+        countriesStr.split(',').map(c => c.trim()).filter(Boolean).forEach(country0 => {
+          const country = alias.get(country0) || country0;
+          if (selectedSet.size > 0 && !selectedSet.has(country0)) return;
+          papersBy.set(country, (papersBy.get(country) || 0) + 1);
+          if (!authorsBy.has(country)) authorsBy.set(country, new Set());
+          const aset = authorsBy.get(country); authors.forEach(a => aset.add(a));
+          if (!venuesBy.has(country)) venuesBy.set(country, new Map());
+          if (venue) venuesBy.get(country).set(venue, (venuesBy.get(country).get(venue) || 0) + 1);
+        });
+      });
+      const points = [];
+      papersBy.forEach((pcount, country) => {
+        const vmap = venuesBy.get(country) || new Map();
+        const top = Array.from(vmap.entries()).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([venue,count])=>({venue, count}));
+        points.push({ location: country, papers: pcount, researchers: (authorsBy.get(country)||new Set()).size, top_venues: top });
+      });
+      return points;
+    }
+
     async function renderInlineMap() {
       const wrapper = document.getElementById('map-wrapper');
       if (!showMap) return;
       // Use current filtered data
       const filtered = filterPapers();
       const rawCounts = aggregateCounts(filtered);
+      const authorCounts = aggregateAuthorCounts(filtered);
       // alias to atlas names
       const alias = new Map([
         ['United States', 'United States of America'],
@@ -554,7 +606,11 @@
         .attr('stroke', '#555')
         .attr('stroke-width', 0.4)
         .append('title')
-        .text(d => `${d.properties.name}: ${(nameToValue.get(d.properties.name) || 0).toLocaleString()} papers`);
+        .text(d => {
+          const papers = (nameToValue.get(d.properties.name) || 0).toLocaleString();
+          const authors = (authorCounts.get(d.properties.name) || 0).toLocaleString();
+          return `${d.properties.name}: ${papers} papers; ${authors} unique authors`;
+        });
 
       // Legend
       const legend = svg.append('g').attr('class','legend').attr('transform', `translate(20,${height-30})`);
@@ -565,6 +621,37 @@
       legend.append('text').attr('x',0).attr('y',24).text('0');
       legend.append('text').attr('x',200).attr('y',24).attr('text-anchor','end').text(d3.format(',')(nonZeroMax));
       legend.append('text').attr('x',0).attr('y',-6).text('Papers');
+
+      // Optional bubbles overlay from client-side data
+      const showBubbles = document.getElementById('toggle-bubbles') && document.getElementById('toggle-bubbles').checked;
+      if (showBubbles) {
+        const points = buildBubblePoints(filtered, alias);
+        const countryByName = new Map(countries.map(f => [f.properties.name, f]));
+        const rScale = d3.scaleSqrt().domain([1, d3.max(points, d => d.papers) || 1]).range([2, 18]);
+        const bubbles = svg.append('g').attr('class','bubbles');
+        const tip = d3.select(wrapper).append('div').attr('class','tooltip').style('position','absolute').style('pointer-events','none').style('background','#fff').style('border','1px solid #ccc').style('padding','6px 8px').style('border-radius','4px').style('font-size','12px').style('display','none');
+        bubbles.selectAll('circle')
+          .data(points)
+          .join('circle')
+          .attr('fill','rgba(231,76,60,0.65)')
+          .attr('stroke','#c0392b')
+          .attr('stroke-width',0.8)
+          .attr('r', d => rScale(Math.max(1, d.papers)))
+          .attr('transform', d => {
+            const feature = countryByName.get(d.location) || countryByName.get(alias.get(d.location) || '');
+            if (!feature) return '';
+            const [cx, cy] = d3.geoPath(projection).centroid(feature);
+            return `translate(${cx},${cy})`;
+          })
+          .on('mousemove', (event, d) => {
+            const venues = (d.top_venues || []).map(v => `${v.venue} (${v.count})`).join(', ');
+            tip.style('display','block')
+               .style('left', (event.offsetX + 12) + 'px')
+               .style('top', (event.offsetY + 12) + 'px')
+               .html(`<strong>${d.location}</strong><br/>Papers: ${d.papers.toLocaleString()}<br/>Researchers: ${d.researchers.toLocaleString()}<br/>Top venues: ${venues || '—'}`);
+          })
+          .on('mouseout', () => tip.style('display','none'));
+      }
     }
 
     function downloadInlineMapPNG() {
