@@ -125,7 +125,8 @@ def get_venues_by_subfield(df):
     return venues_by_subfield
 
 def filter_papers(df, title_search='', author_search='', selected_countries=None, 
-                 selected_venues=None, year_min=None, year_max=None, include_rejected=False):
+                 selected_venues=None, year_min=None, year_max=None, include_rejected=False,
+                 institution_search=''):
     """Filter papers based on search criteria"""
     if selected_countries is None:
         selected_countries = []
@@ -141,6 +142,10 @@ def filter_papers(df, title_search='', author_search='', selected_countries=None
     # Filter by author search
     if author_search:
         filtered_df = filtered_df[filtered_df['Authors'].str.contains(author_search, case=False, na=False)]
+    
+    # Filter by institution search
+    if institution_search and 'Author_Institutions' in filtered_df.columns:
+        filtered_df = filtered_df[filtered_df['Author_Institutions'].astype(str).str.contains(institution_search, case=False, na=False)]
     
     # Filter by countries
     if selected_countries:
@@ -254,6 +259,11 @@ def search():
     # Get search parameters
     title_search = request.args.get('title', '')
     author_search = request.args.get('author', '')
+    institution_search = request.args.get('institution', '')
+    institution_search = request.args.get('institution', '')
+    institution_search = request.args.get('institution', '')
+    institution_search = request.args.get('institution', '')
+    institution_search = request.args.get('institution', '')
     selected_countries = request.args.getlist('countries[]')
     selected_venues = request.args.getlist('venues[]')
     year_min = request.args.get('year_min', type=int)
@@ -266,7 +276,8 @@ def search():
     
     # Filter papers
     filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
-                               selected_venues, year_min, year_max, include_rejected)
+                               selected_venues, year_min, year_max, include_rejected,
+                               institution_search)
     
     # Handle unknown countries separately
     if include_unknown:
@@ -323,6 +334,7 @@ def map_data():
 
     title_search = request.args.get('title', '')
     author_search = request.args.get('author', '')
+    institution_search = request.args.get('institution', '')
     selected_countries = request.args.getlist('countries[]')
     selected_venues = request.args.getlist('venues[]')
     year_min = request.args.get('year_min', type=int)
@@ -331,7 +343,8 @@ def map_data():
     include_rejected = request.args.get('include_rejected', type=bool)
 
     filtered_df = filter_papers(df, title_search, author_search, selected_countries,
-                                selected_venues, year_min, year_max, include_rejected)
+                                selected_venues, year_min, year_max, include_rejected,
+                                institution_search)
 
     counts = aggregate_counts_by_country(filtered_df, selected_countries)
 
@@ -368,6 +381,7 @@ def export_csv():
     # Get search parameters (same as search endpoint)
     title_search = request.args.get('title', '')
     author_search = request.args.get('author', '')
+    institution_search = request.args.get('institution', '')
     selected_countries = request.args.getlist('countries[]')
     selected_venues = request.args.getlist('venues[]')
     year_min = request.args.get('year_min', type=int)
@@ -377,7 +391,8 @@ def export_csv():
     
     # Filter papers
     filtered_df = filter_papers(df, title_search, author_search, selected_countries, 
-                               selected_venues, year_min, year_max, include_rejected)
+                               selected_venues, year_min, year_max, include_rejected,
+                               institution_search)
     
     # Handle unknown countries separately
     if include_unknown:
@@ -394,6 +409,8 @@ def export_csv():
         filename_parts.append(f"title_{title_search[:20]}")
     if author_search:
         filename_parts.append(f"author_{author_search}")
+    if institution_search:
+        filename_parts.append(f"institution_{institution_search[:20]}")
     if selected_countries:
         filename_parts.append(f"countries_{len(selected_countries)}")
     if selected_venues:
