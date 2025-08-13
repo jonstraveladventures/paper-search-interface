@@ -483,6 +483,10 @@
         let includeRejected = false;
         let showMap = false;
         let cachedTopo = null;
+        // Track last values to detect when fields are cleared
+        let lastTitleSearch = '';
+        let lastAuthorSearch = '';
+        let lastInstitutionSearch = '';
         
         function toggleContinent(continent) {
             const container = document.getElementById(`continent-${continent}`);
@@ -589,6 +593,8 @@
         function clearFilters() {
             document.getElementById('title-search').value = '';
             document.getElementById('author-search').value = '';
+            const institutionInput = document.getElementById('institution-search');
+            if (institutionInput) institutionInput.value = '';
             document.getElementById('year-min').value = '{{ year_min }}';
             document.getElementById('year-max').value = '{{ year_max }}';
             
@@ -911,6 +917,37 @@
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 searchPapers();
+            }
+        });
+
+        // Auto-detect when search fields are cleared and refresh results
+        window.addEventListener('DOMContentLoaded', () => {
+            const titleInput = document.getElementById('title-search');
+            const authorInput = document.getElementById('author-search');
+            const instInput = document.getElementById('institution-search');
+            if (titleInput) {
+                lastTitleSearch = titleInput.value.trim();
+                titleInput.addEventListener('input', () => {
+                    const v = titleInput.value.trim();
+                    if (v === '' && lastTitleSearch !== '') { searchPapers(); }
+                    lastTitleSearch = v;
+                });
+            }
+            if (authorInput) {
+                lastAuthorSearch = authorInput.value.trim();
+                authorInput.addEventListener('input', () => {
+                    const v = authorInput.value.trim();
+                    if (v === '' && lastAuthorSearch !== '') { searchPapers(); }
+                    lastAuthorSearch = v;
+                });
+            }
+            if (instInput) {
+                lastInstitutionSearch = instInput.value.trim();
+                instInput.addEventListener('input', () => {
+                    const v = instInput.value.trim();
+                    if (v === '' && lastInstitutionSearch !== '') { searchPapers(); }
+                    lastInstitutionSearch = v;
+                });
             }
         });
         
