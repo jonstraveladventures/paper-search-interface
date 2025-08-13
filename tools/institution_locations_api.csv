@@ -1,0 +1,924 @@
+institution,matched_name,city,country_code,latitude,longitude,source,ror_id,openalex_id,score
+CSIRO’s Data61,,,,,,,,,0
+"Research, Singapore+School of computing",Wageningen University & Research,Wageningen,NL,51.97,5.66667,openalex,,https://openalex.org/I913481162,0.0
+Udeer.ai,,,,,,,,,0
+tapall.ai,,,,,,,,,0
+JD.com,Jingdong (China),Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I4210103986,0.0
+AI Research of JD.com,,,,,,,,,0
+King’s College,The King's University,Edmonton,CA,53.55014,-113.46871,openalex,,https://openalex.org/I61614213,0.0
+Style3D Research,,,,,,,,,0
+Xiaobing.AI,,,,,,,,,0
+Style3D,,,,,,,,,0
+Abacus.AI,,,,,,,,,0
+unaffiliated,,,,,,,,,0
+Lyrebird.ai,,,,,,,,,0
+SalesForce.com,,,,,,,,,0
+cidi-lab,,,,,,,,,0
+physical intelligence,,,,,,,,,0
+shanghai ai lab,Shanghai Artificial Intelligence Laboratory,Shanghai,,31.22222,121.45806,openalex,,https://openalex.org/I4391012619,0.0
+E2open,,,,,,,,,0
+Monteﬁore Institute,,,,,,,,,0
+Institute of Scientiﬁc,,,,,,,,,0
+1+2,Université de Montpellier,Montpellier,FR,43.61093,3.87635,openalex,,https://openalex.org/I19894307,0.0
+1+2+3+4+5,Délégation Paris 5,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I110736937,0.0
+College of Comp. Sci.,,,,,,,,,0
+ByteDance4,,,,,,,,,0
+Meta2,,,,,,,,,0
+´Ecole polytechnique,Ecole Nationale Polytechnique de Constantine,Constantine,,36.365,6.61472,openalex,,https://openalex.org/I4408541918,0.0
+UJM-Saint-Etienne-LabHC1,,,,,,,,,0
+MI-6 Ltd.,,,,,,,,,0
+Allegro.pl,,,,,,,,,0
+Yahoo! Labs.,,,,,,,,,0
+Research Lab,United States Army Aeromedical Research Lab,Fort Novosel,US,31.34282,-85.71538,openalex,,https://openalex.org/I4210102123,0.0
+University of Montr´eal,,,,,,,,,0
+Amazon.com,Amazon (United States),Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I1311688040,0.0
+University College London†,University College London,London,GB,51.50853,-0.12574,openalex,,https://openalex.org/I45129253,0.0
+University of Delaware††,University of Delaware,Newark,US,39.68372,-75.74966,openalex,,https://openalex.org/I86501945,0.0
+University College London‡,University College London,London,GB,51.50853,-0.12574,openalex,,https://openalex.org/I45129253,0.0
+Boğaziçi University,Boğaziçi University,Istanbul,TR,41.01384,28.94966,openalex,,https://openalex.org/I4405392,0.0
+CISPA†,Helmholtz Center for Information Security,Saarbrücken,DE,49.23262,7.00982,openalex,,https://openalex.org/I4210128801,0.0
+yg ferkeley,,,,,,,,,0
+DLID,,,,,,,,,0
+'HSDUWPHQWRI6WDWLVWLFV5XWJHUV8QLYHUVLW3LVFDWDZD1-,,,,,,,,,0
+meta ai,,,,,,,,,0
+university of rome tor vergata,University of Rome Tor Vergata,Rome,IT,41.89193,12.51133,openalex,,https://openalex.org/I116067653,0.0
+University of Helsinki∗,University of Helsinki,Helsinki,FI,60.16952,24.93545,openalex,,https://openalex.org/I133731052,0.0
+V oyLab,,,,,,,,,0
+University College London*,University College London,London,GB,51.50853,-0.12574,openalex,,https://openalex.org/I45129253,0.0
+University of M ¨unster,,,,,,,,,0
+"JD.com, Inc","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+Deekard1,,,,,,,,,0
+Lelivrescolaire.fr,,,,,,,,,0
+NUIM∗,"National University of Ireland, Maynooth",Maynooth,IE,53.385,-6.59361,openalex,,https://openalex.org/I157286207,0.0
+Department of Biostatistics‡,,,,,,,,,0
+University College London1,,,,,,,,,0
+Research Center caesar,,,,,,,,,0
+Cardiﬀ University,,,,,,,,,0
+University of Alberta,University of Alberta,Edmonton,CA,53.55014,-113.46871,openalex,,https://openalex.org/I154425047,0.0
+Secondmind.ai,,,,,,,,,0
+AT&T Laboratories,,,,,,,,,0
+UniversitedeMontreal,,,,,,,,,0
+University of Virginia♦,,,,,,,,,0
+National Institute of Informatics♦,,,,,,,,,0
+deepset†,,,,,,,,,0
+deepset∗‡,,,,,,,,,0
+Udaan.com♦,,,,,,,,,0
+vahan.co,,,,,,,,,0
+Aqxle.ai,,,,,,,,,0
+Xiaobing.ai,,,,,,,,,0
+vivo AI Lab,,,,,,,,,0
+Tencent+3,University of Constantine 3,Ali Mendjeli,,36.2459,6.5671,openalex,,https://openalex.org/I4391767747,0.0
+helvia.ai,Helvia.ai (Greece),Athens,,37.98376,23.72784,openalex,,https://openalex.org/I4391012533,0.0
+FLock.io,,,,,,,,,0
+SynthLabs.ai,,,,,,,,,0
+University of Groningen♦,,,,,,,,,0
+Prompsit†,,,,,,,,,0
+IQVIA2,,,,,,,,,0
+"aiXplain, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+aiXplain Inc.,,,,,,,,,0
+consultant,Saras Environment Consultant,New Delhi,IN,28.62137,77.2148,openalex,,https://openalex.org/I4210114094,0.0
+Cohere2,,,,,,,,,0
+University of Neuchâtel3,,,,,,,,,0
+TV2,,,,,,,,,0
+linguisticbits.de,,,,,,,,,0
+AI Sweden,AI Sweden,Gothenburg,,57.70716,11.96679,openalex,,https://openalex.org/I4387152838,0.0
+Institute of AI,All-Russian Research and Design Institute of Metallurgical Engineering,Moscow,RU,55.75222,37.61556,openalex,,https://openalex.org/I4210091342,0.0
+Harmony.ai,,,,,,,,,0
+E+D,D. E. Shaw Research,New York,US,40.71427,-74.00597,openalex,,https://openalex.org/I2799548008,0.0
+C+Y,Instituto de Química y Fisicoquímica Biológicas,Buenos Aires,AR,-34.61315,-58.37723,openalex,,https://openalex.org/I4210149401,0.0
+University of Jena1,,,,,,,,,0
+independent researcher,,,,,,,,,0
+ShortestPathTechnology♣,,,,,,,,,0
+Learno.ai,,,,,,,,,0
+EQ4ALL†,,,,,,,,,0
+Politecnico di Torino‡,Polytechnic University of Turin,Turin,IT,45.07049,7.68682,openalex,,https://openalex.org/I177477856,0.0
+Helvia.ai,Helvia.ai (Greece),Athens,,37.98376,23.72784,openalex,,https://openalex.org/I4391012533,0.0
+Nkọwa okwu,,,,,,,,,0
+42dot Inc.,,,,,,,,,0
+Shannon.AI,,,,,,,,,0
+Amazon†,Amazon (United States),Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I1311688040,0.0
+IIT Delhi2,,,,,,,,,0
+free,The Royal Free Hospital,London,GB,51.50853,-0.12574,openalex,,https://openalex.org/I2801138448,0.0
+KAIST§,Korea Advanced Institute of Science and Technology,Daejeon,KR,36.34913,127.38493,openalex,,https://openalex.org/I157485424,0.0
+AI Institute,The NSF AI Institute for Artificial Intelligence and Fundamental Interactions,Cambridge,US,42.3751,-71.10561,openalex,,https://openalex.org/I4210160315,0.0
+University of Zaragoza2,,,,,,,,,0
+isee.ai,,,,,,,,,0
+KAIST1,,,,,,,,,0
+POSTECH3,,,,,,,,,0
+University of Oxford4,,,,,,,,,0
+telMaviv university,,,,,,,,,0
+University of Oxford1,,,,,,,,,0
+the university of arizona,The University of Arizona Global Campus,San Diego,US,32.71571,-117.16472,openalex,,https://openalex.org/I28334184,0.0
+Apple†,Apple (United States),Cupertino,US,37.323,-122.03218,openalex,,https://openalex.org/I4210153776,0.0
+Apple*,Apple (United States),Cupertino,US,37.323,-122.03218,openalex,,https://openalex.org/I4210153776,0.0
+"Whisper.ai, Inc","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+NVIDIA1,,,,,,,,,0
+IDSIA∗,Dalle Molle Institute for Artificial Intelligence Research,Lugano,CH,46.01008,8.96004,openalex,,https://openalex.org/I2614128279,0.0
+IIT Kharagpur∗,Indian Institute of Technology Kharagpur,Kharagpur,IN,22.33971,87.32501,openalex,,https://openalex.org/I145894827,0.0
+Grossman Center2,,,,,,,,,0
+layer6.ai,,,,,,,,,0
+OpenAI†,OpenAI (United States),San Francisco,US,37.77493,-122.41942,openalex,,https://openalex.org/I4210161460,0.0
+imar,Institute of Marine Research,Coimbra,PT,40.20564,-8.41955,openalex,,https://openalex.org/I4210122017,0.0
+hebrew university jerusalem israel,,,,,,,,,0
+Parametrix.ai,,,,,,,,,0
+southwest university,Southwest University,Chongqing,CN,29.56026,106.55771,openalex,,https://openalex.org/I142108993,0.0
+booking.com,,,,,,,,,0
+gatsby unit,,,,,,,,,0
+no,Wuhan No.1 Hospital,Wuhan,CN,30.58333,114.26667,openalex,,https://openalex.org/I4210111998,0.0
+LIP6,Laboratoire de Recherche en Informatique de Paris 6,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I4210159731,0.0
+Salesforce.com,,,,,,,,,0
+datakalab,,,,,,,,,0
+cril,,,,,,,,,0
+Centre de coopération internationale en recherche agronomique pour le développement,Centre de Coopération Internationale en Recherche Agronomique pour le Développement,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I131077856,0.0
+doshisha university,Doshisha University,Kyoto,JP,35.02107,135.75385,openalex,,https://openalex.org/I133984924,0.0
+department of statistics,Statistical Service,Nicosia,CY,35.17531,33.3642,openalex,,https://openalex.org/I4210152479,0.0
+Inrae,"Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement",Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I4210088668,0.0
+Data61,Data61,Sydney,AU,-33.86785,151.20732,openalex,,https://openalex.org/I42894916,0.0
+recital,,,,,,,,,0
+ccnu,Central China Normal University,Wuhan,CN,30.58333,114.26667,openalex,,https://openalex.org/I40963666,0.0
+Applica.ai,,,,,,,,,0
+omhu,,,,,,,,,0
+sensetime,Sensetime (China),Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4401727009,0.0
+Inspir.ai,,,,,,,,,0
+2D3,,,,,,,,,0
+Eng.*,École Nationale des Greffes,Dijon,FR,47.31667,5.01667,openalex,,https://openalex.org/I4210107680,0.0
+M]T,M&T Bank (United States),Buffalo,US,42.88645,-78.87837,openalex,,https://openalex.org/I4210164841,0.0
+N.A.P. Inc.,,,,,,,,,0
+InstitutoSuperiorT´ecnico,,,,,,,,,0
+D´epartement d’informatique et de recherche op ´erationnelle,,,,,,,,,0
+TT?,Groupe de recherche clinique – Tumeurs Thyroïdiennes,Paris,,48.85341,2.3488,openalex,,https://openalex.org/I4389425398,0.0
+fanberraM dustralia,,,,,,,,,0
+vydneyPfanberraM dustralia,,,,,,,,,0
+Yahoo! Inc.,,,,,,,,,0
+College of Computing,,,,,,,,,0
+AT&T Research,,,,,,,,,0
+"Baidu.com, Inc","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+Yahoo!,Yahoo (United Kingdom),London,GB,51.50853,-0.12574,openalex,,https://openalex.org/I1325784139,0.0
+xiaohongshu,Xiaohongshu (Little Red Book) (China),Shanghai,,31.22222,121.45806,openalex,,https://openalex.org/I4401726856,0.0
+Layer6,,,,,,,,,0
+Layer6 AI,,,,,,,,,0
+CarbonSilicon.AI,,,,,,,,,0
+carbonsilicon.ai,,,,,,,,,0
+cispa,Helmholtz Center for Information Security,Saarbrücken,DE,49.23262,7.00982,openalex,,https://openalex.org/I4210128801,0.0
+Zhipu.AI,,,,,,,,,0
+x-humanoid,,,,,,,,,0
+HAOMO.AI,,,,,,,,,0
+lenovo group,,,,,,,,,0
+Kumo.AI,,,,,,,,,0
+the university of new south wales,,,,,,,,,0
+northeastern university,Northeastern University,Boston,US,42.35843,-71.05977,openalex,,https://openalex.org/I12912129,0.0
+Together.ai,,,,,,,,,0
+China university of petroleum,"China University of Petroleum, Beijing",Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I204553293,0.0
+uk aisi,,,,,,,,,0
+"biorhodes, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+Netherlands institute for neuroscience,Netherlands Institute for Neuroscience,Amsterdam,NL,52.37403,4.88969,openalex,,https://openalex.org/I1295801184,0.0
+Valeo.ai,,,,,,,,,0
+University of macau,University of Macau,Macao,MO,22.20056,113.54611,openalex,,https://openalex.org/I204512498,0.0
+Institute of automation,Institute of Automation,Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I4210112150,0.0
+Workera.ai,,,,,,,,,0
+Zhipu·AI,,,,,,,,,0
+www.hoiying.net,,,,,,,,,0
+sea ai lab,,,,,,,,,0
+helmholtz zentrum hereon,Helmholtz-Zentrum Hereon,Geesthacht,DE,53.43575,10.3779,openalex,,https://openalex.org/I4210139239,0.0
+Springtail.ai,,,,,,,,,0
+Docta.ai,,,,,,,,,0
+webank,,,,,,,,,0
+vector,Vector Institute,Toronto,CA,43.70643,-79.39864,openalex,,https://openalex.org/I4210127509,0.0
+INRAE,"Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement",Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I4210088668,0.0
+iWudao Tech.,,,,,,,,,0
+scite.ai,,,,,,,,,0
+AImpower.org,,,,,,,,,0
+nstitut national de la recherche scientifique,,,,,,,,,0
+bytedance technology,,,,,,,,,0
+360 AI Institute,,,,,,,,,0
+"qihoo,inc","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+360 AI Lab,,,,,,,,,0
+together.ai,,,,,,,,,0
+Ontocord.AI,,,,,,,,,0
+allen institute,Allen Institute,Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I4210140341,0.0
+shanxi university,Shanxi University,Taiyuan,CN,37.86944,112.56028,openalex,,https://openalex.org/I181877577,0.0
+university of modena,University of Modena and Reggio Emilia,Modena,IT,44.64783,10.92539,openalex,,https://openalex.org/I122346577,0.0
+bytedance,ByteDance (China),Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4406742408,0.0
+Department of Statistics‡,Statistical Service,Nicosia,CY,35.17531,33.3642,openalex,,https://openalex.org/I4210152479,0.0
+Department of Statistics†,Statistical Service,Nicosia,CY,35.17531,33.3642,openalex,,https://openalex.org/I4210152479,0.0
+Department of EECS∗,,,,,,,,,0
+Dept. of Psychology‡,,,,,,,,,0
+Dept. of Psychology†,,,,,,,,,0
+Tech. of China,,,,,,,,,0
+"Baidu.com, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+42dot,,,,,,,,,0
+42dot.ai,,,,,,,,,0
+shanghai university,Shanghai University,Shanghai,CN,31.22222,121.45806,openalex,,https://openalex.org/I113940042,0.0
+Ai2,Allen Institute for Artificial Intelligence,Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I4210156221,0.0
+"JD.com, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+dalian university of technology,Dalian University of Technology,Dalian,CN,38.91222,121.60222,openalex,,https://openalex.org/I27357992,0.0
+ML6,,,,,,,,,0
+JD.com Inc.,,,,,,,,,0
+Mach42,,,,,,,,,0
+westlake university,Westlake University,Hangzhou,CN,30.29365,120.16142,openalex,,https://openalex.org/I3133055985,0.0
+arm,ARM (United Kingdom),Cambridge,GB,52.2,0.11667,openalex,,https://openalex.org/I2801109035,0.0
+harbin institue of technology,,,,,,,,,0
+3M,3M (United States),Saint Paul,US,44.94441,-93.09327,openalex,,https://openalex.org/I1340755506,0.0
+"Universidad ""Adolfo Ibañez""",,,,,,,,,0
+Xidian University,Xidian University,Xi'an,CN,34.25833,108.92861,openalex,,https://openalex.org/I149594827,0.0
+OpenAI∗,OpenAI (United States),San Francisco,US,37.77493,-122.41942,openalex,,https://openalex.org/I4210161460,0.0
+UC Berkeley†,"University of California, Berkeley",Berkeley,US,37.87159,-122.27275,openalex,,https://openalex.org/I95457486,0.0
+OpenAI*†,OpenAI (United States),San Francisco,US,37.77493,-122.41942,openalex,,https://openalex.org/I4210161460,0.0
+DeepMind‡,DeepMind (United Kingdom),London,GB,51.50853,-0.12574,openalex,,https://openalex.org/I4210090411,0.0
+Netﬂix,,,,,,,,,0
+Covariant.ai,,,,,,,,,0
+JDDGlobal.com,,,,,,,,,0
+"Q3DM, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+HKUST†,Hong Kong University of Science and Technology,Hong Kong,HK,22.27832,114.17469,openalex,,https://openalex.org/I200769079,0.0
+as above,,,,,,,,,0
+JD.com AI Lab,,,,,,,,,0
+covariant.ai,,,,,,,,,0
+Naverlabs∗,,,,,,,,,0
+McGill University4,,,,,,,,,0
+Aalto University5,,,,,,,,,0
+University of Oxford†,University of Oxford,Oxford,GB,51.75222,-1.25596,openalex,,https://openalex.org/I40120149,0.0
+Qure.ai,,,,,,,,,0
+University of Bremen2,,,,,,,,,0
+valeo.ai,,,,,,,,,0
+xidian university,Xidian University,Xi'an,CN,34.25833,108.92861,openalex,,https://openalex.org/I149594827,0.0
+kaist,Korea Advanced Institute of Science and Technology,Daejeon,KR,36.34913,127.38493,openalex,,https://openalex.org/I157485424,0.0
+Brand24,,,,,,,,,0
+for.ai,,,,,,,,,0
+decision lab,,,,,,,,,0
+shopee,,,,,,,,,0
+huawei,Huawei Technologies (China),Shenzhen,CN,22.54554,114.0683,openalex,,https://openalex.org/I2250955327,0.0
+zhejiang university,Zhejiang University,Hangzhou,CN,30.29365,120.16142,openalex,,https://openalex.org/I76130692,0.0
+COCOPIE.INC,,,,,,,,,0
+kyoto university,Kyoto University,Kyoto,JP,35.02107,135.75385,openalex,,https://openalex.org/I22299242,0.0
+"Medical AI Co., Ltd.",AGRF Ltd,Brisbane,AU,-27.46794,153.02809,openalex,,https://openalex.org/I4210154382,0.0
+Lum.AI,,,,,,,,,0
+MathSci.ai,,,,,,,,,0
+meituan,,,,,,,,,0
+C3 AI,,,,,,,,,0
+National University Hospital,Seoul National University Hospital,Seoul,KR,37.566,126.9784,openalex,,https://openalex.org/I2802835388,0.0
+kuaishou tech,,,,,,,,,0
+changzhou university,Changzhou University,Changzhou,CN,31.77359,119.95401,openalex,,https://openalex.org/I4210153482,0.0
+cowarobot,,,,,,,,,0
+innovation,Collaborative Innovation Center of Advanced Microstructures,Nanjing,CN,32.06167,118.77778,openalex,,https://openalex.org/I4210140493,0.0
+stepfun,,,,,,,,,0
+hainan,Hainan University,Haikou,CN,20.03421,110.34651,openalex,,https://openalex.org/I20942203,0.0
+hainan university,Hainan University,Haikou,CN,20.03421,110.34651,openalex,,https://openalex.org/I20942203,0.0
+lenovo,Lenovo (China),Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I4210156165,0.0
+cuizhihua@tyust.edu.cn,,,,,,,,,0
+capital medical unversity,,,,,,,,,0
+ccmu.edu,,,,,,,,,0
+hohai University,Hohai University,Nanjing,CN,32.06167,118.77778,openalex,,https://openalex.org/I163340411,0.0
+haomo.ai,,,,,,,,,0
+kuaishou,Kuaishou (China),Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4401726859,0.0
+southern university of science,Southern University of Science and Technology,Shenzhen,CN,22.54554,114.0683,openalex,,https://openalex.org/I3045169105,0.0
+jd.com,Jingdong (China),Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I4210103986,0.0
+whitehorse-group,,,,,,,,,0
+lut,Lappeenranta-Lahti University of Technology,Lappeenranta,FI,61.05871,28.18871,openalex,,https://openalex.org/I63548447,0.0
+fujian medical university,Fujian Medical University,Fuzhou,CN,26.06139,119.30611,openalex,,https://openalex.org/I129708740,0.0
+baishan cloud,,,,,,,,,0
+baishan.cloud,,,,,,,,,0
+shanghaitech,ShanghaiTech University,Shanghai,CN,31.22222,121.45806,openalex,,https://openalex.org/I30809798,0.0
+soochow university,Soochow University,Suzhou,CN,31.30408,120.59538,openalex,,https://openalex.org/I3923682,0.0
+cpss,,,,,,,,,0
+china west normal universtiy,,,,,,,,,0
+hoiying.net,,,,,,,,,0
+nibiru,,,,,,,,,0
+H. H.lsen,,,,,,,,,0
+39-050-883496,,,,,,,,,0
+e-mail: dario@sssup.it,,,,,,,,,0
+Synthesis.ai,,,,,,,,,0
+Pony.ai,Pony.AI (China),Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4401726774,0.0
+Błażej Osiński,,,,,,,,,0
+independent researcher from Japan,,,,,,,,,0
+X Inc.,,,,,,,,,0
+NVIDIA:,Nvidia (United States),Santa Clara,US,37.35411,-121.95524,openalex,,https://openalex.org/I4210127875,0.0
+Centre for Research,Centre National de la Recherche Scientifique,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I1294671590,0.0
+NVIDIA.,Nvidia (United States),Santa Clara,US,37.35411,-121.95524,openalex,,https://openalex.org/I4210127875,0.0
+Univ. of Utah.,,,,,,,,,0
+Tetras. AI,,,,,,,,,0
+Λ Γ Γ I V Λ L,,,,,,,,,0
+Hessian.AI,Hessian Center for Artificial Intelligence,Darmstadt,,49.87167,8.65027,openalex,,https://openalex.org/I4392021234,0.0
+IIT Delhi.,Indian Institute of Technology Delhi,New Delhi,IN,28.62137,77.2148,openalex,,https://openalex.org/I68891433,0.0
+Google.,Google (United States),Mountain View,US,37.38605,-122.08385,openalex,,https://openalex.org/I1291425158,0.0
+Autowise.AI,,,,,,,,,0
+Tetras.AI,,,,,,,,,0
+asarmien@uiuc.edu,,,,,,,,,0
+O. Company,,,,,,,,,0
+cnic,Spanish National Centre for Cardiovascular Research,Madrid,ES,40.4165,-3.70256,openalex,,https://openalex.org/I2809107791,0.0
+L3S Research Center,L3S Research Center,Hanover,DE,52.37052,9.73322,openalex,,https://openalex.org/I4210136150,0.0
+armasuisse,Federal Office for Defence Procurement,Bern,,46.94809,7.44744,openalex,,https://openalex.org/I4409125553,0.0
+kuaishou.com,,,,,,,,,0
+Université Rennes2,,,,,,,,,0
+sekisai,,,,,,,,,0
+sekisai inc.,,,,,,,,,0
+(Megvii),Megvii (China),Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4401726805,0.0
+ygingold@gmu.edu,,,,,,,,,0
+Face,Hugging Face,New York,,40.71427,-74.00597,openalex,,https://openalex.org/I4387154989,0.0
+true[X],,,,,,,,,0
+T.E.A.M. Inc.,,,,,,,,,0
+CRS4,Center for Advanced Studies Research and Development in Sardinia,Pula,IT,39.00727,9.00223,openalex,,https://openalex.org/I2800759272,0.0
+Variance.ai,,,,,,,,,0
+revery.ai,,,,,,,,,0
+Koc¸ University,,,,,,,,,0
+ZERO103,,,,,,,,,0
+ECE1,,,,,,,,,0
+ECE1& IPAI2,,,,,,,,,0
+FutureDrive Inc.,,,,,,,,,0
+Picup.AI,,,,,,,,,0
+Birds.ai B.V.,,,,,,,,,0
+Cyclope.ai,,,,,,,,,0
+Mobileye2,,,,,,,,,0
+Verily1,,,,,,,,,0
+Smallest.ai,,,,,,,,,0
+IAS-8,,,,,,,,,0
+Meta‡,Meta (Israel),Tel Aviv,IL,32.08088,34.78057,openalex,,https://openalex.org/I2252078561,0.0
+T-Bank*,M&T Bank (United States),Buffalo,US,42.88645,-78.87837,openalex,,https://openalex.org/I4210164841,0.0
+KNQ.AI,,,,,,,,,0
+University of Surrey1,,,,,,,,,0
+Amazon2,,,,,,,,,0
+2+3,Escola Básica Integrada da Horta,Horta,PT,38.53737,-28.62615,openalex,,https://openalex.org/I4210122074,0.0
+2+4,VA Healthcare-VISN 4,Pittsburgh,US,40.44062,-79.99589,openalex,,https://openalex.org/I4210147340,0.0
+1+5,Délégation Paris 5,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I110736937,0.0
+"Amazon.com, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+Bo˘gazic ¸i University,,,,,,,,,0
+Adobe‡1,,,,,,,,,0
+NVIDIA∗,Nvidia (United States),Santa Clara,US,37.35411,-121.95524,openalex,,https://openalex.org/I4210127875,0.0
+IIT Kanpur†,Indian Institute of Technology Kanpur,Kanpur,IN,26.46523,80.34975,openalex,,https://openalex.org/I94234084,0.0
+NSUT‡,Netaji Subhas University of Technology,New Delhi,IN,28.62137,77.2148,openalex,,https://openalex.org/I36090812,0.0
+modelbest,,,,,,,,,0
+kakaobrain,,,,,,,,,0
+HEIG-VD∗,HEIG-VD,Yverdon-les-Bains,,46.77852,6.64115,openalex,,https://openalex.org/I4401041603,0.0
+University of Houston†,University of Houston,Houston,US,29.76328,-95.36327,openalex,,https://openalex.org/I44461941,0.0
+Hyperconnect†,,,,,,,,,0
+Hyperconnect∗,,,,,,,,,0
+Google†,Google (United States),Mountain View,US,37.38605,-122.08385,openalex,,https://openalex.org/I1291425158,0.0
+Amazon‡,Amazon (United States),Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I1311688040,0.0
+www.ruizhang.info,,,,,,,,,0
+Queer in AI,,,,,,,,,0
+ShareChat†‡∗,,,,,,,,,0
+QTrade+♦,,,,,,,,,0
+Kata.ai Research,,,,,,,,,0
+Soﬁa University,,,,,,,,,0
+V ody LLC,,,,,,,,,0
+Univ. of Pennsylvania1,,,,,,,,,0
+Univ. of Wisconsin-Madison2,,,,,,,,,0
+lcpandia@gmail.com,,,,,,,,,0
+center for artificial intelligence research,,,,,,,,,0
+computer engineering,"Institute of Electronics, Computer and Telecommunication Engineering",Turin,IT,45.07049,7.68682,openalex,,https://openalex.org/I4210100607,0.0
+the hong kong university of science,,,,,,,,,0
+KAIST♡,,,,,,,,,0
+UCLA♢,,,,,,,,,0
+Yellow.ai,,,,,,,,,0
+Psychology3,,,,,,,,,0
+DeepAuto3,,,,,,,,,0
+Cohere†,Cohere (Canada),San Francisco,,37.77493,-122.41942,openalex,,https://openalex.org/I4401726847,0.0
+Cohere∗,Cohere (Canada),San Francisco,,37.77493,-122.41942,openalex,,https://openalex.org/I4401726847,0.0
+Denser.ai,,,,,,,,,0
+University of Arizona‡,University of Arizona,Tucson,US,32.22174,-110.92648,openalex,,https://openalex.org/I138006243,0.0
+Anytime.AI,,,,,,,,,0
+NVIDIA♦,,,,,,,,,0
+Google♢,,,,,,,,,0
+University of Virginia♣,,,,,,,,,0
+Amazon♢,,,,,,,,,0
+Yanolja♣,,,,,,,,,0
+Amazon♣,,,,,,,,,0
+Zhipu.AI§,,,,,,,,,0
+Mathpresso Inc.,,,,,,,,,0
+UIUC♡,,,,,,,,,0
+National Research Institute (NASK),NASK National Research Institute,Warsaw,PL,52.22977,21.01178,openalex,,https://openalex.org/I4210136276,0.0
+Intuit2,,,,,,,,,0
+Google‡,Google (United States),Mountain View,US,37.38605,-122.08385,openalex,,https://openalex.org/I1291425158,0.0
+[24]7.ai,,,,,,,,,0
+Apple*§,Apple (United States),Cupertino,US,37.323,-122.03218,openalex,,https://openalex.org/I4210153776,0.0
+Apple§,Apple (United States),Cupertino,US,37.323,-122.03218,openalex,,https://openalex.org/I4210153776,0.0
+Karya♢,,,,,,,,,0
+201.AI,,,,,,,,,0
+University of Stuttgart,University of Stuttgart,Stuttgart,DE,48.78232,9.17702,openalex,,https://openalex.org/I100066346,0.0
+Amazon*,Amazon (United States),Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I1311688040,0.0
+Samaya.ai,,,,,,,,,0
+Orby.ai,,,,,,,,,0
+Generative AI Research Lab,,,,,,,,,0
+DeepAuto2,,,,,,,,,0
+Amazon.com Inc,,,,,,,,,0
+Answer.AI,,,,,,,,,0
+Data61 CSIRO2,,,,,,,,,0
+Skit.ai,,,,,,,,,0
+Funix.io,,,,,,,,,0
+C3 AI♢,,,,,,,,,0
+AI at Meta♠,,,,,,,,,0
+Baidu♠,,,,,,,,,0
+ModelBest♡,,,,,,,,,0
+Microsoft♣,,,,,,,,,0
+University of Virginia⋆,University of Virginia,Charlottesville,US,38.02931,-78.47668,openalex,,https://openalex.org/I51556381,0.0
+Graduate School of AI2,,,,,,,,,0
+School of Computing1,,,,,,,,,0
+University of Bucharest♠,,,,,,,,,0
+University of Bucharest♡,,,,,,,,,0
+University of Bucharest♣,,,,,,,,,0
+Google*,Google (United States),Mountain View,US,37.38605,-122.08385,openalex,,https://openalex.org/I1291425158,0.0
+imean.ai,,,,,,,,,0
+xiaobing.ai,,,,,,,,,0
+XL8,,,,,,,,,0
+XL8 Inc.,,,,,,,,,0
+university of south carolina,University of South Carolina,Columbia,US,34.00071,-81.03481,openalex,,https://openalex.org/I155781252,0.0
+duxiaoman,,,,,,,,,0
+4Paradigm. Inc,,,,,,,,,0
+Bardeen.ai,,,,,,,,,0
+oppo,,,,,,,,,0
+Netmind.AI,,,,,,,,,0
+gesis,GESIS - Leibniz-Institute for the Social Sciences,Mannheim,DE,49.4891,8.46694,openalex,,https://openalex.org/I4210101898,0.0
+Ai Sweden,AI Sweden,Gothenburg,,57.70716,11.96679,openalex,,https://openalex.org/I4387152838,0.0
+xiaobing technology company,,,,,,,,,0
+Tencent.inc,,,,,,,,,0
+I2R,Institute for Infocomm Research,Singapore,SG,1.28967,103.85007,openalex,,https://openalex.org/I3005327000,0.0
+institute of qutomation,,,,,,,,,0
+kannadaacademy.com,,,,,,,,,0
+gigatech ltd,,,,,,,,,0
+sun yet sun,,,,,,,,,0
+cncert,National Computer Network Emergency Response Technical Team/Coordination Center of Chinar,Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I4210087772,0.0
+Amazon.com2,,,,,,,,,0
+University of Oklahoma3,,,,,,,,,0
+Faire.com,,,,,,,,,0
+UCLA♣,,,,,,,,,0
+Kumo.ai,,,,,,,,,0
+"⋆Apple, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+yz-intelligence Inc,,,,,,,,,0
+cohere.ai,,,,,,,,,0
+UCLA†,"University of California, Los Angeles",Los Angeles,US,34.05223,-118.24368,openalex,,https://openalex.org/I161318765,0.0
+Verloop.io,,,,,,,,,0
+Microsoft+∗,Microsoft (United States),Redmond,US,47.67399,-122.12151,openalex,,https://openalex.org/I1290206253,0.0
+Microsoft+†,Microsoft (United States),Redmond,US,47.67399,-122.12151,openalex,,https://openalex.org/I1290206253,0.0
+Riiid♣,,,,,,,,,0
+QS29,,,,,,,,,0
+Google3,,,,,,,,,0
+Interactions♠,,,,,,,,,0
+johns hopkins university,Johns Hopkins University,Baltimore,US,39.29038,-76.61219,openalex,,https://openalex.org/I145311948,0.0
+facebook ai,,,,,,,,,0
+graceyx.scut@gmail.com,,,,,,,,,0
+lli9@apple.com,,,,,,,,,0
+Amazon+∗,Amazon (United States),Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I1311688040,0.0
+Grammarly♢,,,,,,,,,0
+University of Georgia♣,,,,,,,,,0
+QuillBot♡,,,,,,,,,0
+University of Arizona♢,,,,,,,,,0
+S2W Inc.,,,,,,,,,0
+Bloomberg†,Bloomberg (United States),New York,US,40.71427,-74.00597,openalex,,https://openalex.org/I1299907687,0.0
+UCSD*,"University of California, San Diego",San Diego,US,32.71571,-117.16472,openalex,,https://openalex.org/I36258959,0.0
+Microsoft†,Microsoft (United States),Redmond,US,47.67399,-122.12151,openalex,,https://openalex.org/I1290206253,0.0
+Apple2,,,,,,,,,0
+Character.ai3,,,,,,,,,0
+Teddysum‡,,,,,,,,,0
+Pr(Ai)2R Group‡,,,,,,,,,0
+Accenture♡,,,,,,,,,0
+NVIDIA♢,,,,,,,,,0
+BharatGen♣,,,,,,,,,0
+Logically.ai,,,,,,,,,0
+NCSOFT4,,,,,,,,,0
+ByteDance♡,,,,,,,,,0
+ISTA▽,Institute of Science and Technology Austria,Klosterneuburg,AT,48.30521,16.32522,openalex,,https://openalex.org/I157556583,0.0
+Amazon.com Inc.,,,,,,,,,0
+PathOnAI.org,,,,,,,,,0
+University of Minnesota2,,,,,,,,,0
+SJTU*,Shanghai Jiao Tong University,Shanghai,CN,31.22222,121.45806,openalex,,https://openalex.org/I183067930,0.0
+FDU†,Fairleigh Dickinson University,Teaneck,US,40.8976,-74.01597,openalex,,https://openalex.org/I32907511,0.0
+UTA‡,The University of Texas at Arlington,Arlington,US,32.73569,-97.10807,openalex,,https://openalex.org/I189196454,0.0
+Xiaohongshu♥,,,,,,,,,0
+University of Cambridge†,University of Cambridge,Cambridge,GB,52.2,0.11667,openalex,,https://openalex.org/I241749,0.0
+DeepAuto.ai3,,,,,,,,,0
+d Lab,,,,,,,,,0
+Research (A* STAR),A*STAR-NUS Clinical Imaging Research Centre,Singapore,SG,1.28967,103.85007,openalex,,https://openalex.org/I4210130241,0.0
+C+D,C and D (Czechia),Prague,CZ,50.08804,14.42076,openalex,,https://openalex.org/I4210141977,0.0
+C+B,B&C Dopravní Systémy (Czechia),Libochovice,CZ,50.40626,14.04439,openalex,,https://openalex.org/I4210108583,0.0
+B+C+P,Procter & Gamble (United States),Cincinnati,US,39.12711,-84.51439,openalex,,https://openalex.org/I74680897,0.0
+IIT Jammu*,Indian Institute of Technology Jammu,Jammu,IN,32.73528,74.86167,openalex,,https://openalex.org/I4210127441,0.0
+St. Luke’s Medical Center,St. Luke’s Boise Medical Center,Boise,US,43.6135,-116.20345,openalex,,https://openalex.org/I4210127150,0.0
+Google♡,,,,,,,,,0
+Lilt♣,,,,,,,,,0
+University of Rochester3,,,,,,,,,0
+Langboat.com,,,,,,,,,0
+Microsoft∗‡,Microsoft (United States),Redmond,US,47.67399,-122.12151,openalex,,https://openalex.org/I1290206253,0.0
+NAIST¶,Nara Institute of Science and Technology,Ikoma,JP,34.68333,135.7,openalex,,https://openalex.org/I75917431,0.0
+University of Virginia♡,,,,,,,,,0
+Twitter∗,Twitter (United States),San Francisco,US,37.77493,-122.41942,openalex,,https://openalex.org/I113979032,0.0
+Hyperconnect*,,,,,,,,,0
+IIT Kanpur3,,,,,,,,,0
+University of California-Irvine,"University of California, Irvine",Irvine,US,33.66946,-117.82311,openalex,,https://openalex.org/I204250578,0.0
+Copenhagen),University of Copenhagen,Copenhagen,DK,55.67594,12.56553,openalex,,https://openalex.org/I124055696,0.0
+California Institute of Tech.,,,,,,,,,0
+University of Oxford*,University of Oxford,Oxford,GB,51.75222,-1.25596,openalex,,https://openalex.org/I40120149,0.0
+Unlearn.ai,,,,,,,,,0
+Cogitai¹,,,,,,,,,0
+enliteAI,,,,,,,,,0
+Cohere.ai,,,,,,,,,0
+genentech,Genentech,San Francisco,,37.77493,-122.41942,openalex,,https://openalex.org/I183934855,0.0
+jiangnan University,Jiangnan University,Wuxi,CN,31.56887,120.28857,openalex,,https://openalex.org/I111599522,0.0
+FAR.AI,,,,,,,,,0
+babylon health,Babylon Health,London,GB,51.50853,-0.12574,openalex,,https://openalex.org/I4210134914,0.0
+Sabancı University,Sabancı Üniversitesi,Istanbul,TR,41.01384,28.94966,openalex,,https://openalex.org/I134235054,0.0
+"Research, AT&T",Wageningen University & Research,Wageningen,NL,51.97,5.66667,openalex,,https://openalex.org/I913481162,0.0
+qiyuanlab,,,,,,,,,0
+universite paris saclay,,,,,,,,,0
+Nexusflow.ai Inc,,,,,,,,,0
+M42,,,,,,,,,0
+Carper.AI,,,,,,,,,0
+tiangong university,Tiangong University,Tianjin,CN,39.14222,117.17667,openalex,,https://openalex.org/I198091727,0.0
+cfdx,,,,,,,,,0
+zhejianglab,,,,,,,,,0
+spidercore,,,,,,,,,0
+shanghai ai laboratory,Shanghai Artificial Intelligence Laboratory,Shanghai,,31.22222,121.45806,openalex,,https://openalex.org/I4391012619,0.0
+polixir,,,,,,,,,0
+engineering,Materials Science & Engineering,Canberra,AU,-35.28346,149.12807,openalex,,https://openalex.org/I4210129794,0.0
+01.AI,,,,,,,,,0
+we derkeleyK utatistics fepartment,,,,,,,,,0
+qhio utate wniversityK eug fepartment,,,,,,,,,0
+ggeu fepartment,,,,,,,,,0
+U. Cambridge†,,,,,,,,,0
+houmo,,,,,,,,,0
+houmo.ai,,,,,,,,,0
+vijil,,,,,,,,,0
+Whiterabbit.ai,,,,,,,,,0
+d-Matrix Corp.,,,,,,,,,0
+vivo,Vietnamese Voluntary Foundation,San Jose,US,37.33939,-121.89496,openalex,,https://openalex.org/I4210125111,0.0
+onepoint,,,,,,,,,0
+scitix,,,,,,,,,0
+pluralis,,,,,,,,,0
+bytedance Inc,,,,,,,,,0
+quwan,,,,,,,,,0
+AI center,Tübingen AI Center,Tübingen,,48.52266,9.05222,openalex,,https://openalex.org/I4401726832,0.0
+University of Oxford,University of Oxford,Oxford,GB,51.75222,-1.25596,openalex,,https://openalex.org/I40120149,0.0
+école polytechnique,École Polytechnique Fédérale de Lausanne,Lausanne,CH,46.516,6.63282,openalex,,https://openalex.org/I5124864,0.0
+Texas A&M,Texas A&M University,College Station,US,30.62798,-96.33441,openalex,,https://openalex.org/I91045830,0.0
+Korea institute for advanced study,Korea Institute for Advanced Study,Seoul,KR,37.566,126.9784,openalex,,https://openalex.org/I125608817,0.0
+huaiyin institute of technology,Huaiyin Institute of Technology,Huai'an,CN,33.58861,119.01917,openalex,,https://openalex.org/I4210153869,0.0
+xAI,xAI (United States),San Francisco,,37.77493,-122.41942,openalex,,https://openalex.org/I4401726768,0.0
+insitro inc.,"insitro, inc. (United States)",South San Francisco,,37.65466,-122.40775,openalex,,https://openalex.org/I4412460330,0.0
+insitro,"insitro, inc. (United States)",South San Francisco,,37.65466,-122.40775,openalex,,https://openalex.org/I4412460330,0.0
+Xmax.AI Ltd.,,,,,,,,,0
+University of Montreal,Université de Montréal,Montreal,CA,45.50884,-73.58781,openalex,,https://openalex.org/I70931966,0.0
+robotera,,,,,,,,,0
+Rhymes.AI,,,,,,,,,0
+360 AI Research,,,,,,,,,0
+wenzhou university,Wenzhou University,Wenzhou,CN,27.99942,120.66682,openalex,,https://openalex.org/I146620803,0.0
+university of tianjin of china,,,,,,,,,0
+backflipAI,,,,,,,,,0
+KUNGFU.AI,,,,,,,,,0
+Character.AI,,,,,,,,,0
+bilibili.inc,,,,,,,,,0
+Arya.ai,,,,,,,,,0
+University Hospital Center,The Ohio State University Comprehensive Cancer Center – Arthur G. James Cancer Hospital and Richard J. Solove Research Institute,Columbus,US,39.96118,-82.99879,openalex,,https://openalex.org/I2799885155,0.0
+University of Tsukuba.,University of Tsukuba,Tsukuba,JP,36.2,140.1,openalex,,https://openalex.org/I146399215,0.0
+Institute of A.I.,Institute of Otolaryngology named after Prof. A.I. Kolomiychenko of the National Academy of Medical Sciences of Ukraine,Kyiv,UA,50.45466,30.5238,openalex,,https://openalex.org/I4210114153,0.0
+Research Institute,Scripps Research Institute,San Diego,US,32.71571,-117.16472,openalex,,https://openalex.org/I123431417,0.0
+Center for Research,NSF National Center for Atmospheric Research,Boulder,US,40.01499,-105.27055,openalex,,https://openalex.org/I107766831,0.0
+K. lizuka,,,,,,,,,0
+Centre for AI,Centre for the Governance of AI,Oxford,,51.75222,-1.25596,openalex,,https://openalex.org/I4387155932,0.0
+Covariant. ai,,,,,,,,,0
+Research Center “E. Piaggio”,,,,,,,,,0
+center for mathematical modeling,Center for Mathematical Modeling,Santiago,,-33.45694,-70.64827,openalex,,https://openalex.org/I4387155550,0.0
+Institute of digestive disease,,,,,,,,,0
+NREC.,Neurophysiologie respiratoire expérimentale et clinique,Paris,,48.85341,2.3488,openalex,,https://openalex.org/I4387152586,0.0
+National Inst. of AIST.,,,,,,,,,0
+"HAOMO.AI Tech. Co., Ltd.",AGRF Ltd,Brisbane,AU,-27.46794,153.02809,openalex,,https://openalex.org/I4210154382,0.0
+Institute for AI,Allen Institute for Artificial Intelligence,Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I4210156221,0.0
+"Research Center ""Enrico Piaggio""",,,,,,,,,0
+narrative nights inc.,,,,,,,,,0
+Institute of robotics,Institute of Robotics,Sofia,,42.69751,23.32415,openalex,,https://openalex.org/I4391767788,0.0
+University of Munich1,,,,,,,,,0
+isize.co,,,,,,,,,0
+SmartMore2,,,,,,,,,0
+University of Oxford3,,,,,,,,,0
+University of Oxford2,,,,,,,,,0
+SmartMore5,,,,,,,,,0
+University of Manitoba1,,,,,,,,,0
+4Monash University,,,,,,,,,0
+University of Maryland*,"University of Maryland, College Park",College Park,US,38.98067,-76.93692,openalex,,https://openalex.org/I66946132,0.0
+Université Laval*,Université Laval,Québec,CA,46.81228,-71.21454,openalex,,https://openalex.org/I43406934,0.0
+Data61 / CSIRO†,,,,,,,,,0
+Allen Institute for AI,Allen Institute for Artificial Intelligence,Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I4210156221,0.0
+2360 AI Institute,,,,,,,,,0
+"perceptiveio, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+National Institute of Informatics†,National Institute of Informatics,Tokyo,JP,35.6895,139.69171,openalex,,https://openalex.org/I184597095,0.0
+Zoox∗,,,,,,,,,0
+DeepScale∗,,,,,,,,,0
+❆❜str❛❝t,,,,,,,,,0
+FaceSoft.io,,,,,,,,,0
+Center for AI Research,,,,,,,,,0
+WATRIX.AI,,,,,,,,,0
+Microsoft‡,Microsoft (United States),Redmond,US,47.67399,-122.12151,openalex,,https://openalex.org/I1290206253,0.0
+Taobao.com,,,,,,,,,0
+Institute for interdisciplinary information core technology(IIISCT),,,,,,,,,0
+five.ai,,,,,,,,,0
+University of Minnesota†,University of Minnesota,Minneapolis,US,44.97997,-93.26384,openalex,,https://openalex.org/I130238516,0.0
+NVIDIA♯,,,,,,,,,0
+NICTA*,Data61,Sydney,AU,-33.86785,151.20732,openalex,,https://openalex.org/I42894916,0.0
+2d3 Ltd.,,,,,,,,,0
+NJUST1,,,,,,,,,0
+THU2,,,,,,,,,0
+SDU3,,,,,,,,,0
+SJTU4,,,,,,,,,0
+KAIST*,Korea Advanced Institute of Science and Technology,Daejeon,KR,36.34913,127.38493,openalex,,https://openalex.org/I157485424,0.0
+OMNIOUS.AI,,,,,,,,,0
+Insta360 Research,,,,,,,,,0
+Microsoft1,,,,,,,,,0
+miguo.ai,,,,,,,,,0
+Pinscreen Inc.,,,,,,,,,0
+342dot Inc.,,,,,,,,,0
+101.AI,,,,,,,,,0
+Amazon3,,,,,,,,,0
+Waabi†,,,,,,,,,0
+NetMind.AI,,,,,,,,,0
+HiDream.ai Inc.,,,,,,,,,0
+DeepAuto.ai,,,,,,,,,0
+GSK.ai,,,,,,,,,0
+Core42,,,,,,,,,0
+dRISK.ai,,,,,,,,,0
+ETH Z¨urich,,,,,,,,,0
+FloppyDisk.AI,,,,,,,,,0
+Microsoft∗,Microsoft (United States),Redmond,US,47.67399,-122.12151,openalex,,https://openalex.org/I1290206253,0.0
+G42,,,,,,,,,0
+POSTECH1,,,,,,,,,0
+Synthesia.io,,,,,,,,,0
+University of Trento1,,,,,,,,,0
+Roblox†,,,,,,,,,0
+IN.AI Research,,,,,,,,,0
+Bytedance.com,,,,,,,,,0
+ALLRIDE.AI,,,,,,,,,0
+Unity∗,Unity Health Toronto,Toronto,,43.70643,-79.39864,openalex,,https://openalex.org/I4399598460,0.0
+valeo,Valeo (France),Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I220619192,0.0
+S Research,Nathan Kline Institute for Psychiatric Research,Orangeburg,US,41.04649,-73.94958,openalex,,https://openalex.org/I125043107,0.0
+Snap Inc.,,,,,,,,,0
+University of Birmingham1,,,,,,,,,0
+CalmCar4,,,,,,,,,0
+Tencent2,,,,,,,,,0
+Universit¸e Laval*,,,,,,,,,0
+Universidad de M ´alaga,,,,,,,,,0
+ISEE.AI,,,,,,,,,0
+University of Oxford♠,,,,,,,,,0
+DeepMind♣,,,,,,,,,0
+Kakao Corp.,Kakao Corporation (South Korea),Jeju City,,33.50972,126.52194,openalex,,https://openalex.org/I4412460149,0.0
+University of Ljubljana,University of Ljubljana,Ljubljana,SI,46.05108,14.50513,openalex,,https://openalex.org/I153976015,0.0
+"DiDiChuxing4People AI, Inc.","Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+3Dwe.ai,,,,,,,,,0
+University of Minnesota*,University of Minnesota,Minneapolis,US,44.97997,-93.26384,openalex,,https://openalex.org/I130238516,0.0
+Eyecan.ai,,,,,,,,,0
+MICS†,Mathématiques et Informatique pour la Complexité et les Systèmes,Gif-sur-Yvette,,48.68333,2.13333,openalex,,https://openalex.org/I4387152683,0.0
+IWR.uni-heidelberg.de,,,,,,,,,0
+Math.uni-heidelberg.de,,,,,,,,,0
+University of Bonn♮,,,,,,,,,0
+Google⋆,Google (United States),Mountain View,US,37.38605,-122.08385,openalex,,https://openalex.org/I1291425158,0.0
+ISR-Coimbra‡,,,,,,,,,0
+Adobe⋆,Adobe Systems (United States),San Jose,US,37.33939,-121.89496,openalex,,https://openalex.org/I1306409833,0.0
+University of Bonn†,University of Bonn,Bonn,DE,50.73438,7.09549,openalex,,https://openalex.org/I135140700,0.0
+Corp,U.S. Army Corp of Engineers Waterways Experiment Station,Vicksburg,,32.35265,-90.87788,openalex,,https://openalex.org/I4389425429,0.0
+"Nuro∗,†",,,,,,,,,0
+"ECE†, ASRI†, & IPAI†,§",,,,,,,,,0
+Univ. of Pittsburgh*,,,,,,,,,0
+iQIYI Inc.,,,,,,,,,0
+University A,Texas A&M University,College Station,US,30.62798,-96.33441,openalex,,https://openalex.org/I91045830,0.0
+University B,Marshall B. Ketchum University,Fullerton,US,33.87029,-117.92534,openalex,,https://openalex.org/I185234458,0.0
+University C,Dr. C. V. Raman University,Kota,IN,22.29507,82.02366,openalex,,https://openalex.org/I3129960170,0.0
+´ETS Montreal*,,,,,,,,,0
+Blackshark.ai,,,,,,,,,0
+H-1 Research,,,,,,,,,0
+mAy-I Inc.,,,,,,,,,0
+University of Bonn‡,University of Bonn,Bonn,DE,50.73438,7.09549,openalex,,https://openalex.org/I135140700,0.0
+Adobe†,Adobe Systems (United States),San Jose,US,37.33939,-121.89496,openalex,,https://openalex.org/I1306409833,0.0
+Affiliation1,,,,,,,,,0
+Affiliation2,,,,,,,,,0
+Affiliation3,,,,,,,,,0
+A9,,,,,,,,,0
+Amazon+2,Université Rennes 2,Rennes,FR,48.11198,-1.67429,openalex,,https://openalex.org/I3124938446,0.0
+UCLA3,,,,,,,,,0
+Graphen.ai,,,,,,,,,0
+Altizure.com,,,,,,,,,0
+Tensorﬂight,,,,,,,,,0
+RSVP.ai,,,,,,,,,0
+Microsoft*†,Microsoft (United States),Redmond,US,47.67399,-122.12151,openalex,,https://openalex.org/I1290206253,0.0
+inchitech,,,,,,,,,0
+dsm-firmenich,,,,,,,,,0
+X-ERA.ai,,,,,,,,,0
+PicUp.Ai,,,,,,,,,0
+i3 LLC,,,,,,,,,0
+University of Sydney⁵,The University of Sydney,Sydney,AU,-33.86785,151.20732,openalex,,https://openalex.org/I129604602,0.0
+---,,,,,,,,,0
+Qualtrics*,,,,,,,,,0
+AI Research,AI Signal Research (United States),Huntsville,US,34.7304,-86.58594,openalex,,https://openalex.org/I4210111032,0.0
+Megvii(Face++) Inc,"Merck & Co., Inc., Rahway, NJ, USA (United States)",Rahway,US,40.60816,-74.27765,openalex,,https://openalex.org/I1285764155,0.0
+Booking.com,,,,,,,,,0
+Institute of artiﬁcial intelligence,,,,,,,,,0
+hellovera.ai,,,,,,,,,0
+University of Siegen2,,,,,,,,,0
+Qihoo-360,Qihoo 360 (China),Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I4210092299,0.0
+twentybn,,,,,,,,,0
+yianilos,,,,,,,,,0
+National Taiwan Univ.,,,,,,,,,0
+Microsoft*,Microsoft (United States),Redmond,US,47.67399,-122.12151,openalex,,https://openalex.org/I1290206253,0.0
+University of Iowa1,,,,,,,,,0
+Yandex1,,,,,,,,,0
+Tencent†,Tencent (China),Shenzhen,CN,22.54554,114.0683,openalex,,https://openalex.org/I2250653659,0.0
+Waabi1,,,,,,,,,0
+University of Oxford∗,University of Oxford,Oxford,GB,51.75222,-1.25596,openalex,,https://openalex.org/I40120149,0.0
+INEEJI†,,,,,,,,,0
+Contract.fit,,,,,,,,,0
+KAIST†,Korea Advanced Institute of Science and Technology,Daejeon,KR,36.34913,127.38493,openalex,,https://openalex.org/I157485424,0.0
+UNIST†,Ulsan National Institute of Science and Technology,Ulsan,KR,35.53722,129.31667,openalex,,https://openalex.org/I48566637,0.0
+Vchar.ai‡,,,,,,,,,0
+Amazon§,Amazon (United States),Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I1311688040,0.0
+University of Wollongong1,,,,,,,,,0
+University of Sydney2,,,,,,,,,0
+242dot Inc.,,,,,,,,,0
+Waymo+⇤,,,,,,,,,0
+HiDream.ai Inc,,,,,,,,,0
+Shopee†‡,,,,,,,,,0
+Shopee†,,,,,,,,,0
+KAUST1,,,,,,,,,0
+T¨ubingen University,,,,,,,,,0
+NIO2,,,,,,,,,0
+CODE42.ai,,,,,,,,,0
+University of Oxford♯,,,,,,,,,0
+Y ork University,,,,,,,,,0
+Riiid! AI Research,,,,,,,,,0
+College de France,,,,,,,,,0
+mofl Inc.,,,,,,,,,0
+inner mongolia university,Inner Mongolia University,Hohhot,CN,40.81056,111.65222,openalex,,https://openalex.org/I2722730,0.0
+eim,Evidence In Motion,San Antonio,,29.42412,-98.49363,openalex,,https://openalex.org/I4400008949,0.0
+Research institutes of Sweden,RISE Research Institutes of Sweden,Gothenburg,SE,57.70716,11.96679,openalex,,https://openalex.org/I2800664555,0.0
+ifA,Institute for Energy Technology,Lillestrøm,NO,59.95597,11.04918,openalex,,https://openalex.org/I3130438513,0.0
+chubu university,Chubu University,Kasugai,JP,35.24762,136.97229,openalex,,https://openalex.org/I184937672,0.0
+lastminute.com group,,,,,,,,,0
+kyunghee univ,,,,,,,,,0
+Point72,,,,,,,,,0
+baichuan,,,,,,,,,0
+2077AI,,,,,,,,,0
+genbio,,,,,,,,,0
+Ingenix.ai,,,,,,,,,0
+Ingenix.AI,,,,,,,,,0
+shanghai AI lab,Shanghai Artificial Intelligence Laboratory,Shanghai,,31.22222,121.45806,openalex,,https://openalex.org/I4391012619,0.0
+bestpay,,,,,,,,,0
+beijing institute of technology,Beijing Institute of Technology,Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I125839683,0.0
+independent,Ann Arbor Center for Independent Living,Ann Arbor,US,42.27756,-83.74088,openalex,,https://openalex.org/I4210140958,0.0
+tarim university,Tarim University,Aral,CN,40.54184,81.26566,openalex,,https://openalex.org/I3129293551,0.0
+H Company,,,,,,,,,0
+"LLC ""LogicYield""",,,,,,,,,0
+Emergence.AI,,,,,,,,,0
+salesforce.com,,,,,,,,,0
+vivestudios,,,,,,,,,0
+Netmind.ai,,,,,,,,,0
+constructor university,Constructor University,Bremen,DE,53.07582,8.80717,openalex,,https://openalex.org/I193619901,0.0
+smaremore,,,,,,,,,0
+yangzhou university,Yangzhou University,Yangzhou,CN,32.39722,119.43583,openalex,,https://openalex.org/I78978612,0.0
+illinois institute of technology,Illinois Institute of Technology,Chicago,US,41.85003,-87.65005,openalex,,https://openalex.org/I180949307,0.0
+southwest jiaotong university,Southwest Jiaotong University,Chengdu,CN,30.66667,104.06667,openalex,,https://openalex.org/I4800084,0.0
+xiaomi,Xiaomi (China),Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I862669128,0.0
+dji,Deutsches Jugendinstitut,Munich,DE,48.13743,11.57549,openalex,,https://openalex.org/I4210135822,0.0
+kunlun,,,,,,,,,0
+Sentinal4D,,,,,,,,,0
+deepglint,Deepglint (China),Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4401726936,0.0
+xuezhilixing,,,,,,,,,0
+xiaomi corporation,,,,,,,,,0
+digiLab,,,,,,,,,0
+lastminute.com,,,,,,,,,0
+lastminute,,,,,,,,,0
+zte,ZTE (China),Shenzhen,CN,22.54554,114.0683,openalex,,https://openalex.org/I4210098582,0.0
+Houmo.AI,,,,,,,,,0
+zhipuAI,,,,,,,,,0
+bigai,Beijing Institute for General Artificial Intelligence,Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4392738278,0.0
+mobvoi,,,,,,,,,0
+Eigent.Ai,,,,,,,,,0
+AI21,,,,,,,,,0
+AI21labs,,,,,,,,,0
+AI21 labs,,,,,,,,,0
+Ai21,,,,,,,,,0
+geely ai lab,,,,,,,,,0
+software research institute,"Advanced Science, Technology & Management Research Institute of Kyoto",Kyoto,JP,35.02107,135.75385,openalex,,https://openalex.org/I4210094023,0.0
+deepsense.ai,,,,,,,,,0
+Nace.AI,,,,,,,,,0
+starguest.ai,,,,,,,,,0
+university of texas at dallas,The University of Texas at Dallas,Richardson,US,32.94818,-96.72972,openalex,,https://openalex.org/I162577319,0.0
+H.ai,,,,,,,,,0
+tsinglink,,,,,,,,,0
+Voxel51,,,,,,,,,0
+ugaiforge.ai,,,,,,,,,0
+Predera.AI,,,,,,,,,0
+private,Applied Science Private University,Amman,JO,31.95522,35.94503,openalex,,https://openalex.org/I146367977,0.0
+cyber security,European Network for Cyber Security,The Hague,NL,52.07667,4.29861,openalex,,https://openalex.org/I4210165920,0.0
+KC-ML2,,,,,,,,,0
+infini-ai,,,,,,,,,0
+cnnic,China Internet Network Information Center,Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I4210100200,0.0
+Skan.ai,,,,,,,,,0
+deepwisdom,,,,,,,,,0
+datatist,,,,,,,,,0
+datastory,,,,,,,,,0
+vivo mobile communication,,,,,,,,,0
+nncollective,,,,,,,,,0
+imec,IMEC,Leuven,BE,50.87959,4.70093,openalex,,https://openalex.org/I4210114974,0.0
+sea group,,,,,,,,,0
+tsinghua university,Tsinghua University,Beijing,CN,39.9075,116.39723,openalex,,https://openalex.org/I99065089,0.0
+shanghai matwings technology,,,,,,,,,0
+Collov.ai,,,,,,,,,0
+mbue.ai,,,,,,,,,0
+mthreads,,,,,,,,,0
+Pixocial.com,,,,,,,,,0
+oxa,Thion Medical (France),Tours,FR,47.39484,0.70398,openalex,,https://openalex.org/I4210127454,0.0
+iart.ai,,,,,,,,,0
+gan.ai,,,,,,,,,0
+Gan.ai,,,,,,,,,0
+hkustgz,,,,,,,,,0
+university of cambridge,University of Cambridge,Cambridge,GB,52.2,0.11667,openalex,,https://openalex.org/I241749,0.0
+Leonardo.Ai,,,,,,,,,0
+Abacus.ai,,,,,,,,,0
+seyso,,,,,,,,,0
+tencent,Tencent (China),Shenzhen,CN,22.54554,114.0683,openalex,,https://openalex.org/I2250653659,0.0
+theori,,,,,,,,,0
+Maum.ai,,,,,,,,,0
+icodeformybhasa,,,,,,,,,0
+"rinna Co., Ltd.",AGRF Ltd,Brisbane,AU,-27.46794,153.02809,openalex,,https://openalex.org/I4210154382,0.0
+uef,University of Eastern Finland,Kuopio,FI,62.89238,27.67703,openalex,,https://openalex.org/I175532246,0.0
+futureverse,,,,,,,,,0
+iim,Instituto de Investigacións Mariñas,Vigo,ES,42.23282,-8.72264,openalex,,https://openalex.org/I4210101760,0.0
+sapeon,,,,,,,,,0
+Udeer.AI,,,,,,,,,0
+pixiv Inc.,,,,,,,,,0
+Games24x7,,,,,,,,,0
+lg ai research,LG AI Research (South Korea),Seoul,,37.566,126.9784,openalex,,https://openalex.org/I4412460287,0.0
+henan normal university,Henan Normal University,Xinxiang,CN,30.49999,108.27278,openalex,,https://openalex.org/I75955062,0.0
+drug administration,United States Food and Drug Administration,Silver Spring,US,38.99067,-77.02609,openalex,,https://openalex.org/I1320320070,0.0
+zhipu,Zhipu AI (China),Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4401726915,0.0
+Okra.ai,,,,,,,,,0
+XSense.ai Inc.,,,,,,,,,0
+nwpu,Northwestern Polytechnical University,Xi'an,CN,34.25833,108.92861,openalex,,https://openalex.org/I17145004,0.0
+Zdrive.ai,,,,,,,,,0
+zhimeifenghua,,,,,,,,,0
+li auto,,,,,,,,,0
+senseauto,,,,,,,,,0
+Meteum.AI,,,,,,,,,0
+tsinghua-berkeley shenzhen institute,Tsinghua–Berkeley Shenzhen Institute,Shenzhen,CN,22.54554,114.0683,openalex,,https://openalex.org/I4210114105,0.0
+us research center,Western Ecological Research Center,Sacramento,,38.58157,-121.4944,openalex,,https://openalex.org/I4387152364,0.0
+Parametrix.AI,,,,,,,,,0
+revirtx AI lab,,,,,,,,,0
+Observe.AI,,,,,,,,,0
+nih,National Institutes of Health,Bethesda,US,38.98067,-77.10026,openalex,,https://openalex.org/I1299303238,0.0
+Signal1,,,,,,,,,0
+University of tianjin of china,,,,,,,,,0
+Molecule.one,,,,,,,,,0
+Universidade federal fluminense,Universidade Federal Fluminense,Niterói,BR,-22.88333,-43.10361,openalex,,https://openalex.org/I161127581,0.0
+zhejiang normal university,Zhejiang Normal University,Jinhua,CN,29.10678,119.64421,openalex,,https://openalex.org/I135237710,0.0
+university of strasbourg,Université de Strasbourg,Strasbourg,FR,48.58392,7.74553,openalex,,https://openalex.org/I68947357,0.0
+"ZHEJIANGDAHUATECHNOLOGYCO.,LTD",AGRF Ltd,Brisbane,AU,-27.46794,153.02809,openalex,,https://openalex.org/I4210154382,0.0
+D4C,,,,,,,,,0
+private researcher),,,,,,,,,0
+iLambda Inc.,,,,,,,,,0
+JD. Inc,,,,,,,,,0
+Institute of computational biology,,,,,,,,,0
+Vernacular.ai,,,,,,,,,0
+CMU†,Carnegie Mellon University,Pittsburgh,US,40.44062,-79.99589,openalex,,https://openalex.org/I74973139,0.0
+Facebook†,Meta (Israel),Tel Aviv,IL,32.08088,34.78057,openalex,,https://openalex.org/I2252078561,0.0
+Cisco+2,Université Rennes 2,Rennes,FR,48.11198,-1.67429,openalex,,https://openalex.org/I3124938446,0.0
+UIUC✠,University of Illinois Urbana-Champaign,Urbana,US,40.11059,-88.20727,openalex,,https://openalex.org/I157725225,0.0
+University of Chicago✠,University of Chicago,Chicago,US,41.85003,-87.65005,openalex,,https://openalex.org/I40347166,0.0
+HBKU,Hamad bin Khalifa University,Doha,QA,25.28545,51.53096,openalex,,https://openalex.org/I4210144839,0.0
+Stardust.AI,,,,,,,,,0
+harmony.ai,,,,,,,,,0
+University of Arizona,University of Arizona,Tucson,US,32.22174,-110.92648,openalex,,https://openalex.org/I138006243,0.0
+"wei Co., Ltd",AGRF Ltd,Brisbane,AU,-27.46794,153.02809,openalex,,https://openalex.org/I4210154382,0.0
+Microsoft♡,,,,,,,,,0
+Google♣,,,,,,,,,0
+Smartor.me,,,,,,,,,0
+EleutherAI2,,,,,,,,,0
+HiDream.ai,,,,,,,,,0
+University College London2,,,,,,,,,0
+King’s College London3,,,,,,,,,0
+Microsoft2,,,,,,,,,0
+summary.ai,,,,,,,,,0
+Harmony.AI,,,,,,,,,0
+301.ai,,,,,,,,,0
+IIT Delhi‡,Indian Institute of Technology Delhi,New Delhi,IN,28.62137,77.2148,openalex,,https://openalex.org/I68891433,0.0
+IN.AI Research♡,,,,,,,,,0
+trivago N.V.,,,,,,,,,0
+ByteDance2,,,,,,,,,0
+ByteDance†,ByteDance (China),Beijing,,39.9075,116.39723,openalex,,https://openalex.org/I4406742408,0.0
+MBZUAI2,,,,,,,,,0
+University of Alberta♢,,,,,,,,,0
+rinna Co. Ltd.,,,,,,,,,0
+Amazon⋆,Amazon (United States),Seattle,US,47.60621,-122.33207,openalex,,https://openalex.org/I1311688040,0.0
+AI4Bharat2,,,,,,,,,0
+Microsoft4,,,,,,,,,0
+University of Hawai’i at M ¯anoa,,,,,,,,,0
+ByteDance♣,,,,,,,,,0
+Bloomberg♠,,,,,,,,,0
+Bloomberg♡,,,,,,,,,0
+Forethought.AI,,,,,,,,,0
+AI-Research.id,,,,,,,,,0
+Bahasa.ai,,,,,,,,,0
+BYJU’s LAB,,,,,,,,,0
+Corresponding author,,,,,,,,,0
+Amazon♣♠,,,,,,,,,0
+Openstream.ai,,,,,,,,,0
+UCSB∗,"University of California, Santa Barbara",Santa Barbara,US,34.42083,-119.69819,openalex,,https://openalex.org/I154570441,0.0
+Xiaoniao.AI,,,,,,,,,0
+University of Maryland∗,"University of Maryland, College Park",College Park,US,38.98067,-76.93692,openalex,,https://openalex.org/I66946132,0.0
+Tournafest∗,,,,,,,,,0
+University of Illinois∗,University of Illinois Urbana-Champaign,Urbana,US,40.11059,-88.20727,openalex,,https://openalex.org/I157725225,0.0
+University of Chicago4,,,,,,,,,0
+NVIDIA§,Nvidia (United States),Santa Clara,US,37.35411,-121.95524,openalex,,https://openalex.org/I4210127875,0.0
+Kata.ai,,,,,,,,,0

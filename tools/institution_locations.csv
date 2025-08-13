@@ -1,0 +1,62 @@
+institution,matched_name,city,country_code,latitude,longitude,source,ror_id,openalex_id,score,updated_at
+New Jersey,"Rutgers, The State University of New Jersey",New Brunswick,US,40.48622,-74.45182,openalex,,https://openalex.org/I102322142,0.0,2025-08-13T18:14:02Z
+Carnegie Mellon University,Carnegie Mellon University,Pittsburgh,US,40.44062,-79.99589,openalex,,https://openalex.org/I74973139,0.0,2025-08-13T18:14:02Z
+New York University,New York University,New York,US,40.71427,-74.00597,openalex,,https://openalex.org/I57206974,0.0,2025-08-13T18:14:02Z
+Columbia University,Columbia University,New York,US,40.71427,-74.00597,openalex,,https://openalex.org/I78577930,0.0,2025-08-13T18:14:02Z
+Politecnico di Milano,Politecnico di Milano,Milan,IT,45.46427,9.18951,openalex,,https://openalex.org/I93860229,0.0,2025-08-13T18:14:02Z
+Stanford University,Stanford University,Stanford,US,37.42411,-122.16608,openalex,,https://openalex.org/I97018004,0.0,2025-08-13T18:14:02Z
+University of California San Diego,"University of California, San Diego",San Diego,US,32.71571,-117.16472,openalex,,https://openalex.org/I36258959,0.0,2025-08-13T18:14:02Z
+Princeton University,Princeton University,Princeton,US,40.34872,-74.65905,openalex,,https://openalex.org/I20089843,0.0,2025-08-13T18:14:02Z
+Technion,Technion – Israel Institute of Technology,Haifa,IL,32.81841,34.9885,openalex,,https://openalex.org/I174306211,0.0,2025-08-13T18:14:02Z
+University of California Irvine,"University of California, Irvine",Irvine,US,33.66946,-117.82311,openalex,,https://openalex.org/I204250578,0.0,2025-08-13T18:14:02Z
+Rutgers University,"Rutgers, The State University of New Jersey",New Brunswick,US,40.48622,-74.45182,openalex,,https://openalex.org/I102322142,0.0,2025-08-13T18:14:02Z
+"Departments of Mathematics, Computer Science, and Data and Decision Sciences, Technion + Google Research",,,,,,,,,0.0,2025-08-13T18:14:02Z
+ETH Zurich,ETH Zurich,Zurich,CH,47.36667,8.55,openalex,,https://openalex.org/I35440088,0.0,2025-08-13T18:14:02Z
+Georgia Institute of Technology,Georgia Institute of Technology,Atlanta,US,33.749,-84.38798,openalex,,https://openalex.org/I130701444,0.0,2025-08-13T18:14:02Z
+Google Research,,,,,,,,,0.0,2025-08-13T18:14:02Z
+Harvard,Harvard University,Cambridge,US,42.3751,-71.10561,openalex,,https://openalex.org/I136199984,0.0,2025-08-13T18:14:02Z
+IBM Research,IBM Research - Thomas J. Watson Research Center,Yorktown Heights,US,41.27093,-73.77763,openalex,,https://openalex.org/I4210114115,0.0,2025-08-13T18:14:02Z
+Institute for Advanced Study,Institute for Advanced Study,Princeton,US,40.34872,-74.65905,openalex,,https://openalex.org/I40036882,0.0,2025-08-13T18:14:02Z
+Institute of Science and Technology Austria,Institute of Science and Technology Austria,Klosterneuburg,AT,48.30521,16.32522,openalex,,https://openalex.org/I157556583,0.0,2025-08-13T18:14:02Z
+Kyoto University,Kyoto University,Kyoto,JP,35.02107,135.75385,openalex,,https://openalex.org/I22299242,0.0,2025-08-13T18:14:02Z
+INRAE,"Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement",Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I4210088668,0.0,2025-08-13T18:14:02Z
+MIT,Massachusetts Institute of Technology,Cambridge,US,42.3751,-71.10561,openalex,,https://openalex.org/I63966007,0.0,2025-08-13T18:14:02Z
+Massachusetts Institute of Technology,Massachusetts Institute of Technology,Cambridge,US,42.3751,-71.10561,openalex,,https://openalex.org/I63966007,0.0,2025-08-13T18:14:02Z
+Microsoft Research,Microsoft Research (United Kingdom),Cambridge,GB,52.2,0.11667,openalex,,https://openalex.org/I4210164937,0.0,2025-08-13T18:14:02Z
+"Microsoft Research, New York",Microsoft Research New York City (United States),New York,,40.71427,-74.00597,openalex,,https://openalex.org/I4401726785,0.0,2025-08-13T18:14:02Z
+Nanyang Technological University,Nanyang Technological University,Singapore,SG,1.28967,103.85007,openalex,,https://openalex.org/I172675005,0.0,2025-08-13T18:14:02Z
+Tel Aviv University,Tel Aviv University,Tel Aviv,IL,32.08088,34.78057,openalex,,https://openalex.org/I16391192,0.0,2025-08-13T18:14:02Z
+"The Chinese University of Hong Kong, Shenzhen",,,,,,,,,0.0,2025-08-13T18:14:02Z
+The University of Texas at Austin,The University of Texas at Austin,Austin,US,30.26715,-97.74306,openalex,,https://openalex.org/I86519309,0.0,2025-08-13T18:14:02Z
+The University of Tokyo,The University of Tokyo,Tokyo,JP,35.6895,139.69171,openalex,,https://openalex.org/I74801974,0.0,2025-08-13T18:14:02Z
+University of Athens,National and Kapodistrian University of Athens,Athens,GR,37.98376,23.72784,openalex,,https://openalex.org/I200777214,0.0,2025-08-13T18:14:02Z
+University of Michigan,University of Michigan,Ann Arbor,US,42.27756,-83.74088,openalex,,https://openalex.org/I27837315,0.0,2025-08-13T18:14:02Z
+"University of Michigan, Ann Arbor",University of Michigan,Ann Arbor,US,42.27756,-83.74088,openalex,,https://openalex.org/I27837315,0.0,2025-08-13T18:14:02Z
+University of Pennsylvania,University of Pennsylvania,Philadelphia,US,39.95238,-75.16362,openalex,,https://openalex.org/I79576946,0.0,2025-08-13T18:14:02Z
+University of Pittsburgh,University of Pittsburgh,Pittsburgh,US,40.44062,-79.99589,openalex,,https://openalex.org/I170201317,0.0,2025-08-13T18:14:02Z
+University of Southern California,University of Southern California,Los Angeles,US,34.05223,-118.24368,openalex,,https://openalex.org/I1174212,0.0,2025-08-13T18:14:02Z
+University of Texas at Austin,The University of Texas at Austin,Austin,US,30.26715,-97.74306,openalex,,https://openalex.org/I86519309,0.0,2025-08-13T18:14:02Z
+University of Wisconsin-Madison,University of Wisconsin–Madison,Madison,US,43.07305,-89.40123,openalex,,https://openalex.org/I135310074,0.0,2025-08-13T18:14:02Z
+CNRS,Centre National de la Recherche Scientifique,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I1294671590,0.0,2025-08-13T18:14:02Z
+"´Ecole Polytechnique F´ed´erale de Lausanne (EPFL), IdePHICS Lab",,,,,,,,,0.0,2025-08-13T18:14:02Z
+CERMICS,CERMICS,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I4210128309,0.0,2025-08-13T18:14:02Z
+New Jersey,"Rutgers, The State University of New Jersey",New Brunswick,US,40.48622,-74.45182,openalex,,https://openalex.org/I102322142,0.0,2025-08-13T18:14:02Z
+New York University,New York University,New York,US,40.71427,-74.00597,openalex,,https://openalex.org/I57206974,0.0,2025-08-13T18:14:02Z
+New York University,New York University,New York,US,40.71427,-74.00597,openalex,,https://openalex.org/I57206974,0.0,2025-08-13T18:14:02Z
+Politecnico di Milano,Politecnico di Milano,Milan,IT,45.46427,9.18951,openalex,,https://openalex.org/I93860229,0.0,2025-08-13T18:14:02Z
+Stanford University,Stanford University,Stanford,US,37.42411,-122.16608,openalex,,https://openalex.org/I97018004,0.0,2025-08-13T18:14:02Z
+University of California San Diego,"University of California, San Diego",San Diego,US,32.71571,-117.16472,openalex,,https://openalex.org/I36258959,0.0,2025-08-13T18:14:02Z
+Princeton University,Princeton University,Princeton,US,40.34872,-74.65905,openalex,,https://openalex.org/I20089843,0.0,2025-08-13T18:14:02Z
+Technion,Technion – Israel Institute of Technology,Haifa,IL,32.81841,34.9885,openalex,,https://openalex.org/I174306211,0.0,2025-08-13T18:14:02Z
+University of California Irvine,"University of California, Irvine",Irvine,US,33.66946,-117.82311,openalex,,https://openalex.org/I204250578,0.0,2025-08-13T18:14:02Z
+Rutgers University,"Rutgers, The State University of New Jersey",New Brunswick,US,40.48622,-74.45182,openalex,,https://openalex.org/I102322142,0.0,2025-08-13T18:14:02Z
+Stanford University,Stanford University,Stanford,US,37.42411,-122.16608,openalex,,https://openalex.org/I97018004,0.0,2025-08-13T18:14:02Z
+University of California San Diego,"University of California, San Diego",San Diego,US,32.71571,-117.16472,openalex,,https://openalex.org/I36258959,0.0,2025-08-13T18:14:02Z
+INRAE,"Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement",Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I4210088668,0.0,2025-08-13T18:14:02Z
+Microsoft Research,Microsoft Research (United Kingdom),Cambridge,GB,52.2,0.11667,openalex,,https://openalex.org/I4210164937,0.0,2025-08-13T18:14:02Z
+RIKEN AIP,,,,,,,,,0.0,2025-08-13T18:14:02Z
+RIKEN AIP + NEC Corporation,,,,,,,,,0.0,2025-08-13T18:14:02Z
+Institute for Advanced Study,Institute for Advanced Study,Princeton,US,40.34872,-74.65905,openalex,,https://openalex.org/I40036882,0.0,2025-08-13T18:14:02Z
+University of Athens,National and Kapodistrian University of Athens,Athens,GR,37.98376,23.72784,openalex,,https://openalex.org/I200777214,0.0,2025-08-13T18:14:02Z
+CNRS,Centre National de la Recherche Scientifique,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I1294671590,0.0,2025-08-13T18:14:02Z
+CERMICS,CERMICS,Paris,FR,48.85341,2.3488,openalex,,https://openalex.org/I4210128309,0.0,2025-08-13T18:14:02Z
