@@ -487,6 +487,12 @@
                 <div class="map-controls">
                     <button class="export-button" onclick="downloadInlineMapPNG()">Download map (PNG)</button>
                     <label class="bubble-toggle"><input type="checkbox" id="toggle-bubbles" onchange="renderInlineMap()"/> Show bubbles</label>
+                    <label class="bubble-toggle">Metric:
+                        <select id="bubble-metric" onchange="renderInlineMap()" style="padding:2px 6px;">
+                            <option value="papers">Papers</option>
+                            <option value="researchers">Unique authors</option>
+                        </select>
+                    </label>
                 </div>
             </div>
             <div class="results-header">
@@ -950,10 +956,13 @@
             const showBubbles = document.getElementById('toggle-bubbles')?.checked;
             if (showBubbles) {
                 if (!bubbleResp.error) {
-                    const points = bubbleResp.points || [];
+                    const metric = (document.getElementById('bubble-metric')?.value) || 'papers';
+                    let points = bubbleResp.points || [];
+                    // adjust radius scale based on selected metric
+                    const val = d => Math.max(1, metric === 'researchers' ? (d.researchers || 0) : (d.papers || 0));
                     // country centroid by name
                     const countryByName = new Map(countries.map(f => [f.properties.name, f]));
-                    const rScale = d3.scaleSqrt().domain([1, d3.max(points, d => d.papers) || 1]).range([2, 18]);
+                    const rScale = d3.scaleSqrt().domain([1, d3.max(points, val) || 1]).range([2, 18]);
                     const bubbles = svg.append('g').attr('class','bubbles');
                     const tip = d3.select(wrapper).append('div').attr('class','tooltip').style('position','absolute').style('pointer-events','none').style('background','#fff').style('border','1px solid #ccc').style('padding','6px 8px').style('border-radius','4px').style('font-size','12px').style('display','none');
                     bubbles.selectAll('circle')
@@ -962,7 +971,7 @@
                         .attr('fill','rgba(231,76,60,0.65)')
                         .attr('stroke','#c0392b')
                         .attr('stroke-width',0.8)
-                        .attr('r', d => rScale(Math.max(1, d.papers)))
+                        .attr('r', d => rScale(val(d)))
                         .attr('transform', d => {
                             const feature = countryByName.get(d.location) || countryByName.get(alias.get(d.location) || '');
                             if (!feature) return '';
