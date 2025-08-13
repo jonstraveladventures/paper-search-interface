@@ -381,6 +381,110 @@ def map_view():
     response.headers['Expires'] = '0'
     return response
 
+@app.route('/bubble_data')
+def bubble_data():
+    """Return aggregated bubble metrics by country for current filters.
+
+    Each paper contributes to every listed country. For each country we compute:
+      - papers: number of papers associated with the country
+      - researchers: approximate unique author count (split by commas)
+      - top_venues: top 3 venues with counts
+    """
+    df = load_data()
+    if df.empty:
+        return jsonify({'error': 'Could not load data'})
+
+    title_search = request.args.get('title', '')
+    author_search = request.args.get('author', '')
+    institution_search = request.args.get('institution', '')
+    selected_countries = request.args.getlist('countries[]')
+    selected_venues = request.args.getlist('venues[]')
+    year_min = request.args.get('year_min', type=int)
+    year_max = request.args.get('year_max', type=int)
+    include_unknown = request.args.get('include_unknown', type=bool)
+    include_rejected = request.args.get('include_rejected', type=bool)
+
+    filtered_df = filter_papers(
+        df,
+        title_search,
+        author_search,
+        selected_countries,
+        selected_venues,
+        year_min,
+        year_max,
+        include_rejected,
+        institution_search,
+    )
+
+    # Optionally include unknowns in bubbles as a synthetic "Unknown" location
+    if include_unknown:
+        unknown_papers = filtered_df[
+            filtered_df['Author_Countries'].isna() |
+            (filtered_df['Author_Countries'].astype(str).str.strip() == '')
+        ]
+    else:
+        unknown_papers = filtered_df.iloc[0:0]
+
+    from collections import defaultdict, Counter
+    papers_by_country = Counter()
+    authors_by_country = defaultdict(set)
+    venues_by_country = defaultdict(Counter)
+
+    def process_row(countries_str, authors_str, venue):
+        if not isinstance(countries_str, str) or not countries_str.strip():
+            return
+        countries = [c.strip() for c in countries_str.split(',') if c.strip()]
+        # normalize minor variants we handle elsewhere
+        normalized = []
+        for c in countries:
+            if c == 'Kingdom of Saudi Arabia':
+                normalized.append('Saudi Arabia')
+            elif c == 'State of Palestine':
+                normalized.append('Palestine')
+            elif c == 'Türkiye':
+                normalized.append('Turkey')
+            else:
+                normalized.append(c)
+        author_list = []
+        if isinstance(authors_str, str) and authors_str.strip():
+            author_list = [a.strip() for a in authors_str.split(',') if a.strip()]
+        for country in normalized:
+            # If a subset of countries is selected, only count those
+            if selected_countries and (country not in selected_countries):
+                continue
+            papers_by_country[country] += 1
+            for a in author_list:
+                authors_by_country[country].add(a)
+            if isinstance(venue, str) and venue:
+                venues_by_country[country][venue] += 1
+
+    for _, row in filtered_df.iterrows():
+        process_row(row.get('Author_Countries'), row.get('Authors'), row.get('Conference'))
+
+    if not unknown_papers.empty:
+        # group all unknowns into a single key
+        unk_key = 'Unknown'
+        for _, row in unknown_papers.iterrows():
+            papers_by_country[unk_key] += 1
+            if isinstance(row.get('Authors'), str) and row.get('Authors').strip():
+                for a in [x.strip() for x in row.get('Authors').split(',') if x.strip()]:
+                    authors_by_country[unk_key].add(a)
+            if isinstance(row.get('Conference'), str) and row.get('Conference'):
+                venues_by_country[unk_key][row.get('Conference')] += 1
+
+    # Build response list
+    payload = []
+    for country, paper_count in papers_by_country.items():
+        top_venues = venues_by_country[country].most_common(3)
+        payload.append({
+            'location': country,
+            'papers': int(paper_count),
+            'researchers': int(len(authors_by_country[country])),
+            'top_venues': [{'venue': v, 'count': int(cnt)} for v, cnt in top_venues],
+        })
+
+    return jsonify({'points': payload})
+
 @app.route('/export_csv')
 def export_csv():
     """API endpoint for exporting search results to CSV"""

@@ -246,6 +246,9 @@
             display: none;
             margin: 8px 0 16px 0;
         }
+        .bubble-toggle {
+            display: inline-flex; align-items: center; gap: 6px; margin-left: 10px; font-size: 12px;
+        }
         .results-header {
             display: flex;
             justify-content: space-between;
@@ -483,6 +486,7 @@
                 <div id="map-wrapper"></div>
                 <div class="map-controls">
                     <button class="export-button" onclick="downloadInlineMapPNG()">Download map (PNG)</button>
+                    <label class="bubble-toggle"><input type="checkbox" id="toggle-bubbles" onchange="renderInlineMap()"/> Show bubbles</label>
                 </div>
             </div>
             <div class="results-header">
@@ -886,6 +890,33 @@
             const color = d3.scaleSequentialSqrt([1, nonZeroMax], d3.interpolateYlGnBu);
 
             svg.append('path').attr('fill', '#eef6fb').attr('d', path({type: 'Sphere'}));
+
+            // Fetch bubble data to compute unique author counts per country for tooltips
+            const params2 = new URLSearchParams();
+            const titleSearch2 = document.getElementById('title-search').value;
+            const authorSearch2 = document.getElementById('author-search').value;
+            const yearMin2 = document.getElementById('year-min').value;
+            const yearMax2 = document.getElementById('year-max').value;
+            if (titleSearch2) params2.append('title', titleSearch2);
+            if (authorSearch2) params2.append('author', authorSearch2);
+            if (yearMin2) params2.append('year_min', yearMin2);
+            if (yearMax2) params2.append('year_max', yearMax2);
+            selectedCountries.forEach(country => params2.append('countries[]', country));
+            selectedVenues.forEach(venue => params2.append('venues[]', venue));
+            if (includeUnknown) params2.append('include_unknown', 'true');
+            if (includeRejected) params2.append('include_rejected', 'true');
+
+            let bubbleResp = {};
+            try {
+                bubbleResp = await fetch(`/bubble_data?${params2.toString()}`, { cache: 'no-store' }).then(r => r.json());
+            } catch (e) { bubbleResp = {}; }
+            const authorsByName = new Map();
+            if (bubbleResp && Array.isArray(bubbleResp.points)) {
+                for (const p of bubbleResp.points) {
+                    const tgt = alias.get(p.location) || p.location;
+                    authorsByName.set(tgt, (p.researchers || 0));
+                }
+            }
             svg.append('g')
               .selectAll('path')
               .data(countries)
@@ -898,7 +929,12 @@
               .attr('stroke', '#555')
               .attr('stroke-width', 0.4)
               .append('title')
-              .text(d => `${d.properties.name}: ${(nameToValue.get(d.properties.name) || 0).toLocaleString()} papers`);
+              .text(d => {
+                  const name = d.properties.name;
+                  const papers = (nameToValue.get(name) || 0).toLocaleString();
+                  const researchers = (authorsByName.get(name) || 0).toLocaleString();
+                  return `${name}: ${papers} papers; ${researchers} unique authors`;
+              });
 
             // Legend
             const legend = svg.append('g').attr('class', 'legend').attr('transform', `translate(20,${height-30})`);
@@ -909,6 +945,40 @@
             legend.append('text').attr('x', 0).attr('y', 24).text('0');
             legend.append('text').attr('x', 200).attr('y', 24).attr('text-anchor', 'end').text(d3.format(',')(nonZeroMax));
             legend.append('text').attr('x', 0).attr('y', -6).text('Papers');
+
+            // Optional bubbles overlay
+            const showBubbles = document.getElementById('toggle-bubbles')?.checked;
+            if (showBubbles) {
+                if (!bubbleResp.error) {
+                    const points = bubbleResp.points || [];
+                    // country centroid by name
+                    const countryByName = new Map(countries.map(f => [f.properties.name, f]));
+                    const rScale = d3.scaleSqrt().domain([1, d3.max(points, d => d.papers) || 1]).range([2, 18]);
+                    const bubbles = svg.append('g').attr('class','bubbles');
+                    const tip = d3.select(wrapper).append('div').attr('class','tooltip').style('position','absolute').style('pointer-events','none').style('background','#fff').style('border','1px solid #ccc').style('padding','6px 8px').style('border-radius','4px').style('font-size','12px').style('display','none');
+                    bubbles.selectAll('circle')
+                        .data(points)
+                        .join('circle')
+                        .attr('fill','rgba(231,76,60,0.65)')
+                        .attr('stroke','#c0392b')
+                        .attr('stroke-width',0.8)
+                        .attr('r', d => rScale(Math.max(1, d.papers)))
+                        .attr('transform', d => {
+                            const feature = countryByName.get(d.location) || countryByName.get(alias.get(d.location) || '');
+                            if (!feature) return '';
+                            const [cx, cy] = d3.geoPath(projection).centroid(feature);
+                            return `translate(${cx},${cy})`;
+                        })
+                        .on('mousemove', (event, d) => {
+                            const venues = (d.top_venues || []).map(v => `${v.venue} (${v.count})`).join(', ');
+                            tip.style('display','block')
+                               .style('left', (event.offsetX + 12) + 'px')
+                               .style('top', (event.offsetY + 12) + 'px')
+                               .html(`<strong>${d.location}</strong><br/>Papers: ${d.papers.toLocaleString()}<br/>Researchers: ${d.researchers.toLocaleString()}<br/>Top venues: ${venues || '—'}`);
+                        })
+                        .on('mouseout', () => tip.style('display','none'));
+                }
+            }
         }
 
         function downloadInlineMapPNG() {
