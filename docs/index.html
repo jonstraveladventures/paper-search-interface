@@ -70,6 +70,10 @@
           <label for="author-search">Author Search:</label>
           <input type="text" id="author-search" placeholder="Enter author name..." />
         </div>
+        <div class="search-group">
+          <label for="institution-search">Institution Search:</label>
+          <input type="text" id="institution-search" placeholder="Enter institution name..." />
+        </div>
       </div>
 
       <div class="search-row">
@@ -282,6 +286,7 @@
     function clearFilters() {
       document.getElementById('title-search').value = '';
       document.getElementById('author-search').value = '';
+      const inst = document.getElementById('institution-search'); if (inst) inst.value = '';
       const years = allPapers.map(p => p.Year).filter(v => typeof v === 'number');
       document.getElementById('year-min').value = Math.min(...years);
       document.getElementById('year-max').value = Math.max(...years);
@@ -302,6 +307,7 @@
     function filterPapers() {
       const titleSearch = (document.getElementById('title-search').value || '').toLowerCase();
       const authorSearch = (document.getElementById('author-search').value || '').toLowerCase();
+      const institutionSearch = (document.getElementById('institution-search') ? document.getElementById('institution-search').value.toLowerCase() : '');
       const yearMin = parseInt(document.getElementById('year-min').value, 10);
       const yearMax = parseInt(document.getElementById('year-max').value, 10);
 
@@ -309,6 +315,7 @@
         // Title/author
         if (titleSearch && !(row.Title || '').toLowerCase().includes(titleSearch)) return false;
         if (authorSearch && !(row.Authors || '').toLowerCase().includes(authorSearch)) return false;
+        if (institutionSearch && !(row.Author_Institutions || '').toLowerCase().includes(institutionSearch)) return false;
 
         // Year range
         if (Number.isFinite(yearMin) && typeof row.Year === 'number' && row.Year < yearMin) return false;
