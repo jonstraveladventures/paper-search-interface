@@ -57,6 +57,24 @@
             gap: 10px;
             align-items: center;
         }
+        /* Dual-handle year slider */
+        .dual-slider { position: relative; height: 48px; width: 50%; }
+        .dual-slider input[type="range"] {
+            position: absolute; left: 0; right: 0; width: 100%;
+            margin: 0; padding: 0; background: transparent; pointer-events: none;
+            -webkit-appearance: none; height: 48px;
+        }
+        .dual-slider input[type="range"]::-webkit-slider-runnable-track {
+            height: 10px; background: #d0d7de; border-radius: 6px; cursor: pointer;
+        }
+        .dual-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; pointer-events: auto; width: 22px; height: 22px;
+            border-radius: 50%; background: #3498db; border: 2px solid #fff; box-shadow: 0 0 0 2px #3498db;
+            margin-top: -6px; /* center on track */
+        }
+        /* Firefox */
+        .dual-slider input[type="range"]::-moz-range-track { height: 10px; background: #d0d7de; border-radius: 6px; }
+        .dual-slider input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #3498db; border: 2px solid #fff; box-shadow: 0 0 0 2px #3498db; pointer-events: auto; }
         .year-range input {
             width: 80px;
         }
@@ -350,10 +368,17 @@
             <div class="search-row">
                 <div class="search-group">
                     <label>Year Range:</label>
-                    <div class="year-range">
-                        <input type="number" id="year-min" placeholder="Min" min="{{ year_min }}" max="{{ year_max }}" value="{{ year_min }}">
-                        <span>to</span>
-                        <input type="number" id="year-max" placeholder="Max" min="{{ year_min }}" max="{{ year_max }}" value="{{ year_max }}">
+                    <div class="year-range" style="display:flex;flex-direction:column;gap:10px;">
+                        <div class="dual-slider">
+                            <input type="range" id="year-range-min" min="{{ year_min }}" max="{{ year_max }}" value="{{ year_min }}" oninput="syncYearRangeFromSlider()">
+                            <input type="range" id="year-range-max" min="{{ year_min }}" max="{{ year_max }}" value="{{ year_max }}" oninput="syncYearRangeFromSlider()">
+                        </div>
+                        <div id="year-range-display" style="font-size:14px;color:#444;">Years: {{ year_min }} – {{ year_max }}</div>
+                        <!-- Hidden number inputs used by existing logic; kept in sync with sliders -->
+                        <div style="display:none;">
+                            <input type="number" id="year-min" min="{{ year_min }}" max="{{ year_max }}" value="{{ year_min }}">
+                            <input type="number" id="year-max" min="{{ year_min }}" max="{{ year_max }}" value="{{ year_max }}">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -597,6 +622,13 @@
             if (institutionInput) institutionInput.value = '';
             document.getElementById('year-min').value = '{{ year_min }}';
             document.getElementById('year-max').value = '{{ year_max }}';
+            const yrMin = document.getElementById('year-range-min');
+            const yrMax = document.getElementById('year-range-max');
+            if (yrMin && yrMax) {
+                yrMin.value = '{{ year_min }}';
+                yrMax.value = '{{ year_max }}';
+                updateYearRangeDisplay();
+            }
             
             document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                 checkbox.checked = false;
@@ -919,6 +951,25 @@
                 searchPapers();
             }
         });
+
+        function updateYearRangeDisplay() {
+            const yrMin = document.getElementById('year-range-min');
+            const yrMax = document.getElementById('year-range-max');
+            const numMin = document.getElementById('year-min');
+            const numMax = document.getElementById('year-max');
+            if (!yrMin || !yrMax) return;
+            // Ensure min <= max by swapping if needed
+            let a = parseInt(yrMin.value, 10);
+            let b = parseInt(yrMax.value, 10);
+            if (a > b) { const t = a; a = b; b = t; }
+            if (numMin && numMax) { numMin.value = a; numMax.value = b; }
+            const disp = document.getElementById('year-range-display');
+            if (disp) disp.textContent = `Years: ${a} – ${b}`;
+        }
+
+        function syncYearRangeFromSlider() {
+            updateYearRangeDisplay();
+        }
 
         // Auto-detect when search fields are cleared and refresh results
         window.addEventListener('DOMContentLoaded', () => {

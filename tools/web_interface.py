@@ -279,10 +279,20 @@ def search():
                                selected_venues, year_min, year_max, include_rejected,
                                institution_search)
     
-    # Handle unknown countries separately
+    # Handle unknown countries separately (preserve other filters like venue/year)
     if include_unknown:
-        # Add papers with missing country data
-        unknown_papers = df[df['Author_Countries'].isna() | (df['Author_Countries'].astype(str).str.strip() == '')]
+        base_scope = filter_papers(
+            df,
+            title_search,
+            author_search,
+            [],  # no country filter for unknowns
+            selected_venues,
+            year_min,
+            year_max,
+            include_rejected,
+            request.args.get('institution', '')
+        )
+        unknown_papers = base_scope[base_scope['Author_Countries'].isna() | (base_scope['Author_Countries'].astype(str).str.strip() == '')]
         filtered_df = pd.concat([filtered_df, unknown_papers]).drop_duplicates()
     
     # Limit results to prevent performance issues

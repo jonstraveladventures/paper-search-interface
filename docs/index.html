@@ -14,8 +14,21 @@
     .search-group { flex: 1; min-width: 220px; }
     .search-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
     .search-group input, .search-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
-    .year-range { display: flex; gap: 10px; align-items: center; }
-    .year-range input { width: 80px; }
+    .year-range { display: flex; gap: 10px; align-items: center; flex-direction: column; }
+    /* Dual-handle year slider */
+    .dual-slider { position: relative; height: 48px; width: 50%; }
+    .dual-slider input[type="range"] {
+      position: absolute; left: 0; right: 0; width: 100%;
+      margin: 0; padding: 0; background: transparent; pointer-events: none;
+      -webkit-appearance: none; height: 48px;
+    }
+    .dual-slider input[type="range"]::-webkit-slider-runnable-track { height: 10px; background: #d0d7de; border-radius: 6px; cursor: pointer; }
+    .dual-slider input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; pointer-events: auto; width: 22px; height: 22px;
+      border-radius: 50%; background: #3498db; border: 2px solid #fff; box-shadow: 0 0 0 2px #3498db; margin-top: -6px;
+    }
+    .dual-slider input[type="range"]::-moz-range-track { height: 10px; background: #d0d7de; border-radius: 6px; }
+    .dual-slider input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #3498db; border: 2px solid #fff; box-shadow: 0 0 0 2px #3498db; pointer-events: auto; }
     .filter-section { margin-bottom: 20px; }
     .filter-section h3 { margin: 0 0 10px 0; color: #2c3e50; font-size: 16px; }
     .countries-container, .venues-container { max-height: 260px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; padding: 10px; background: white; }
@@ -80,9 +93,15 @@
         <div class="search-group">
           <label>Year Range:</label>
           <div class="year-range">
-            <input type="number" id="year-min" placeholder="Min" />
-            <span>to</span>
-            <input type="number" id="year-max" placeholder="Max" />
+            <div class="dual-slider">
+              <input type="range" id="year-range-min" min="" max="" value="" oninput="syncYearRangeFromSlider()" />
+              <input type="range" id="year-range-max" min="" max="" value="" oninput="syncYearRangeFromSlider()" />
+            </div>
+            <div id="year-range-display" style="font-size:14px;color:#444;">Years: </div>
+            <div style="display:none;">
+              <input type="number" id="year-min" placeholder="Min" />
+              <input type="number" id="year-max" placeholder="Max" />
+            </div>
           </div>
         </div>
       </div>
@@ -214,8 +233,17 @@
       const yearValues = allPapers.map(p => p.Year).filter(v => typeof v === 'number');
       const yearMin = Math.min(...yearValues);
       const yearMax = Math.max(...yearValues);
-      document.getElementById('year-min').value = yearMin;
-      document.getElementById('year-max').value = yearMax;
+      const numMin = document.getElementById('year-min');
+      const numMax = document.getElementById('year-max');
+      const rMin = document.getElementById('year-range-min');
+      const rMax = document.getElementById('year-range-max');
+      if (numMin) numMin.value = yearMin;
+      if (numMax) numMax.value = yearMax;
+      if (rMin && rMax) {
+        rMin.min = yearMin; rMin.max = yearMax; rMin.value = yearMin;
+        rMax.min = yearMin; rMax.max = yearMax; rMax.value = yearMax;
+      }
+      updateYearRangeDisplay();
 
       // Venues grouped by subfield using existing Subfield field
       const venuesBySubfield = {};
@@ -288,8 +316,12 @@
       document.getElementById('author-search').value = '';
       const inst = document.getElementById('institution-search'); if (inst) inst.value = '';
       const years = allPapers.map(p => p.Year).filter(v => typeof v === 'number');
-      document.getElementById('year-min').value = Math.min(...years);
-      document.getElementById('year-max').value = Math.max(...years);
+      const ymin = Math.min(...years), ymax = Math.max(...years);
+      document.getElementById('year-min').value = ymin;
+      document.getElementById('year-max').value = ymax;
+      const rMin = document.getElementById('year-range-min');
+      const rMax = document.getElementById('year-range-max');
+      if (rMin && rMax) { rMin.value = ymin; rMax.value = ymax; updateYearRangeDisplay(); }
       document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
       selectedCountries = []; selectedVenues = []; includeUnknown = false; includeRejected = false;
       document.getElementById('results-container').innerHTML = '<div class="no-results">Enter search criteria and click "Search Papers" to begin</div>';
@@ -352,6 +384,22 @@
         return true;
       });
     }
+
+    function updateYearRangeDisplay() {
+      const yrMin = document.getElementById('year-range-min');
+      const yrMax = document.getElementById('year-range-max');
+      const numMin = document.getElementById('year-min');
+      const numMax = document.getElementById('year-max');
+      if (!yrMin || !yrMax) return;
+      let a = parseInt(yrMin.value, 10);
+      let b = parseInt(yrMax.value, 10);
+      if (isFinite(a) && isFinite(b) && a > b) { const t = a; a = b; b = t; }
+      if (numMin && numMax) { numMin.value = a; numMax.value = b; }
+      const disp = document.getElementById('year-range-display');
+      if (disp) disp.textContent = `Years: ${a} – ${b}`;
+    }
+
+    function syncYearRangeFromSlider() { updateYearRangeDisplay(); }
 
     function searchPapers() {
       const container = document.getElementById('results-container');

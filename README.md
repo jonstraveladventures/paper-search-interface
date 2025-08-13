@@ -6,7 +6,7 @@ A web-based tool for searching and analyzing academic papers from major conferen
 
 **Author:** [Jonathan Shock](https://www.shocklab.net) - University of Cape Town
 
-![Paper Search Interface](tools/img/Screenshot%202025-08-13%20at%2010.53.13.png)
+![Paper Search Interface](Screenshot%202025-08-13%20at%2012.56.41.png)
 
 ## ⚠️ Important Notice
 
