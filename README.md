@@ -6,7 +6,7 @@ A web-based tool for searching and analyzing academic papers from major conferen
 
 **Author:** [Jonathan Shock](https://www.shocklab.net) - University of Cape Town
 
-![Paper Search Interface](Screenshot%202025-08-13%20at%2012.56.41.png)
+![Paper Search Interface](tools/img/interface_screenshot_main.png)
 
 ## ⚠️ Important Notice
 
@@ -26,7 +26,7 @@ A web-based tool for searching and analyzing academic papers from major conferen
 - **Bulk Selection**: Select all countries, African countries, or venues with one click
 - **Map View**: Toggle a world map above results to visualize per‑country paper counts, scoped to current filters. Download the rendered map as PNG.
 
-<img src="tools/img/Screenshot%202025-08-12%20at%2016.17.28.png" alt="Example map view" width="800" />
+<img src="tools/img/map_view_screenshot.png" alt="Example map view" width="800" />
 
 ## Supported Research Areas
 
