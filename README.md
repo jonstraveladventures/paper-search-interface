@@ -26,7 +26,7 @@ A web-based tool for searching and analyzing academic papers from major conferen
 - **Bulk Selection**: Select all countries, African countries, or venues with one click
 - **Map View**: Toggle a world map above results to visualize per‑country paper counts, scoped to current filters. Download the rendered map as PNG.
 
-<img src="tools/img/Screenshot%202025-08-12%20at%2016.17.28.png" alt="Example map view" width="800" />
+<img src="tools/img/Screenshot%202025-08-13%20at%2010.53.13.png" alt="Paper Search Interface screenshot" width="800" />
 
 ## Supported Research Areas
 
