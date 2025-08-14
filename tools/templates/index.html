@@ -497,6 +497,7 @@
                         </select>
                     </label>
                     <span class="scale-note">Bubble radius uses square-root scaling for readability.</span>
+                    <span class="scale-note">Author counts are estimates due to ambiguity in author affiliations.</span>
                 </div>
             </div>
             <div class="results-header">
@@ -522,6 +523,7 @@
         let includeRejected = false;
         let showMap = false;
         let cachedTopo = null;
+        let drilldownCountry = null; // selected country for city drilldown
         // Track last values to detect when fields are cleared
         let lastTitleSearch = '';
         let lastAuthorSearch = '';
@@ -893,13 +895,14 @@
             const height = wrapper.clientHeight || 520;
             wrapper.innerHTML = '';
             const svg = d3.select(wrapper).append('svg').attr('viewBox', `0 0 ${width} ${height}`);
+            const root = svg.append('g').attr('class','map-root');
             const projection = d3.geoNaturalEarth1().fitSize([width, height], {type: 'Sphere'});
             const path = d3.geoPath(projection);
             const maxVal = data.max || 1;
             const nonZeroMax = Math.max(1, d3.max(Array.from(nameToValue.values()).filter(v => v > 0)) || 1);
             const color = d3.scaleSequentialSqrt([1, nonZeroMax], d3.interpolateYlGnBu);
 
-            svg.append('path').attr('fill', '#eef6fb').attr('d', path({type: 'Sphere'}));
+            root.append('path').attr('fill', '#eef6fb').attr('d', path({type: 'Sphere'}));
 
             // Fetch bubble data to compute unique author counts per country for tooltips
             const params2 = new URLSearchParams();
@@ -927,7 +930,7 @@
                     authorsByName.set(tgt, (p.researchers || 0));
                 }
             }
-            svg.append('g')
+            root.append('g')
               .selectAll('path')
               .data(countries)
               .join('path')
@@ -947,7 +950,7 @@
               });
 
             // Legend
-            const legend = svg.append('g').attr('class', 'legend').attr('transform', `translate(20,${height-30})`);
+            const legend = root.append('g').attr('class', 'legend').attr('transform', `translate(20,${height-30})`);
             const stops = d3.range(0, 1.01, 0.1);
             legend.selectAll('rect').data(stops).join('rect')
               .attr('x', (d,i) => i*20).attr('y', 0).attr('width', 20).attr('height', 10)
@@ -967,7 +970,7 @@
                     // country centroid by name
                     const countryByName = new Map(countries.map(f => [f.properties.name, f]));
                     const rScale = d3.scaleSqrt().domain([1, d3.max(points, val) || 1]).range([2, 18]);
-                    const bubbles = svg.append('g').attr('class','bubbles');
+                    const bubbles = root.append('g').attr('class','bubbles');
                     const tip = d3.select(wrapper).append('div').attr('class','tooltip').style('position','absolute').style('pointer-events','none').style('background','#fff').style('border','1px solid #ccc').style('padding','6px 8px').style('border-radius','4px').style('font-size','12px').style('display','none');
                     bubbles.selectAll('circle')
                         .data(points)
@@ -991,6 +994,141 @@
                         })
                         .on('mouseout', () => tip.style('display','none'));
                 }
+            }
+
+            // Attach country click handler for city drilldown
+            svg.selectAll('g.map-root path')
+              .style('cursor', 'pointer')
+              .on('click', async (event, d) => {
+                  drilldownCountry = d.properties.name;
+                  window.__drilldownFeature = d; // store geometry for client-side point-in-country filter
+                  // Zoom to country bounds
+                  const [[x0, y0], [x1, y1]] = d3.geoPath(projection).bounds(d);
+                  const cx = (x0 + x1) / 2;
+                  const cy = (y0 + y1) / 2;
+                  const scale = Math.min(5, 0.9 / Math.max((x1 - x0) / (svg.node().viewBox.baseVal.width || 1000), (y1 - y0) / (svg.node().viewBox.baseVal.height || 520)));
+                  const mapRoot = svg.select('g.map-root');
+                  mapRoot.transition().duration(600).attr('transform', `translate(${svg.node().viewBox.baseVal.width/2 - scale*cx},${svg.node().viewBox.baseVal.height/2 - scale*cy}) scale(${scale})`);
+                  await renderCityOverlay(svg, projection);
+                  const backBtn = ensureBackButton();
+                  backBtn.style.display = 'inline-flex';
+              });
+        }
+
+        function ensureBackButton() {
+            let btn = document.getElementById('back-to-world');
+            if (!btn) {
+                const controls = document.querySelector('.map-controls');
+                btn = document.createElement('button');
+                btn.id = 'back-to-world';
+                btn.className = 'export-button';
+                btn.textContent = 'Back to world';
+                btn.style.display = 'none';
+                btn.onclick = () => {
+                    drilldownCountry = null;
+                    const wrapper = document.getElementById('map-wrapper');
+                    if (wrapper) {
+                        renderInlineMap();
+                    }
+                    btn.style.display = 'none';
+                };
+                controls.appendChild(btn);
+            }
+            return btn;
+        }
+
+        async function renderCityOverlay(svg, projection) {
+            if (!drilldownCountry) return;
+            const titleSearch = document.getElementById('title-search').value;
+            const authorSearch = document.getElementById('author-search').value;
+            const yearMin = document.getElementById('year-min').value;
+            const yearMax = document.getElementById('year-max').value;
+            const params = new URLSearchParams();
+            if (titleSearch) params.append('title', titleSearch);
+            if (authorSearch) params.append('author', authorSearch);
+            if (yearMin) params.append('year_min', yearMin);
+            if (yearMax) params.append('year_max', yearMax);
+            // Do not send country filter; we will filter cities client-side using the clicked country's geometry
+            selectedVenues.forEach(venue => params.append('venues[]', venue));
+            if (includeRejected) params.append('include_rejected', 'true');
+
+            let data = await fetch(`/city_points?${params.toString()}`, { cache: 'no-store' }).then(r => r.json());
+            const mapRoot = svg.select('g.map-root');
+            mapRoot.selectAll('g.city-bubbles').remove();
+            const g = mapRoot.append('g').attr('class', 'city-bubbles');
+            const countryGeom = window.__drilldownFeature;
+            const allPts = data.points || [];
+            let insidePts = countryGeom ? allPts.filter(p => (typeof d3.geoContains === 'function') ? d3.geoContains(countryGeom, [p.lon, p.lat]) : true) : allPts;
+            // Fallback: if nothing inside (e.g., geoContains not available), re-fetch with server-side country filter
+            if (!insidePts.length) {
+                const params2 = new URLSearchParams(params.toString());
+                params2.append('countries[]', drilldownCountry);
+                data = await fetch(`/city_points?${params2.toString()}`, { cache: 'no-store' }).then(r => r.json());
+                insidePts = data.points || [];
+                // If still empty, synthesize a capital bubble sized by country totals
+                if (!insidePts.length) {
+                    const agg = await fetch(`/bubble_data?${params2.toString()}`, { cache: 'no-store' }).then(r => r.json());
+                    const entry = Array.isArray(agg.points) ? agg.points.find(x => x.location === drilldownCountry) : null;
+                    if (entry && window.__drilldownFeature) {
+                        const [cx, cy] = d3.geoPath(projection).centroid(window.__drilldownFeature);
+                        const rr = d3.scaleSqrt().domain([1, Math.max(1, entry.papers)]).range([2, 10])(entry.papers || 1);
+                        g.append('circle')
+                          .attr('cx', cx)
+                          .attr('cy', cy)
+                          .attr('r', rr)
+                          .attr('fill', 'rgba(200,30,30,0.65)')
+                          .attr('stroke', '#8b0000')
+                          .attr('stroke-width', 0.6)
+                          .append('title')
+                          .text(`${drilldownCountry}: ${entry.papers.toLocaleString()} papers; ${entry.researchers.toLocaleString()} authors (capital placeholder)`);
+                    }
+                }
+            }
+            const r = d3.scaleSqrt().domain([1, d3.max(insidePts, d => d.count) || 1]).range([2, 10]);
+            if (insidePts.length) {
+              g.selectAll('circle')
+                .data(insidePts)
+                .join('circle')
+                .attr('cx', d => projection([d.lon, d.lat])[0])
+                .attr('cy', d => projection([d.lon, d.lat])[1])
+                .attr('r', d => r(d.count))
+                .attr('fill', 'rgba(200,30,30,0.65)')
+                .attr('stroke', '#8b0000')
+                .attr('stroke-width', 0.6)
+                .append('title')
+                .text(d => `${d.city}, ${d.country_code}: ${d.papers?.toLocaleString?.() || d.count?.toLocaleString?.() || d.count} papers; ${d.authors?.toLocaleString?.() || 0} authors`);
+            } else {
+              // Last-resort fallback: show a single bubble at the country centroid sized by country-level papers/authors
+              try {
+                const p = new URLSearchParams();
+                const t = document.getElementById('title-search').value;
+                const a = document.getElementById('author-search').value;
+                const y1 = document.getElementById('year-min').value;
+                const y2 = document.getElementById('year-max').value;
+                if (t) p.append('title', t);
+                if (a) p.append('author', a);
+                if (y1) p.append('year_min', y1);
+                if (y2) p.append('year_max', y2);
+                selectedVenues.forEach(v => p.append('venues[]', v));
+                p.append('countries[]', drilldownCountry);
+                const agg = await fetch(`/bubble_data?${p.toString()}`, { cache: 'no-store' }).then(r => r.json());
+                const entry = Array.isArray(agg.points) ? agg.points.find(x => x.location === drilldownCountry) : null;
+                if (entry && window.__drilldownFeature) {
+                  const [cx, cy] = d3.geoPath(projection).centroid(window.__drilldownFeature);
+                  const rr = r(entry.papers || 1);
+                  g.append('circle')
+                    .attr('cx', cx)
+                    .attr('cy', cy)
+                    .attr('r', rr)
+                    .attr('fill', 'rgba(200,30,30,0.65)')
+                    .attr('stroke', '#8b0000')
+                    .attr('stroke-width', 0.6)
+                    .append('title')
+                    .text(`${drilldownCountry}: ${entry.papers.toLocaleString()} papers; ${entry.researchers.toLocaleString()} authors`);
+                }
+              } catch (e) {
+                // ignore
+              }
             }
         }
 
