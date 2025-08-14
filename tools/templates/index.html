@@ -737,6 +737,15 @@
                 });
         }
         
+        function formatAuthors(authorsStr) {
+            const raw = String(authorsStr || '');
+            const parts = raw.split(/[;,]/).map(s => s.trim()).filter(Boolean);
+            const seen = new Set();
+            const out = [];
+            for (const p of parts) { if (!seen.has(p)) { seen.add(p); out.push(p); } }
+            return out.join('; ');
+        }
+
         function displayResults(data) {
             console.log('displayResults called with:', data);
             const container = document.getElementById('results-container');
@@ -764,10 +773,11 @@
             }
             data.results.forEach((paper, index) => {
                 const statusClass = getStatusClass(paper.status);
+                const authors = formatAuthors(paper.authors);
                 html += `
                     <div class="paper-item">
                         <div class="paper-title">${paper.title}</div>
-                        <div class="paper-authors">${paper.authors}</div>
+                        <div class="paper-authors">${authors}</div>
                         <div class="paper-meta">
                             <span>${paper.conference} ${paper.year}</span>
                             <span>${paper.subfield}</span>

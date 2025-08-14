@@ -69,6 +69,9 @@
         <a href="https://github.com/jonstraveladventures/paper-search-interface" target="_blank" style="color:#fff;text-decoration:underline;">View on GitHub</a>
       </div>
       <p id="paper-count">Loading data...</p>
+      <p style="font-size: 12px; margin: 6px 0 0 0; opacity: 0.8;">
+        Citation counts are snapshots and may be out of date.
+      </p>
       <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">
         Data sourced from <a href="https://papercopilot.com" target="_blank" style="color: white; text-decoration: underline;">Paper Copilot</a>
       </p>
@@ -346,6 +349,15 @@
       wrapper.innerHTML = '';
     }
 
+    function formatAuthors(authorsStr) {
+      const raw = String(authorsStr || '');
+      const parts = raw.split(/[;,]/).map(s => s.trim()).filter(Boolean);
+      const seen = new Set();
+      const out = [];
+      for (const p of parts) { if (!seen.has(p)) { seen.add(p); out.push(p); } }
+      return out.join('; ');
+    }
+
     function filterPapers() {
       const titleSearch = (document.getElementById('title-search').value || '').toLowerCase();
       const authorSearch = (document.getElementById('author-search').value || '').toLowerCase();
@@ -429,10 +441,11 @@
         }
         displayedList.forEach(row => {
           const status = row.Status || 'Unknown';
+          const authors = formatAuthors(row.Authors);
           html += `
             <div class="paper-item">
               <div class="paper-title">${row.Title}</div>
-              <div class="paper-authors">${row.Authors}</div>
+              <div class="paper-authors">${authors}</div>
               <div class="paper-meta">
                 <span>${row.Conference || ''} ${row.Year || ''}</span>
                 <span>${row.Subfield || ''}</span>
