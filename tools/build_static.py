@@ -2,9 +2,10 @@
 """
 Build script to generate static assets for GitHub Pages.
 
-This script reads `all_papers.csv` and writes a minimized `docs/data.json`
-with only the fields the web UI needs. The static site in `docs/` then loads
-this JSON and performs all filtering client-side.
+This script prefers `enriched_papers.csv` (if present) and otherwise falls back
+to `all_papers.csv`, then writes a compact `docs/data.json` with only the fields
+the web UI needs. The static site in `docs/` then loads this JSON and performs
+all filtering client-side.
 """
 
 from __future__ import annotations
@@ -16,9 +17,18 @@ import pandas as pd
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-CSV_PATH = PROJECT_ROOT / "all_papers.csv"
+ENRICHED_PATH = PROJECT_ROOT / "enriched_papers.csv"
+FALLBACK_PATH = PROJECT_ROOT / "all_papers.csv"
 DOCS_DIR = PROJECT_ROOT / "docs"
 JSON_OUT = DOCS_DIR / "data.json"
+
+
+def resolve_csv_path() -> Path:
+    if ENRICHED_PATH.exists():
+        return ENRICHED_PATH
+    if FALLBACK_PATH.exists():
+        return FALLBACK_PATH
+    raise FileNotFoundError(f"Missing CSV files. Expected one of: {ENRICHED_PATH} or {FALLBACK_PATH}")
 
 
 def load_dataframe(csv_path: Path) -> pd.DataFrame:
@@ -36,8 +46,6 @@ def load_dataframe(csv_path: Path) -> pd.DataFrame:
         "Subfield",
         "Author_Institutions",
         "Author_Countries",
-        "Status",
-        "Track",
         "Citations",
     ]
     for col in required_columns:
@@ -53,8 +61,6 @@ def load_dataframe(csv_path: Path) -> pd.DataFrame:
         "Subfield",
         "Author_Institutions",
         "Author_Countries",
-        "Status",
-        "Track",
         "Citations",
     ]].copy()
 
@@ -70,7 +76,7 @@ def load_dataframe(csv_path: Path) -> pd.DataFrame:
     df["Citations"] = df["Citations"].apply(safe_int)
 
     # Fill NaNs with empty strings for text fields
-    for col in ["Title", "Authors", "Conference", "Subfield", "Author_Institutions", "Author_Countries", "Status", "Track"]:
+    for col in ["Title", "Authors", "Conference", "Subfield", "Author_Institutions", "Author_Countries"]:
         df[col] = df[col].fillna("")
 
     return df
@@ -88,9 +94,10 @@ def write_json(df: pd.DataFrame, out_path: Path) -> None:
 
 
 def main() -> None:
-    df = load_dataframe(CSV_PATH)
+    csv_path = resolve_csv_path()
+    df = load_dataframe(csv_path)
     write_json(df, JSON_OUT)
-    print(f"Wrote {len(df)} records to {JSON_OUT}")
+    print(f"Wrote {len(df)} records from {csv_path.name} to {JSON_OUT}")
 
 
 if __name__ == "__main__":
