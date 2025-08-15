@@ -43,9 +43,9 @@ def load_dataframe(csv_path: Path) -> pd.DataFrame:
         "Authors",
         "Conference",
         "Year",
-        "Subfield",
         "Author_Institutions",
         "Author_Countries",
+        "Status",
         "Citations",
     ]
     for col in required_columns:
@@ -58,9 +58,9 @@ def load_dataframe(csv_path: Path) -> pd.DataFrame:
         "Authors",
         "Conference",
         "Year",
-        "Subfield",
         "Author_Institutions",
         "Author_Countries",
+        "Status",
         "Citations",
     ]].copy()
 
@@ -76,7 +76,7 @@ def load_dataframe(csv_path: Path) -> pd.DataFrame:
     df["Citations"] = df["Citations"].apply(safe_int)
 
     # Fill NaNs with empty strings for text fields
-    for col in ["Title", "Authors", "Conference", "Subfield", "Author_Institutions", "Author_Countries"]:
+    for col in ["Title", "Authors", "Conference", "Author_Institutions", "Author_Countries", "Status"]:
         df[col] = df[col].fillna("")
 
     return df

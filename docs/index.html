@@ -209,6 +209,20 @@
 
     function getUnique(arr) { return Array.from(new Set(arr)); }
 
+    function getSubfield(conference) {
+      const name = String(conference || '').toUpperCase();
+      if (["NIPS","NEURIPS","ICLR","ICML","AAAI","IJCAI","AISTATS","CORL","ACML"].includes(name)) return "Artificial Intelligence";
+      if (["ACL","EMNLP","NAACL","COLING","ARR","COLM"].includes(name)) return "Computational Linguistics";
+      if (["SIGGRAPH","SIGGRAPHASIA","EUROGRAPHICS"].includes(name)) return "Computer Graphics";
+      if (["SITCOM"].includes(name)) return "Computer Networks and Wireless Communication";
+      if (["CVPR","ICCV","WACV","BMVC","3DV"].includes(name)) return "Computer Vision and Pattern Recognition";
+      if (["KDD"].includes(name)) return "Data Mining and Analysis";
+      if (["WWW","SIGIR"].includes(name)) return "Databases and Information Systems";
+      if (["ACMMM"].includes(name)) return "Multimedia";
+      if (["ICRA","IROS","RSS"].includes(name)) return "Robotics";
+      return "Other";
+    }
+
     function makeIdSafe(text) {
       return String(text || '')
         .toLowerCase()
@@ -258,10 +272,10 @@
       }
       updateYearRangeDisplay();
 
-      // Venues grouped by subfield using existing Subfield field
+      // Venues grouped by subfield computed from Conference
       const venuesBySubfield = {};
       allPapers.forEach(p => {
-        const sub = p.Subfield || 'Other';
+        const sub = getSubfield(p.Conference);
         const conf = p.Conference || 'Unknown';
         if (!venuesBySubfield[sub]) venuesBySubfield[sub] = new Set();
         venuesBySubfield[sub].add(conf);
@@ -448,7 +462,7 @@
               <div class="paper-authors">${authors}</div>
               <div class="paper-meta">
                 <span>${row.Conference || ''} ${row.Year || ''}</span>
-                <span>${row.Subfield || ''}</span>
+                <span>${getSubfield(row.Conference) || ''}</span>
                 <span>${status}</span>
                 <span>${row.Track || 'N/A'}</span>
                 <span>${Number.isFinite(row.Citations) ? row.Citations : 0} citations</span>
